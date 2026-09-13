@@ -9,7 +9,7 @@
 		SectionBlock
 	} from '$lib/types/email';
 	import { EMAIL_SAFE_FONTS } from '$lib/constants/blocks';
-	import { Button, FormField, Input, Select, Textarea } from 'yaxa-svelte';
+	import { Button, FormField, Input, Select, Textarea, ColorPicker } from 'yaxa-svelte';
 	import ImageUploader from './ImageUploader.svelte';
 	import {
 		Trash2,
@@ -86,11 +86,7 @@
 
 			<div class="grid grid-cols-2 gap-2.5">
 				<FormField label="Canvas BG">
-					<Input
-						bind:value={studio.template.globalStyles.backgroundColor}
-						oninput={studio.onTemplateChanged}
-						size="sm"
-					/>
+					<ColorPicker bind:value={studio.template.globalStyles.backgroundColor} class="w-full" />
 				</FormField>
 				<FormField label="Max Width">
 					<Input
@@ -105,12 +101,7 @@
 		{:else if studio.selectedBlock.type === 'section'}
 			{@const section = studio.selectedBlock as SectionBlock}
 			<FormField label="Section Background Color">
-				<Input
-					bind:value={section.backgroundColor}
-					oninput={studio.onTemplateChanged}
-					placeholder="#ffffff or transparent"
-					size="sm"
-				/>
+				<ColorPicker bind:value={section.backgroundColor} class="w-full" />
 			</FormField>
 
 			<!-- Text Block -->
@@ -280,14 +271,10 @@
 
 			<div class="grid grid-cols-2 gap-2.5">
 				<FormField label="Button Color">
-					<Input
-						bind:value={buttonBlock.backgroundColor}
-						oninput={studio.onTemplateChanged}
-						size="sm"
-					/>
+					<ColorPicker bind:value={buttonBlock.backgroundColor} class="w-full" />
 				</FormField>
 				<FormField label="Text Color">
-					<Input bind:value={buttonBlock.color} oninput={studio.onTemplateChanged} size="sm" />
+					<ColorPicker bind:value={buttonBlock.color} class="w-full" />
 				</FormField>
 			</div>
 

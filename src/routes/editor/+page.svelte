@@ -1,7 +1,7 @@
 <!-- src/routes/editor/+page.svelte -->
 <script lang="ts">
 	import { studio } from '$lib/stores/studio.svelte';
-	import { useShortcuts, toast, Button, Badge, Tabs, Seo } from 'yaxa-svelte';
+	import { useShortcuts, toast, Button, ButtonGroup, Kbd, Badge, Tabs, Seo } from 'yaxa-svelte';
 	import { page } from '$app/state';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import BlockPalette from '$lib/components/BlockPalette.svelte';
@@ -131,9 +131,9 @@
 
 		<!-- 2. Center: Viewport & Dark Mode Simulation Controls -->
 		<div class="flex items-center gap-2">
-			<div class="flex items-center rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800">
+			<ButtonGroup>
 				<Button
-					variant={studio.previewMode === 'desktop' ? 'solid' : 'ghost'}
+					variant={studio.previewMode === 'desktop' ? 'solid' : 'outline'}
 					color="neutral"
 					size="sm"
 					aria-label="Desktop Preview"
@@ -142,7 +142,7 @@
 					<Monitor class="h-4 w-4" />
 				</Button>
 				<Button
-					variant={studio.previewMode === 'mobile' ? 'solid' : 'ghost'}
+					variant={studio.previewMode === 'mobile' ? 'solid' : 'outline'}
 					color="neutral"
 					size="sm"
 					aria-label="Mobile Preview"
@@ -150,10 +150,10 @@
 				>
 					<Smartphone class="h-4 w-4" />
 				</Button>
-			</div>
+			</ButtonGroup>
 
 			<Button
-				variant={studio.simulateDarkMode ? 'solid' : 'ghost'}
+				variant={studio.simulateDarkMode ? 'solid' : 'outline'}
 				color={studio.simulateDarkMode ? 'primary' : 'neutral'}
 				size="sm"
 				aria-label="Simulate Email Client Dark Mode"
@@ -164,26 +164,28 @@
 
 			<div class="mx-1 h-4 w-px bg-neutral-200 dark:bg-neutral-700"></div>
 
-			<Button
-				size="sm"
-				color="neutral"
-				variant="ghost"
-				disabled={!studio.canUndo}
-				aria-label="Undo"
-				onclick={studio.undo}
-			>
-				<Undo2 class="h-4 w-4" />
-			</Button>
-			<Button
-				size="sm"
-				color="neutral"
-				variant="ghost"
-				disabled={!studio.canRedo}
-				aria-label="Redo"
-				onclick={studio.redo}
-			>
-				<Redo2 class="h-4 w-4" />
-			</Button>
+			<ButtonGroup>
+				<Button
+					size="sm"
+					color="neutral"
+					variant="outline"
+					disabled={!studio.canUndo}
+					aria-label="Undo"
+					onclick={studio.undo}
+				>
+					<Undo2 class="h-4 w-4" />
+				</Button>
+				<Button
+					size="sm"
+					color="neutral"
+					variant="outline"
+					disabled={!studio.canRedo}
+					aria-label="Redo"
+					onclick={studio.redo}
+				>
+					<Redo2 class="h-4 w-4" />
+				</Button>
+			</ButtonGroup>
 		</div>
 
 		<!-- 3. Right: Size Badge, Content Health, Actions -->
@@ -296,4 +298,15 @@
 	<TemplateLibraryModal bind:open={isLibraryOpen} />
 	<UpgradeModal bind:open={isUpgradeOpen} />
 	<AuthModal bind:open={isAuthOpen} />
+
+	<!-- Floating Shortcut Hints Bar -->
+	<div
+		class="fixed bottom-3 left-1/2 hidden -translate-x-1/2 items-center gap-3 rounded-full border border-neutral-200/80 bg-white/90 px-4 py-1.5 text-xs text-neutral-500 shadow-md backdrop-blur md:flex dark:border-neutral-800/80 dark:bg-neutral-900/90 dark:text-neutral-400"
+	>
+		<span class="flex items-center gap-1"><Kbd size="xs" value="⌘Z" /> Undo</span>
+		<span class="text-neutral-300 dark:text-neutral-700">&bull;</span>
+		<span class="flex items-center gap-1"><Kbd size="xs" value="⌘Y" /> Redo</span>
+		<span class="text-neutral-300 dark:text-neutral-700">&bull;</span>
+		<span class="flex items-center gap-1"><Kbd size="xs" value="Esc" /> Deselect</span>
+	</div>
 </div>

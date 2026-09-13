@@ -56,6 +56,6 @@
 		"lucide-svelte": "^1.0.1",
 		"mjml": "^5.4.1",
 		"resend": "^6.27.0",
-		"yaxa-svelte": "^1.0.1"
+		"yaxa-svelte": "^1.2.0"
 	}
 }

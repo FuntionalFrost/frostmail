@@ -58,7 +58,18 @@
 		'White-Label (Remove FrostMail branding)',
 		'Commercial Merchant of Record via Polar.sh'
 	];
+
+	import { siteConfig } from '$lib/config/site';
+	import { generateWebSiteSchema, generateOrganizationSchema } from 'yaxa-svelte';
+
+	const webSiteSchema = JSON.stringify(generateWebSiteSchema(siteConfig));
+	const organizationSchema = JSON.stringify(generateOrganizationSchema(siteConfig));
 </script>
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${webSiteSchema}</` + `script>`}
+	{@html `<script type="application/ld+json">${organizationSchema}</` + `script>`}
+</svelte:head>
 
 <Seo
 	title="Open Source Visual Transactional Email Studio & Deliverability Auditor"
