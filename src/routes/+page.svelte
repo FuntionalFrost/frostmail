@@ -60,16 +60,8 @@
 	];
 
 	import { siteConfig } from '$lib/config/site';
-	import { generateWebSiteSchema, generateOrganizationSchema } from 'yaxa-svelte';
-
-	const webSiteSchema = JSON.stringify(generateWebSiteSchema(siteConfig));
-	const organizationSchema = JSON.stringify(generateOrganizationSchema(siteConfig));
+	import { generateOrganizationSchema } from 'yaxa-svelte';
 </script>
-
-<svelte:head>
-	{@html `<script type="application/ld+json">${webSiteSchema}</` + `script>`}
-	{@html `<script type="application/ld+json">${organizationSchema}</` + `script>`}
-</svelte:head>
 
 <Seo
 	title="Open Source Visual Transactional Email Studio & Deliverability Auditor"
@@ -79,6 +71,7 @@
 		description: 'Design bulletproof emails. Ensure primary inbox delivery.',
 		badge: 'Open Source Email Studio'
 	}}
+	schema={[generateOrganizationSchema(siteConfig)]}
 />
 
 <div

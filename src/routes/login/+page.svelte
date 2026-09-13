@@ -20,6 +20,11 @@
 <Seo
 	title="Sign In / Register"
 	description="Sign in or register for FrostMail to save email designs, sync merge variables, and audit domain deliverability."
+	ogImage={{
+		title: 'Sign In / Register',
+		description: 'Access saved templates, cloud backups & DNS auditing.',
+		badge: 'FrostMail Account'
+	}}
 />
 
 <div
