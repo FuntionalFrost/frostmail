@@ -1,29 +1,27 @@
-node_modules
+# SvelteKit & Vite build outputs
+.svelte-kit/
+build/
+dist/
+.netlify/
 
-# Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
-/build
+# Dependencies
+node_modules/
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Env
+# Environment files
 .env
 .env.*
 !.env.example
-!.env.test
 
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-# Playwright
-test-results
+# Playwright & Test Results
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Misc
+.DS_Store
+*.log
 
 # AI
-GEMINI.md
 /.gemini
+GEMINI.md

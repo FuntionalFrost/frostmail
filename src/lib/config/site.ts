@@ -1,0 +1,67 @@
+// src/lib/config/site.ts
+import { defineSiteConfig } from 'yaxa-svelte';
+
+export const siteConfig = defineSiteConfig({
+	name: 'FrostMail',
+	title: 'FrostMail — Open Source Visual Transactional Email Studio & Deliverability Auditor',
+	description:
+		'Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records (SPF, DKIM, DMARC, MX), and dispatch test emails.',
+	url: 'https://frostmail.dev',
+	version: '1.0.0',
+	defaultLocale: 'en',
+	logo: '/favicon.svg',
+	author: {
+		name: 'FrostMail Team',
+		url: 'https://frostmail.dev',
+		twitter: '@frostmail'
+	},
+	theme: {
+		primaryColor: '#ff3e00',
+		neutralColor: '#18181b',
+		defaultMode: 'system'
+	},
+	seo: {
+		titleTemplate: '%s | FrostMail',
+		defaultOgImage: '/api/og',
+		twitterCard: 'summary_large_image',
+		keywords: [
+			'email builder',
+			'mjml editor',
+			'transactional email studio',
+			'email deliverability auditor',
+			'spf dkim dmarc validator',
+			'sveltekit email builder',
+			'react email converter',
+			'resend email testing',
+			'email design tool',
+			'polar merchant of record',
+			'yaxa-svelte'
+		],
+		robots: {
+			index: true,
+			follow: true
+		}
+	},
+	sitemap: {
+		changefreq: 'weekly',
+		priority: 0.9,
+		exclude: ['/demo/*', '/api/*']
+	},
+	robots: {
+		rules: [
+			{
+				userAgent: '*',
+				allow: ['/'],
+				disallow: ['/api/*', '/demo/*']
+			}
+		]
+	},
+	nav: [
+		{ label: 'Editor Studio', href: '/editor' },
+		{ label: 'DNS Auditor', href: '/diagnostic' }
+	],
+	socials: {
+		github: 'https://github.com/frostmail/frostmail',
+		twitter: 'https://twitter.com/frostmail'
+	}
+});

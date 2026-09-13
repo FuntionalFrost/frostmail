@@ -1,9 +1,14 @@
+<!-- src/routes/+layout.svelte -->
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import { YaxaApp } from 'yaxa-svelte';
+	import { siteConfig } from '$lib/config/site';
 
 	let { children } = $props();
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
-{@render children()}
+<YaxaApp config={siteConfig}>
+	{#if children}
+		{@render children()}
+	{/if}
+</YaxaApp>

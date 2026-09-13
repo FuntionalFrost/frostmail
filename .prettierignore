@@ -1,10 +1,11 @@
-# Package Managers
+.svelte-kit
+build
+dist
+.netlify
+node_modules
+.gemini
+test-results
+playwright-report
+blob-report
 package-lock.json
 pnpm-lock.yaml
-yarn.lock
-bun.lock
-bun.lockb
-
-# Miscellaneous
-/static/
-/drizzle/
