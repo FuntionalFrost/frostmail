@@ -86,7 +86,7 @@
 			</div>
 		{:else}
 			<div class="space-y-3 pt-1">
-				<a href="/demo/better-auth/login" class="block w-full">
+				<a href="/login" class="block w-full">
 					<Button block color="primary" size="md">Sign In / Register</Button>
 				</a>
 

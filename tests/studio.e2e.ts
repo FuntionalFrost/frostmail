@@ -92,4 +92,21 @@ test.describe('FrostMail Application Navigation & SEO E2E Tests', () => {
 		await expect(input).toBeVisible();
 		await expect(page.getByRole('button', { name: /Audit Domain/i })).toBeVisible();
 	});
+
+	test('Login page loads high-contrast form with tabs and social sign-in', async ({ page }) => {
+		await page.goto('/login');
+		await expect(page).toHaveTitle(/Sign In \/ Register/i);
+		await expect(page.getByRole('tab', { name: /Sign In/i })).toBeVisible();
+		await expect(page.getByRole('tab', { name: /Create Account/i })).toBeVisible();
+		await expect(page.getByRole('button', { name: /Continue with GitHub/i })).toBeVisible();
+		await expect(page.getByPlaceholder('alex@company.com')).toBeVisible();
+	});
+
+	test('Legal pages render with yaxa-svelte compliance content', async ({ page }) => {
+		for (const route of ['/privacy', '/terms', '/refunds', '/impressum']) {
+			await page.goto(route);
+			await expect(page.getByRole('link', { name: /Back to FrostMail/i })).toBeVisible();
+			await expect(page.locator('article, main')).toBeVisible();
+		}
+	});
 });
