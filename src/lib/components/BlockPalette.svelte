@@ -25,7 +25,9 @@
 </script>
 
 <div class="space-y-4 text-sm">
-	<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">Add Content</div>
+	<div class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400">
+		Add Content
+	</div>
 	<div class="grid grid-cols-1 gap-2.5">
 		{#each paletteItems as item (item.type)}
 			{@const IconComponent = getLucideIcon(item.type)}
@@ -40,7 +42,9 @@
 					<IconComponent class="h-4.5 w-4.5" />
 				</div>
 				<div>
-					<div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{item.label}</div>
+					<div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+						{item.label}
+					</div>
 				</div>
 			</button>
 		{/each}

@@ -49,7 +49,8 @@
 <Popover class="w-88 p-4">
 	{#snippet trigger()}
 		<span
-			class="inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm font-semibold transition-colors cursor-pointer select-none {lintResult.score >= 80 && !studio.isClippedInGmail
+			class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm font-semibold transition-colors select-none {lintResult.score >=
+				80 && !studio.isClippedInGmail
 				? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-800/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/70'
 				: lintResult.score >= 50 && !studio.isClippedInGmail
 					? 'border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 dark:border-amber-800/80 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-950/70'
@@ -74,7 +75,11 @@
 		>
 			<span class="text-base font-bold">Deliverability Audit</span>
 			<Badge
-				color={lintResult.score >= 80 && !studio.isClippedInGmail ? 'success' : lintResult.score >= 50 ? 'warning' : 'error'}
+				color={lintResult.score >= 80 && !studio.isClippedInGmail
+					? 'success'
+					: lintResult.score >= 50
+						? 'warning'
+						: 'error'}
 				size="sm"
 			>
 				{studio.isClippedInGmail
@@ -88,9 +93,15 @@
 		</div>
 
 		<!-- Size & Weight breakdown -->
-		<div class="flex items-center justify-between rounded-md bg-neutral-50 px-3 py-2 text-xs dark:bg-neutral-800/60">
+		<div
+			class="flex items-center justify-between rounded-md bg-neutral-50 px-3 py-2 text-xs dark:bg-neutral-800/60"
+		>
 			<span class="text-neutral-600 dark:text-neutral-400">Email Size (Gmail 102 KB Limit):</span>
-			<span class="font-mono font-semibold {studio.isClippedInGmail ? 'text-rose-600 dark:text-rose-400' : 'text-neutral-900 dark:text-neutral-100'}">
+			<span
+				class="font-mono font-semibold {studio.isClippedInGmail
+					? 'text-rose-600 dark:text-rose-400'
+					: 'text-neutral-900 dark:text-neutral-100'}"
+			>
 				{studio.emailSizeKb} KB
 			</span>
 		</div>

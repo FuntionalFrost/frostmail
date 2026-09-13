@@ -91,7 +91,17 @@
 				</a>
 
 				<p class="pt-1 text-center text-sm text-neutral-500 dark:text-neutral-400">
-					By signing in, you agree to our Terms of Service and Privacy Policy.
+					By signing in, you agree to our <a
+						href="/terms"
+						class="underline hover:text-neutral-900 dark:hover:text-white"
+						target="_blank">Terms of Service</a
+					>
+					and
+					<a
+						href="/privacy"
+						class="underline hover:text-neutral-900 dark:hover:text-white"
+						target="_blank">Privacy Policy</a
+					>.
 				</p>
 			</div>
 		{/if}

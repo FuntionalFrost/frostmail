@@ -149,9 +149,7 @@
 			</FormField>
 
 			<div class="space-y-1.5">
-				<span class="text-sm font-bold text-neutral-600 dark:text-neutral-400"
-					>Quick Insert</span
-				>
+				<span class="text-sm font-bold text-neutral-600 dark:text-neutral-400">Quick Insert</span>
 				<div class="flex flex-wrap gap-1">
 					<Button
 						size="sm"

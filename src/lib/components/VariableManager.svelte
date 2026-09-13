@@ -52,10 +52,14 @@
 
 <div class="space-y-4 text-sm">
 	<div>
-		<div class="mb-1 text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+		<div
+			class="mb-1 text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
+		>
 			Available Merge Tags
 		</div>
-		<p class="mb-2 text-sm text-neutral-600 dark:text-neutral-400">Click any tag to copy its interpolation syntax.</p>
+		<p class="mb-2 text-sm text-neutral-600 dark:text-neutral-400">
+			Click any tag to copy its interpolation syntax.
+		</p>
 
 		{#if availableKeys.length === 0}
 			<div class="text-sm text-neutral-500 italic">No variables found in JSON.</div>
@@ -83,7 +87,7 @@
 		<div class="flex items-center justify-between">
 			<label
 				for="mock-vars-textarea"
-				class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase"
+				class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
 			>
 				Mock Variables (JSON)
 			</label>

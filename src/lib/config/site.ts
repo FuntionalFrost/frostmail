@@ -6,14 +6,32 @@ export const siteConfig = defineSiteConfig({
 	title: 'FrostMail — Open Source Visual Transactional Email Studio & Deliverability Auditor',
 	description:
 		'Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records (SPF, DKIM, DMARC, MX), and dispatch test emails.',
-	url: 'https://frostmail.dev',
+	url: 'https://frostmail.netlify.app',
 	version: '1.0.0',
 	defaultLocale: 'en',
 	logo: '/favicon.svg',
 	author: {
-		name: 'FrostMail Team',
-		url: 'https://frostmail.dev',
-		twitter: '@frostmail'
+		name: 'FunctionalFrost',
+		url: 'https://github.com/FuntionalFrost'
+	},
+	company: {
+		legalName: 'FrostMail',
+		contactEmail: 'devfrost@protonmail.com',
+		representative: 'FunctionalFrost'
+	},
+	legal: {
+		jurisdiction: 'EU',
+		paymentProcessor: 'polar',
+		adNetwork: 'ethicalads',
+		analytics: 'none',
+		refundDays: 14,
+		dpoEmail: 'devfrost@protonmail.com',
+		links: {
+			privacy: '/privacy',
+			terms: '/terms',
+			refunds: '/refunds',
+			impressum: '/impressum'
+		}
 	},
 	theme: {
 		primaryColor: '#ff3e00',
@@ -61,7 +79,6 @@ export const siteConfig = defineSiteConfig({
 		{ label: 'DNS Auditor', href: '/diagnostic' }
 	],
 	socials: {
-		github: 'https://github.com/frostmail/frostmail',
-		twitter: 'https://twitter.com/frostmail'
+		github: 'https://github.com/FuntionalFrost/'
 	}
 });

@@ -37,7 +37,7 @@
 
 <div class="space-y-4 text-sm">
 	<div class="flex items-center justify-between">
-		<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+		<div class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400">
 			Structure ({studio.template.body?.length || 0})
 		</div>
 		<Button size="sm" color="primary" variant="subtle" onclick={studio.addSection}>

@@ -30,7 +30,6 @@
 		Sparkles,
 		Code,
 		Send,
-		Plus,
 		LayoutGrid,
 		Layers,
 		Variable
@@ -121,7 +120,9 @@
 				<ChevronDown class="ml-1.5 h-3.5 w-3.5 opacity-70" />
 			</Button>
 
-			<span class="ml-1 flex items-center gap-1.5 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+			<span
+				class="ml-1 flex items-center gap-1.5 text-sm font-medium text-neutral-600 dark:text-neutral-400"
+			>
 				{#if studio.isSaved}
 					<CheckCircle2 class="h-4.5 w-4.5 text-emerald-500" />
 					Saved
@@ -222,12 +223,7 @@
 				Pro
 			</Button>
 
-			<Button
-				size="sm"
-				color="neutral"
-				variant="outline"
-				onclick={() => (isAuthOpen = true)}
-			>
+			<Button size="sm" color="neutral" variant="outline" onclick={() => (isAuthOpen = true)}>
 				<User class="mr-1.5 h-4 w-4" />
 				Account
 			</Button>

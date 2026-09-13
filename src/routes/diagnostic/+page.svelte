@@ -79,7 +79,7 @@
 • DKIM Signatures: ${scanResult.dkim.status.toUpperCase()} - ${scanResult.dkim.message}
 • DMARC Policy: ${scanResult.dmarc.status.toUpperCase()} - ${scanResult.dmarc.message}
 
-Audited with FrostMail: https://frostmail.dev/diagnostic`;
+Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 
 		try {
 			await navigator.clipboard.writeText(text);
@@ -117,7 +117,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 	>
 		<div class="flex items-center gap-3">
 			<a href="/" class="text-lg font-bold tracking-tight hover:opacity-80"> FrostMail </a>
-			<span class="bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300 rounded px-2.5 py-0.5 text-sm font-semibold">
+			<span
+				class="bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300 rounded px-2.5 py-0.5 text-sm font-semibold"
+			>
 				DNS Auditor
 			</span>
 		</div>
@@ -162,7 +164,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 
 			<!-- Quick 1-Click Domain Chips -->
 			<div class="flex flex-wrap items-center justify-center gap-2 pt-2">
-				<span class="mr-1 text-sm font-medium text-neutral-600 dark:text-neutral-400">Try example:</span>
+				<span class="mr-1 text-sm font-medium text-neutral-600 dark:text-neutral-400"
+					>Try example:</span
+				>
 				{#each sampleDomains as domain (domain)}
 					<Button
 						size="sm"
@@ -186,10 +190,14 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 					class="flex flex-col justify-between gap-4 rounded-xl border border-neutral-300 bg-white p-6 shadow-sm sm:flex-row sm:items-center dark:border-neutral-800 dark:bg-neutral-900"
 				>
 					<div>
-						<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+						<div
+							class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
+						>
 							Audit Target
 						</div>
-						<div class="mt-0.5 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+						<div
+							class="mt-0.5 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
+						>
 							{scanResult.domain}
 						</div>
 					</div>
@@ -204,7 +212,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 							{/if}
 						</Button>
 						<div class="text-right">
-							<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+							<div
+								class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
+							>
 								Deliverability Score
 							</div>
 							<div
@@ -226,7 +236,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 						class="space-y-2.5 rounded-xl border border-neutral-200 bg-white p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="flex items-center justify-between">
-							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100">MX Routing</span>
+							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+								>MX Routing</span
+							>
 							<Badge color={getBadgeColor(scanResult.mx.status)} size="sm" variant="subtle">
 								{scanResult.mx.status.toUpperCase()}
 							</Badge>
@@ -241,7 +253,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 						class="space-y-2.5 rounded-xl border border-neutral-200 bg-white p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="flex items-center justify-between">
-							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100">SPF Alignment</span>
+							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+								>SPF Alignment</span
+							>
 							<Badge color={getBadgeColor(scanResult.spf.status)} size="sm" variant="subtle">
 								{scanResult.spf.status.toUpperCase()}
 							</Badge>
@@ -256,7 +270,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 						class="space-y-2.5 rounded-xl border border-neutral-200 bg-white p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="flex items-center justify-between">
-							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100">DKIM Signatures</span>
+							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+								>DKIM Signatures</span
+							>
 							<Badge color={getBadgeColor(scanResult.dkim.status)} size="sm" variant="subtle">
 								{scanResult.dkim.status.toUpperCase()}
 							</Badge>
@@ -271,7 +287,9 @@ Audited with FrostMail: https://frostmail.dev/diagnostic`;
 						class="space-y-2.5 rounded-xl border border-neutral-200 bg-white p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="flex items-center justify-between">
-							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100">DMARC Policy</span>
+							<span class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+								>DMARC Policy</span
+							>
 							<Badge color={getBadgeColor(scanResult.dmarc.status)} size="sm" variant="subtle">
 								{scanResult.dmarc.status.toUpperCase()}
 							</Badge>

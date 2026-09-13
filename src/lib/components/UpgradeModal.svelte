@@ -82,7 +82,9 @@
 		<!-- Features List -->
 		<div class="space-y-2.5 py-1">
 			{#each features as feat (feat)}
-				<div class="flex items-center gap-2.5 text-sm font-medium text-neutral-800 dark:text-neutral-200">
+				<div
+					class="flex items-center gap-2.5 text-sm font-medium text-neutral-800 dark:text-neutral-200"
+				>
 					<CheckCircle2 class="text-primary-500 h-5 w-5 shrink-0" />
 					<span>{feat}</span>
 				</div>
@@ -100,7 +102,9 @@
 				Subscribe with Polar (€19 / mo)
 			</Button>
 
-			<div class="flex items-center justify-center gap-1.5 pt-1 text-sm text-neutral-600 dark:text-neutral-400">
+			<div
+				class="flex items-center justify-center gap-1.5 pt-1 text-sm text-neutral-600 dark:text-neutral-400"
+			>
 				<Lock class="h-4 w-4" />
 				<span>Processed securely by Polar.sh &bull; Merchant of Record</span>
 			</div>

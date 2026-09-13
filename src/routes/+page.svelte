@@ -168,9 +168,13 @@
 					class="flex h-11 items-center justify-between border-b border-neutral-200 bg-neutral-100/90 px-4 dark:border-neutral-800 dark:bg-neutral-900/90"
 				>
 					<div class="flex items-center gap-2">
-						<span class="inline-block h-3.5 w-3.5 rounded-full bg-red-400 dark:bg-red-500/80"></span>
-						<span class="inline-block h-3.5 w-3.5 rounded-full bg-amber-400 dark:bg-amber-500/80"></span>
-						<span class="inline-block h-3.5 w-3.5 rounded-full bg-emerald-400 dark:bg-emerald-500/80"></span>
+						<span class="inline-block h-3.5 w-3.5 rounded-full bg-red-400 dark:bg-red-500/80"
+						></span>
+						<span class="inline-block h-3.5 w-3.5 rounded-full bg-amber-400 dark:bg-amber-500/80"
+						></span>
+						<span
+							class="inline-block h-3.5 w-3.5 rounded-full bg-emerald-400 dark:bg-emerald-500/80"
+						></span>
 						<span class="ml-2 font-mono text-sm font-medium text-neutral-600 dark:text-neutral-400"
 							>frostmail-studio — order-receipt.mjml</span
 						>
@@ -195,7 +199,9 @@
 						class="hidden w-60 flex-col justify-between border-r border-neutral-200 bg-white p-3.5 md:flex dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="space-y-3">
-							<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+							<div
+								class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
+							>
 								Block Palette
 							</div>
 							<div class="space-y-2">
@@ -269,7 +275,9 @@
 						class="hidden w-60 flex-col justify-between border-l border-neutral-200 bg-white p-3.5 lg:flex dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div class="space-y-3">
-							<div class="text-sm font-bold tracking-wider text-neutral-600 dark:text-neutral-400 uppercase">
+							<div
+								class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
+							>
 								Button Inspector
 							</div>
 							<div class="space-y-2.5 text-sm">
@@ -356,12 +364,16 @@
 					<div class="space-y-4">
 						<div>
 							<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Community</h3>
-							<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">For independent hackers and developers</p>
+							<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+								For independent hackers and developers
+							</p>
 						</div>
 
 						<div class="flex items-baseline gap-1.5">
 							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">€0</span>
-							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400">/ free forever</span>
+							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
+								>/ free forever</span
+							>
 						</div>
 
 						<div class="space-y-3 pt-2">
@@ -393,7 +405,9 @@
 
 					<div class="space-y-4">
 						<div>
-							<h3 class="flex items-center gap-2 text-xl font-bold text-neutral-900 dark:text-neutral-100">
+							<h3
+								class="flex items-center gap-2 text-xl font-bold text-neutral-900 dark:text-neutral-100"
+							>
 								<span>FrostMail Pro</span>
 								<Sparkles class="text-primary-500 h-5 w-5" />
 							</h3>
@@ -404,7 +418,8 @@
 
 						<div class="flex items-baseline gap-2">
 							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">€19</span>
-							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400">/ month</span>
+							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400">/ month</span
+							>
 						</div>
 
 						<div class="space-y-3 pt-2">
@@ -429,12 +444,42 @@
 	</main>
 
 	<!-- Footer -->
-	<footer class="border-t border-neutral-200 py-6 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
-		<div class="mx-auto flex max-w-6xl items-center justify-between px-6">
-			<span>FrostMail &bull; Built with SvelteKit & yaxa-svelte</span>
-			<div class="flex gap-4">
-				<a href="/editor" class="hover:underline">Editor</a>
-				<a href="/diagnostic" class="hover:underline">Diagnostic</a>
+	<footer
+		class="border-t border-neutral-200 py-8 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400"
+	>
+		<div
+			class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row"
+		>
+			<div class="flex items-center gap-2">
+				<span class="font-bold text-neutral-900 dark:text-neutral-100">FrostMail</span>
+				<span>&bull;</span>
+				<span>Built with SvelteKit & yaxa-svelte</span>
+			</div>
+			<div class="flex flex-wrap items-center justify-center gap-5 text-sm">
+				<a href="/editor" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>Studio</a
+				>
+				<a href="/diagnostic" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>DNS Auditor</a
+				>
+				<a
+					href="https://github.com/FuntionalFrost/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:text-neutral-900 hover:underline dark:hover:text-white">GitHub</a
+				>
+				<a href="/privacy" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>Privacy</a
+				>
+				<a href="/terms" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>Terms</a
+				>
+				<a href="/refunds" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>Refunds</a
+				>
+				<a href="/impressum" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
+					>Impressum</a
+				>
 			</div>
 		</div>
 	</footer>
