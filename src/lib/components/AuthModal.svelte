@@ -48,26 +48,26 @@
 				</div>
 
 				<div>
-					<h3 class="text-base font-bold text-neutral-900 dark:text-neutral-100">
+					<h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
 						{user?.name || 'FrostMail User'}
 					</h3>
-					<p class="text-xs text-neutral-500">{user?.email}</p>
+					<p class="text-sm text-neutral-600 dark:text-neutral-400">{user?.email}</p>
 				</div>
 
 				<div>
 					<Badge color={user?.tier === 'pro' ? 'primary' : 'neutral'} variant="subtle" size="sm">
 						{#if user?.tier === 'pro'}
-							<Sparkles class="mr-1 h-3.5 w-3.5" />
+							<Sparkles class="mr-1 h-4 w-4" />
 							FrostMail Pro
 						{:else}
-							<User class="mr-1 h-3.5 w-3.5" />
+							<User class="mr-1 h-4 w-4" />
 							Free Community Plan
 						{/if}
 					</Badge>
 				</div>
 
 				<div
-					class="flex justify-between gap-2 border-t border-neutral-100 pt-3 dark:border-neutral-800"
+					class="flex justify-between gap-2 border-t border-neutral-200 pt-3 dark:border-neutral-800"
 				>
 					<Button
 						color="neutral"
@@ -90,7 +90,7 @@
 					<Button block color="primary" size="md">Sign In / Register</Button>
 				</a>
 
-				<p class="pt-1 text-center text-[11px] text-neutral-400">
+				<p class="pt-1 text-center text-sm text-neutral-500 dark:text-neutral-400">
 					By signing in, you agree to our Terms of Service and Privacy Policy.
 				</p>
 			</div>

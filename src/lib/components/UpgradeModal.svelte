@@ -64,44 +64,44 @@
 	<div class="space-y-4 text-sm">
 		<!-- Monthly Pricing Banner -->
 		<div
-			class="border-primary-500 bg-primary-50/20 dark:bg-primary-950/20 space-y-1 rounded-xl border-2 p-4 text-center"
+			class="border-primary-500 bg-primary-50/40 dark:bg-primary-950/30 space-y-1.5 rounded-xl border-2 p-5 text-center"
 		>
 			<div
-				class="text-primary-600 dark:text-primary-400 text-xs font-bold tracking-wider uppercase"
+				class="text-primary-700 dark:text-primary-300 text-sm font-bold tracking-wider uppercase"
 			>
 				Monthly Subscription
 			</div>
 			<div class="text-3xl font-black text-neutral-900 dark:text-neutral-100">
-				€19<span class="text-sm font-normal text-neutral-400"> / month</span>
+				€19<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"> / month</span>
 			</div>
-			<div class="text-xs text-neutral-500">
+			<div class="text-sm text-neutral-600 dark:text-neutral-400">
 				Cancel or pause anytime &bull; VAT handled automatically
 			</div>
 		</div>
 
 		<!-- Features List -->
-		<div class="space-y-2 py-1">
+		<div class="space-y-2.5 py-1">
 			{#each features as feat (feat)}
-				<div class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
-					<CheckCircle2 class="text-primary-500 h-4.5 w-4.5 shrink-0" />
+				<div class="flex items-center gap-2.5 text-sm font-medium text-neutral-800 dark:text-neutral-200">
+					<CheckCircle2 class="text-primary-500 h-5 w-5 shrink-0" />
 					<span>{feat}</span>
 				</div>
 			{/each}
 		</div>
 
 		{#if checkoutError}
-			<p class="text-xs font-medium text-rose-500">{checkoutError}</p>
+			<p class="text-sm font-semibold text-rose-500">{checkoutError}</p>
 		{/if}
 
 		<!-- Polar Actions -->
-		<div class="space-y-2 pt-2">
+		<div class="space-y-3 pt-2">
 			<Button block color="primary" size="lg" loading={isCheckingOut} onclick={handleCheckout}>
 				<ShieldCheck class="mr-2 h-5 w-5" />
 				Subscribe with Polar (€19 / mo)
 			</Button>
 
-			<div class="flex items-center justify-center gap-1.5 pt-1 text-xs text-neutral-400">
-				<Lock class="h-3.5 w-3.5" />
+			<div class="flex items-center justify-center gap-1.5 pt-1 text-sm text-neutral-600 dark:text-neutral-400">
+				<Lock class="h-4 w-4" />
 				<span>Processed securely by Polar.sh &bull; Merchant of Record</span>
 			</div>
 		</div>

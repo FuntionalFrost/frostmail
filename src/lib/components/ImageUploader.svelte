@@ -101,14 +101,14 @@
 			<Image class="h-6 w-6 text-neutral-400" />
 		{/if}
 
-		<div class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+		<div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
 			{isUploading ? 'Uploading asset...' : 'Drop image or browse'}
 		</div>
-		<div class="text-xs text-neutral-400">PNG, JPG, WEBP, GIF up to 5 MB</div>
+		<div class="text-sm text-neutral-500 dark:text-neutral-400">PNG, JPG, WEBP, GIF up to 5 MB</div>
 	</div>
 
 	{#if uploadError}
-		<p class="text-xs font-medium text-rose-500">{uploadError}</p>
+		<p class="text-sm font-semibold text-rose-500">{uploadError}</p>
 	{/if}
 
 	<!-- Manual URL Input -->

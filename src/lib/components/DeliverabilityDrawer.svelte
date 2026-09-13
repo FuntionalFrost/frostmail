@@ -1,7 +1,7 @@
 <!-- src/lib/components/DeliverabilityDrawer.svelte -->
 <script lang="ts">
 	import { studio } from '$lib/stores/studio.svelte';
-	import { Popover, Button, Badge } from 'yaxa-svelte';
+	import { Popover, Badge } from 'yaxa-svelte';
 	import { ShieldAlert, AlertTriangle, XCircle, Info, CheckCircle2 } from '@lucide/svelte';
 
 	interface LintResult {
@@ -48,32 +48,51 @@
 
 <Popover class="w-88 p-4">
 	{#snippet trigger()}
-		<Button
-			size="sm"
-			color={lintResult.score >= 80 ? 'success' : lintResult.score >= 50 ? 'warning' : 'error'}
-			variant="subtle"
-			loading={isValidating}
+		<span
+			class="inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm font-semibold transition-colors cursor-pointer select-none {lintResult.score >= 80 && !studio.isClippedInGmail
+				? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-800/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/70'
+				: lintResult.score >= 50 && !studio.isClippedInGmail
+					? 'border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 dark:border-amber-800/80 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-950/70'
+					: 'border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 dark:border-rose-800/80 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-950/70'}"
 		>
-			<ShieldAlert class="mr-1.5 h-4 w-4" />
-			<span class="text-sm">Spam Score: {lintResult.score}/100</span>
-		</Button>
+			{#if isValidating}
+				<span
+					class="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent"
+				></span>
+			{:else}
+				<ShieldAlert class="h-3.5 w-3.5" />
+			{/if}
+			<span>Spam: {lintResult.score}/100</span>
+			<span class="opacity-50">&bull;</span>
+			<span class="font-mono text-xs">{studio.emailSizeKb} KB</span>
+		</span>
 	{/snippet}
 
 	<div class="space-y-3 text-sm">
 		<div
 			class="flex items-center justify-between border-b border-neutral-100 pb-2.5 dark:border-neutral-800"
 		>
-			<span class="text-base font-bold">Content Health Audit</span>
+			<span class="text-base font-bold">Deliverability Audit</span>
 			<Badge
-				color={lintResult.score >= 80 ? 'success' : lintResult.score >= 50 ? 'warning' : 'error'}
+				color={lintResult.score >= 80 && !studio.isClippedInGmail ? 'success' : lintResult.score >= 50 ? 'warning' : 'error'}
 				size="sm"
 			>
-				{lintResult.score >= 80
-					? 'Optimal'
-					: lintResult.score >= 50
-						? 'Moderate Risk'
-						: 'High Spam Risk'}
+				{studio.isClippedInGmail
+					? 'Gmail Clipped'
+					: lintResult.score >= 80
+						? 'Optimal'
+						: lintResult.score >= 50
+							? 'Moderate Risk'
+							: 'High Spam Risk'}
 			</Badge>
+		</div>
+
+		<!-- Size & Weight breakdown -->
+		<div class="flex items-center justify-between rounded-md bg-neutral-50 px-3 py-2 text-xs dark:bg-neutral-800/60">
+			<span class="text-neutral-600 dark:text-neutral-400">Email Size (Gmail 102 KB Limit):</span>
+			<span class="font-mono font-semibold {studio.isClippedInGmail ? 'text-rose-600 dark:text-rose-400' : 'text-neutral-900 dark:text-neutral-100'}">
+				{studio.emailSizeKb} KB
+			</span>
 		</div>
 
 		{#if lintResult.flags.length === 0}

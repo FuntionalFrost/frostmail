@@ -115,21 +115,21 @@
 					</div>
 
 					<div
-						class="mt-3 flex items-center justify-between border-t border-neutral-100 pt-3 text-xs text-neutral-400 dark:border-neutral-800"
+						class="mt-3 flex items-center justify-between border-t border-neutral-200 pt-3 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400"
 					>
 						<span>{new Date(project.updatedAt).toLocaleDateString()}</span>
 						{#if studio.savedProjects.length > 1}
 							<Button
 								color="error"
 								variant="ghost"
-								size="xs"
+								size="sm"
 								aria-label="Delete Template"
 								onclick={(e) => {
 									e.stopPropagation();
 									studio.deleteProject(project.id);
 								}}
 							>
-								<Trash2 class="h-3.5 w-3.5" />
+								<Trash2 class="h-4 w-4" />
 							</Button>
 						{/if}
 					</div>

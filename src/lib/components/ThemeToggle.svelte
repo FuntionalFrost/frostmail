@@ -14,8 +14,8 @@
 	onclick={() => colorMode.toggle()}
 >
 	{#if colorMode.isDark}
-		<Moon class="h-4 w-4 text-neutral-300" />
+		<Moon class="h-4.5 w-4.5 text-amber-400" />
 	{:else}
-		<Sun class="h-4 w-4 text-neutral-600" />
+		<Sun class="h-4.5 w-4.5 text-neutral-800 hover:text-neutral-950" />
 	{/if}
 </Button>
