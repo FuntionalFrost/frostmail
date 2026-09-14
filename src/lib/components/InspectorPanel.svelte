@@ -9,7 +9,15 @@
 		SectionBlock
 	} from '$lib/types/email';
 	import { EMAIL_SAFE_FONTS } from '$lib/constants/blocks';
-	import { Button, FormField, Input, Select, Textarea, ColorPicker } from 'yaxa-svelte';
+	import {
+		Button,
+		FormField,
+		Input,
+		Select,
+		Textarea,
+		ColorPicker,
+		ToggleGroup
+	} from 'yaxa-svelte';
 	import ImageUploader from './ImageUploader.svelte';
 	import {
 		Trash2,
@@ -22,6 +30,12 @@
 		Heading2,
 		Code
 	} from '@lucide/svelte';
+
+	const alignOptions = [
+		{ value: 'left', label: 'Left', icon: AlignLeft },
+		{ value: 'center', label: 'Center', icon: AlignCenter },
+		{ value: 'right', label: 'Right', icon: AlignRight }
+	];
 
 	const spacerPresets = ['12px', '24px', '36px', '48px', '64px'];
 
@@ -108,44 +122,14 @@
 		{:else if studio.selectedBlock.type === 'text'}
 			{@const textBlock = studio.selectedBlock as TextBlock}
 			<FormField label="Text Alignment">
-				<div class="flex items-center gap-1.5">
-					<Button
-						variant={textBlock.align === 'left' ? 'solid' : 'outline'}
-						color={textBlock.align === 'left' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Left"
-						onclick={() => {
-							textBlock.align = 'left';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignLeft class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={textBlock.align === 'center' ? 'solid' : 'outline'}
-						color={textBlock.align === 'center' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Center"
-						onclick={() => {
-							textBlock.align = 'center';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignCenter class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={textBlock.align === 'right' ? 'solid' : 'outline'}
-						color={textBlock.align === 'right' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Right"
-						onclick={() => {
-							textBlock.align = 'right';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignRight class="h-3.5 w-3.5" />
-					</Button>
-				</div>
+				<ToggleGroup
+					items={alignOptions}
+					bind:value={textBlock.align}
+					onchange={() => studio.onTemplateChanged()}
+					size="sm"
+					variant="outline"
+					block
+				/>
 			</FormField>
 
 			<div class="space-y-1.5">
@@ -227,44 +211,14 @@
 			</FormField>
 
 			<FormField label="Alignment">
-				<div class="flex items-center gap-1.5">
-					<Button
-						variant={(buttonBlock.align || 'center') === 'left' ? 'solid' : 'outline'}
-						color={(buttonBlock.align || 'center') === 'left' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Left"
-						onclick={() => {
-							buttonBlock.align = 'left';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignLeft class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={(buttonBlock.align || 'center') === 'center' ? 'solid' : 'outline'}
-						color={(buttonBlock.align || 'center') === 'center' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Center"
-						onclick={() => {
-							buttonBlock.align = 'center';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignCenter class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={(buttonBlock.align || 'center') === 'right' ? 'solid' : 'outline'}
-						color={(buttonBlock.align || 'center') === 'right' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Right"
-						onclick={() => {
-							buttonBlock.align = 'right';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignRight class="h-3.5 w-3.5" />
-					</Button>
-				</div>
+				<ToggleGroup
+					items={alignOptions}
+					bind:value={buttonBlock.align}
+					onchange={() => studio.onTemplateChanged()}
+					size="sm"
+					variant="outline"
+					block
+				/>
 			</FormField>
 
 			<div class="grid grid-cols-2 gap-2.5">
@@ -295,44 +249,14 @@
 			</FormField>
 
 			<FormField label="Alignment">
-				<div class="flex items-center gap-1.5">
-					<Button
-						variant={(imgBlock.align || 'center') === 'left' ? 'solid' : 'outline'}
-						color={(imgBlock.align || 'center') === 'left' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Left"
-						onclick={() => {
-							imgBlock.align = 'left';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignLeft class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={(imgBlock.align || 'center') === 'center' ? 'solid' : 'outline'}
-						color={(imgBlock.align || 'center') === 'center' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Center"
-						onclick={() => {
-							imgBlock.align = 'center';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignCenter class="h-3.5 w-3.5" />
-					</Button>
-					<Button
-						variant={(imgBlock.align || 'center') === 'right' ? 'solid' : 'outline'}
-						color={(imgBlock.align || 'center') === 'right' ? 'primary' : 'neutral'}
-						size="sm"
-						aria-label="Align Right"
-						onclick={() => {
-							imgBlock.align = 'right';
-							studio.onTemplateChanged();
-						}}
-					>
-						<AlignRight class="h-3.5 w-3.5" />
-					</Button>
-				</div>
+				<ToggleGroup
+					items={alignOptions}
+					bind:value={imgBlock.align}
+					onchange={() => studio.onTemplateChanged()}
+					size="sm"
+					variant="outline"
+					block
+				/>
 			</FormField>
 
 			<div class="grid grid-cols-2 gap-2.5">

@@ -1,7 +1,16 @@
 <!-- src/routes/editor/+page.svelte -->
 <script lang="ts">
 	import { studio } from '$lib/stores/studio.svelte';
-	import { useShortcuts, toast, Button, ButtonGroup, Kbd, Tabs, Seo } from 'yaxa-svelte';
+	import {
+		useShortcuts,
+		toast,
+		Button,
+		ButtonGroup,
+		Kbd,
+		Tabs,
+		Seo,
+		ToggleGroup
+	} from 'yaxa-svelte';
 	import { page } from '$app/state';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import BlockPalette from '$lib/components/BlockPalette.svelte';
@@ -39,6 +48,11 @@
 		{ label: 'Blocks', icon: LayoutGrid, value: 'blocks' },
 		{ label: 'Layers', icon: Layers, value: 'layers' },
 		{ label: 'Vars', icon: Variable, value: 'variables' }
+	];
+
+	const viewportOptions = [
+		{ value: 'desktop', label: 'Desktop', icon: Monitor },
+		{ value: 'mobile', label: 'Mobile', icon: Smartphone }
 	];
 
 	let activeLeftTab = $state('blocks');
@@ -135,26 +149,12 @@
 
 		<!-- 2. Center: Viewport & Dark Mode Simulation Controls -->
 		<div class="flex items-center gap-2.5">
-			<ButtonGroup>
-				<Button
-					variant={studio.previewMode === 'desktop' ? 'solid' : 'outline'}
-					color="neutral"
-					size="sm"
-					aria-label="Desktop Preview"
-					onclick={() => (studio.previewMode = 'desktop')}
-				>
-					<Monitor class="h-4 w-4" />
-				</Button>
-				<Button
-					variant={studio.previewMode === 'mobile' ? 'solid' : 'outline'}
-					color="neutral"
-					size="sm"
-					aria-label="Mobile Preview"
-					onclick={() => (studio.previewMode = 'mobile')}
-				>
-					<Smartphone class="h-4 w-4" />
-				</Button>
-			</ButtonGroup>
+			<ToggleGroup
+				items={viewportOptions}
+				bind:value={studio.previewMode}
+				size="sm"
+				variant="outline"
+			/>
 
 			<Button
 				variant={studio.simulateDarkMode ? 'solid' : 'outline'}

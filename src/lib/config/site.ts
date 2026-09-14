@@ -7,12 +7,23 @@ export const siteConfig = defineSiteConfig({
 	description:
 		'Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records (SPF, DKIM, DMARC, MX), and dispatch test emails.',
 	url: 'https://frostmail.netlify.app',
+	email: 'devfrost@protonmail.com',
 	version: '1.0.0',
 	defaultLocale: 'en',
 	logo: '/favicon.svg',
 	author: {
 		name: 'FunctionalFrost',
-		url: 'https://github.com/FuntionalFrost'
+		url: 'https://github.com/FuntionalFrost',
+		email: 'devfrost@protonmail.com',
+		github: 'https://github.com/FuntionalFrost'
+	},
+	project: {
+		license: 'MIT',
+		type: 'open-source',
+		pricingModel: 'freemium',
+		repositoryUrl: 'https://github.com/FuntionalFrost/',
+		isAccessibleForFree: true,
+		badge: 'MIT Open Source'
 	},
 	company: {
 		legalName: 'FrostMail',

@@ -60,7 +60,7 @@
 	];
 
 	import { siteConfig } from '$lib/config/site';
-	import { generateOrganizationSchema } from 'yaxa-svelte';
+	import { generateOrganizationSchema, generateSoftwareApplicationSchema } from 'yaxa-svelte';
 </script>
 
 <Seo
@@ -71,7 +71,7 @@
 		description: 'Design bulletproof emails. Ensure primary inbox delivery.',
 		badge: 'Open Source Email Studio'
 	}}
-	schema={[generateOrganizationSchema(siteConfig)]}
+	schema={[generateOrganizationSchema(siteConfig), generateSoftwareApplicationSchema(siteConfig)]}
 />
 
 <div

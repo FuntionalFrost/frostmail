@@ -1,6 +1,6 @@
 <!-- src/routes/diagnostic/+page.svelte -->
 <script lang="ts">
-	import { Button, Badge, Input, Seo } from 'yaxa-svelte';
+	import { Button, Badge, Input, Seo, MetricCard, toast } from 'yaxa-svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import { Wrench, Globe, Search, Check, Copy } from '@lucide/svelte';
 
@@ -84,10 +84,12 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 		try {
 			await navigator.clipboard.writeText(text);
 			isCopied = true;
+			toast.success('Audit report copied to clipboard!');
 			setTimeout(() => {
 				isCopied = false;
 			}, 2000);
 		} catch (err) {
+			toast.error('Failed to copy report to clipboard.');
 			console.error('Failed to copy report:', err);
 		}
 	}
@@ -186,48 +188,55 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 
 		{#if scanResult}
 			<div class="space-y-6">
-				<div
-					class="flex flex-col justify-between gap-4 rounded-xl border border-neutral-300 bg-white p-6 shadow-sm sm:flex-row sm:items-center dark:border-neutral-800 dark:bg-neutral-900"
-				>
-					<div>
-						<div
-							class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
-						>
-							Audit Target
-						</div>
-						<div
-							class="mt-0.5 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
-						>
-							{scanResult.domain}
-						</div>
-					</div>
-					<div class="flex items-center gap-6">
-						<Button size="sm" color="neutral" variant="outline" onclick={copyAuditReport}>
+				<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+					<MetricCard
+						title="Deliverability Score"
+						value={`${scanResult.score} / 100`}
+						change={scanResult.score >= 80 ? 100 : scanResult.score >= 50 ? 50 : 0}
+						changeType="percent"
+						changePeriod={scanResult.score >= 80 ? 'Optimal Inbox Placement' : 'Action Recommended'}
+						sparkline={[40, 60, 75, scanResult.score]}
+						sparklineColor={scanResult.score >= 80
+							? 'success'
+							: scanResult.score >= 50
+								? 'warning'
+								: 'error'}
+						variant="elevated"
+					/>
+					<MetricCard
+						title="Audit Target Domain"
+						value={scanResult.domain}
+						changePeriod="Cloudflare DNS-over-HTTPS"
+						variant="outline"
+					>
+						<Button size="sm" block color="neutral" variant="outline" onclick={copyAuditReport}>
 							{#if isCopied}
 								<Check class="mr-1.5 h-4 w-4" />
 								Report Copied!
 							{:else}
 								<Copy class="mr-1.5 h-4 w-4" />
-								Copy Report
+								Copy Audit Report
 							{/if}
 						</Button>
-						<div class="text-right">
-							<div
-								class="text-sm font-bold tracking-wider text-neutral-600 uppercase dark:text-neutral-400"
-							>
-								Deliverability Score
-							</div>
-							<div
-								class="mt-0.5 text-4xl font-black {scanResult.score >= 80
-									? 'text-emerald-500'
-									: scanResult.score >= 50
-										? 'text-amber-500'
-										: 'text-rose-500'}"
-							>
-								{scanResult.score} / 100
-							</div>
-						</div>
-					</div>
+					</MetricCard>
+					<MetricCard
+						title="Protocol Health"
+						value={`${[scanResult.mx.status, scanResult.spf.status, scanResult.dkim.status, scanResult.dmarc.status].filter((s) => s === 'pass').length} / 4 Passed`}
+						changePeriod="SPF • DKIM • DMARC • MX"
+						sparkline={[
+							1,
+							2,
+							3,
+							[
+								scanResult.mx.status,
+								scanResult.spf.status,
+								scanResult.dkim.status,
+								scanResult.dmarc.status
+							].filter((s) => s === 'pass').length
+						]}
+						sparklineColor="primary"
+						variant="outline"
+					/>
 				</div>
 
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
