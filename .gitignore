@@ -21,7 +21,3 @@ playwright/.cache/
 # Misc
 .DS_Store
 *.log
-
-# AI
-/.gemini
-GEMINI.md
