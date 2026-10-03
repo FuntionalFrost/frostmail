@@ -1,5 +1,6 @@
 // src/lib/utils/mjmlGenerator.ts
 import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '$lib/types/email';
+import { BLOCK_REGISTRY } from '$lib/blocks';
 
 export interface MjmlGeneratorOptions {
 	/** When true, embeds editor selection classes and postMessage event handlers for the canvas preview */
@@ -15,39 +16,32 @@ export function templateToMjml(
 	const sectionsHtml = (template.body || [])
 		.map((section: SectionBlock) => {
 			const sectionClass = forCanvas ? `css-class="mf-selectable mf-id-${section.id}"` : '';
+			const sectionPadding = section.padding ? `padding="${section.padding}"` : '';
 
 			const columnsHtml = (section.children || [])
 				.map((column: ColumnBlock) => {
+					const columnClass = forCanvas ? `css-class="mf-selectable mf-id-${column.id}"` : '';
+					const columnBg = column.backgroundColor
+						? `background-color="${column.backgroundColor}"`
+						: '';
+					const columnPadding = column.padding ? `padding="${column.padding}"` : '';
+
 					const blocksHtml = (column.children || [])
 						.map((block: ContentBlock) => {
-							const blockClass = forCanvas ? `css-class="mf-selectable mf-id-${block.id}"` : '';
-
-							switch (block.type) {
-								case 'text': {
-									const alignAttr = block.align ? `align="${block.align}"` : '';
-									return `<mj-text ${blockClass} ${alignAttr}>${block.content || ''}</mj-text>`;
-								}
-								case 'button':
-									return `<mj-button ${blockClass} align="${block.align || 'center'}" href="${block.url || '#'}" background-color="${block.backgroundColor || '#0284c7'}" color="${block.color || '#ffffff'}" border-radius="${block.borderRadius || '4px'}">${block.label || 'Button'}</mj-button>`;
-								case 'image': {
-									const hrefAttr = block.href ? `href="${block.href}"` : '';
-									return `<mj-image ${blockClass} align="${block.align || 'center'}" src="${block.src || ''}" alt="${block.alt || ''}" width="${block.width || 'auto'}" ${hrefAttr} />`;
-								}
-								case 'divider':
-									return `<mj-divider ${blockClass} />`;
-								case 'spacer':
-									return `<mj-spacer ${blockClass} height="${block.height || '20px'}" />`;
-								default:
-									return '';
+							const plugin = BLOCK_REGISTRY[block.type];
+							if (plugin?.toMjml) {
+								return plugin.toMjml(block, { forCanvas });
 							}
+							return '';
 						})
+						.filter(Boolean)
 						.join('\n');
 
-					return `<mj-column width="${column.width || '100%'}">\n${blocksHtml}\n</mj-column>`;
+					return `<mj-column width="${column.width || '100%'}" ${columnClass} ${columnBg} ${columnPadding}>\n${blocksHtml}\n</mj-column>`;
 				})
 				.join('\n');
 
-			return `<mj-section background-color="${section.backgroundColor || 'transparent'}" ${sectionClass}>\n${columnsHtml}\n</mj-section>`;
+			return `<mj-section background-color="${section.backgroundColor || 'transparent'}" ${sectionPadding} ${sectionClass}>\n${columnsHtml}\n</mj-section>`;
 		})
 		.join('\n');
 

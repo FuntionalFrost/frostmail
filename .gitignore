@@ -23,5 +23,4 @@ playwright/.cache/
 *.log
 
 # AI
-/.gemini
-GEMINI.md
+AGENTS.md

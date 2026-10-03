@@ -5,25 +5,22 @@ import type {
 	EmailTemplate,
 	AnyBlock,
 	SectionBlock,
+	ColumnBlock,
 	ContentBlock,
 	CompilerResult,
 	SavedProject
 } from '$lib/types/email';
 import { TEMPLATE_PRESETS } from '$lib/constants/presets';
 
-function isParentBlock(
-	block: AnyBlock
-): block is SectionBlock | (AnyBlock & { children: AnyBlock[] }) {
-	return 'children' in block && Array.isArray((block as { children: AnyBlock[] }).children);
-}
-
-function findBlockInTree(id: string, blocks: AnyBlock[]): AnyBlock | null {
-	if (!Array.isArray(blocks)) return null;
-	for (const b of blocks) {
-		if (b.id === id) return b;
-		if (isParentBlock(b)) {
-			const found = findBlockInTree(id, b.children);
-			if (found) return found;
+function findBlockInTree(id: string, sections: SectionBlock[]): AnyBlock | null {
+	if (!Array.isArray(sections)) return null;
+	for (const section of sections) {
+		if (section.id === id) return section;
+		for (const col of section.children || []) {
+			if (col.id === id) return col;
+			for (const block of col.children || []) {
+				if (block.id === id) return block;
+			}
 		}
 	}
 	return null;
@@ -32,13 +29,36 @@ function findBlockInTree(id: string, blocks: AnyBlock[]): AnyBlock | null {
 function findBlockLocation(
 	body: SectionBlock[],
 	blockId: string
-): { parentArray: ContentBlock[]; index: number } | null {
+): {
+	section: SectionBlock;
+	column: ColumnBlock;
+	parentArray: ContentBlock[];
+	index: number;
+} | null {
 	for (const section of body) {
 		for (const col of section.children || []) {
 			const index = (col.children || []).findIndex((b) => b.id === blockId);
 			if (index !== -1) {
-				return { parentArray: col.children as ContentBlock[], index };
+				return {
+					section,
+					column: col,
+					parentArray: col.children as ContentBlock[],
+					index
+				};
 			}
+		}
+	}
+	return null;
+}
+
+function findColumnLocation(
+	body: SectionBlock[],
+	columnId: string
+): { section: SectionBlock; index: number } | null {
+	for (const section of body) {
+		const index = (section.children || []).findIndex((c) => c.id === columnId);
+		if (index !== -1) {
+			return { section, index };
 		}
 	}
 	return null;
@@ -225,29 +245,62 @@ export class EmailStudioState {
 		}
 	};
 
-	// Block & Section Manipulation Methods
+	// Selection
 	selectBlock = (id: string | null) => {
 		this.selectedBlockId = id;
 	};
 
+	// Section & Layout Management
 	addSection = () => {
+		return this.addLayoutSection(['100%']);
+	};
+
+	addLayoutSection = (columns: string[] = ['100%']) => {
 		if (!this.template.body) this.template.body = [];
 		const newSection: SectionBlock = {
-			id: `sec_${Date.now()}`,
+			id: `sec_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
 			type: 'section',
 			backgroundColor: '#ffffff',
-			children: [
-				{
-					id: `col_${Date.now()}`,
-					type: 'column',
-					width: '100%',
-					children: []
-				}
-			]
+			children: columns.map((w) => ({
+				id: `col_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+				type: 'column',
+				width: w,
+				children: []
+			}))
 		};
 		this.template.body.push(newSection);
 		this.selectedBlockId = newSection.id;
 		this.onTemplateChanged();
+		return newSection;
+	};
+
+	addColumnToSection = (sectionId: string, width = '100%') => {
+		if (!this.template?.body) return;
+		const section = this.template.body.find((s) => s.id === sectionId);
+		if (!section) return;
+		if (!section.children) section.children = [];
+
+		const newCol: ColumnBlock = {
+			id: `col_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+			type: 'column',
+			width,
+			children: []
+		};
+		section.children.push(newCol);
+		this.selectedBlockId = newCol.id;
+		this.onTemplateChanged();
+	};
+
+	removeColumn = (columnId: string) => {
+		if (!this.template?.body) return;
+		const loc = findColumnLocation(this.template.body, columnId);
+		if (loc) {
+			loc.section.children.splice(loc.index, 1);
+			if (this.selectedBlockId === columnId) {
+				this.selectedBlockId = null;
+			}
+			this.onTemplateChanged();
+		}
 	};
 
 	moveSection = (direction: 'up' | 'down', sectionId: string) => {
@@ -269,7 +322,7 @@ export class EmailStudioState {
 		const original = this.template.body[idx];
 		if (original) {
 			const clone = structuredClone($state.snapshot(original));
-			clone.id = `sec_${Date.now()}`;
+			clone.id = `sec_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
 			for (const col of clone.children || []) {
 				col.id = `col_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
 				for (const block of col.children || []) {
@@ -291,11 +344,59 @@ export class EmailStudioState {
 		this.onTemplateChanged();
 	};
 
+	// Block Manipulation (Contextual Insertion)
 	addBlock = (factory: () => ContentBlock) => {
 		const newBlock = factory();
 		if (!this.template.body) this.template.body = [];
-		let targetSection = this.template.body[this.template.body.length - 1];
 
+		// Case 1: If a content block is selected, insert directly after it in that column
+		if (this.selectedBlockId) {
+			const blockLoc = findBlockLocation(this.template.body, this.selectedBlockId);
+			if (blockLoc) {
+				blockLoc.parentArray.splice(blockLoc.index + 1, 0, newBlock);
+				this.selectedBlockId = newBlock.id;
+				this.onTemplateChanged();
+				return;
+			}
+
+			// Case 2: If a column is selected, append to that column
+			for (const sec of this.template.body) {
+				const col = (sec.children || []).find((c) => c.id === this.selectedBlockId);
+				if (col) {
+					if (!col.children) col.children = [];
+					col.children.push(newBlock);
+					this.selectedBlockId = newBlock.id;
+					this.onTemplateChanged();
+					return;
+				}
+			}
+
+			// Case 3: If a section is selected, insert into its first column
+			const sec = this.template.body.find((s) => s.id === this.selectedBlockId);
+			if (sec) {
+				if (!sec.children || sec.children.length === 0) {
+					sec.children = [
+						{
+							id: `col_${Date.now()}`,
+							type: 'column',
+							width: '100%',
+							children: []
+						}
+					];
+				}
+				const firstCol = sec.children[0];
+				if (firstCol) {
+					if (!firstCol.children) firstCol.children = [];
+					firstCol.children.push(newBlock);
+					this.selectedBlockId = newBlock.id;
+					this.onTemplateChanged();
+					return;
+				}
+			}
+		}
+
+		// Fallback: Append to last section's last column (or create new section)
+		let targetSection = this.template.body[this.template.body.length - 1];
 		if (!targetSection) {
 			targetSection = {
 				id: `sec_${Date.now()}`,
@@ -306,18 +407,23 @@ export class EmailStudioState {
 			this.template.body.push(targetSection);
 		}
 
-		let targetCol = targetSection.children[0];
-		if (!targetCol) {
-			targetCol = {
-				id: `col_${Date.now()}`,
-				type: 'column',
-				width: '100%',
-				children: []
-			};
-			targetSection.children.push(targetCol);
+		if (!targetSection.children || targetSection.children.length === 0) {
+			targetSection.children = [
+				{
+					id: `col_${Date.now()}`,
+					type: 'column',
+					width: '100%',
+					children: []
+				}
+			];
 		}
 
-		targetCol.children.push(newBlock);
+		const targetCol = targetSection.children[targetSection.children.length - 1];
+		if (targetCol) {
+			if (!targetCol.children) targetCol.children = [];
+			targetCol.children.push(newBlock);
+		}
+
 		this.selectedBlockId = newBlock.id;
 		this.onTemplateChanged();
 	};
@@ -341,7 +447,7 @@ export class EmailStudioState {
 		const original = loc.parentArray[loc.index];
 		if (original) {
 			const clone = structuredClone($state.snapshot(original));
-			clone.id = `${clone.type}_${Date.now()}`;
+			clone.id = `${clone.type}_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
 			loc.parentArray.splice(loc.index + 1, 0, clone);
 			this.selectedBlockId = clone.id;
 			this.onTemplateChanged();
@@ -359,6 +465,14 @@ export class EmailStudioState {
 			this.onTemplateChanged();
 			return;
 		}
+
+		// Also check if it was a column or section
+		const colLoc = findColumnLocation(this.template.body, blockId);
+		if (colLoc) {
+			this.removeColumn(blockId);
+			return;
+		}
+
 		this.removeSection(blockId);
 	};
 
