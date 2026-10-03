@@ -1,6 +1,6 @@
 // src/lib/utils/reactEmailConverter.ts
-import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '$lib/types/email';
-import { BLOCK_REGISTRY } from '$lib/blocks';
+import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '#lib/types/email.js';
+import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
 
 function toValidComponentName(name: string): string {
 	const cleaned = name.replace(/[^a-zA-Z0-9]/g, '');

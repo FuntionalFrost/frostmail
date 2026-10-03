@@ -1,10 +1,9 @@
-import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle } from '@sveltejs/kit';
-import { building } from '$app/environment';
-import { auth } from '$lib/server/auth';
+import { sequence, type Handle } from '@sveltejs/kit/hooks';
+import { building } from '$app/env';
+import { auth } from '#lib/server/auth.js';
 import { svelteKitHandler } from 'better-auth/svelte-kit';
 import { createYaxaHook } from 'yaxa-svelte';
-import { siteConfig } from '$lib/config/site';
+import { siteConfig } from '#lib/config/site.js';
 
 const handleBetterAuth: Handle = async ({ event, resolve }) => {
 	const session = await auth.api.getSession({ headers: event.request.headers });

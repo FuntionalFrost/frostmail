@@ -1,8 +1,8 @@
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
 	import { Badge, Button, Seo } from 'yaxa-svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import UpgradeModal from '$lib/components/UpgradeModal.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import UpgradeModal from '#lib/components/UpgradeModal.svelte';
 	import {
 		Sparkles,
 		ArrowRight,
@@ -59,7 +59,7 @@
 		'Commercial Merchant of Record via Polar.sh'
 	];
 
-	import { siteConfig } from '$lib/config/site';
+	import { siteConfig } from '#lib/config/site.js';
 	import { generateOrganizationSchema, generateSoftwareApplicationSchema } from 'yaxa-svelte';
 </script>
 

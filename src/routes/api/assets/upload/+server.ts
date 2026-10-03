@@ -1,7 +1,7 @@
 // src/routes/api/assets/upload/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { uploadEmailAsset } from '$lib/server/storage';
+import { uploadEmailAsset } from '#lib/server/storage.js';
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB limit
@@ -34,7 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const result = await uploadEmailAsset(buffer, mimeType, file.name);
 
-	return json({
+	return Response.json({
 		url: result.url,
 		key: result.key,
 		name: file.name || 'uploaded_image',

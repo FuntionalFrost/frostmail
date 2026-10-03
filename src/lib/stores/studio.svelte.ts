@@ -1,5 +1,5 @@
 // src/lib/stores/studio.svelte.ts
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import { SvelteDate } from 'svelte/reactivity';
 import type {
 	EmailTemplate,
@@ -9,8 +9,8 @@ import type {
 	ContentBlock,
 	CompilerResult,
 	SavedProject
-} from '$lib/types/email';
-import { TEMPLATE_PRESETS } from '$lib/constants/presets';
+} from '#lib/types/email.js';
+import { TEMPLATE_PRESETS } from '#lib/constants/presets.js';
 
 function findBlockInTree(id: string, sections: SectionBlock[]): AnyBlock | null {
 	if (!Array.isArray(sections)) return null;

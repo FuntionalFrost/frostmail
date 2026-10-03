@@ -1,8 +1,8 @@
 // src/lib/blocks/social.ts
-import type { SocialBlock } from '$lib/types/email';
+import type { SocialBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { Share2 } from '@lucide/svelte';
-import SocialBlockInspector from '$lib/components/inspectors/SocialBlockInspector.svelte';
+import SocialBlockInspector from '#lib/components/inspectors/SocialBlockInspector.svelte';
 
 function mapNetworkToMjmlName(network: string): string {
 	switch (network) {

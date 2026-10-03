@@ -1,16 +1,25 @@
 // src/lib/server/storage.ts
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { randomUUID } from 'node:crypto';
-import { env } from '$env/dynamic/private';
+
+import {
+	R2_ACCOUNT_ID,
+	R2_ACCESS_KEY_ID,
+	AWS_ACCESS_KEY_ID,
+	R2_SECRET_ACCESS_KEY,
+	AWS_SECRET_ACCESS_KEY,
+	R2_BUCKET_NAME,
+	R2_PUBLIC_DOMAIN
+} from '$app/env/private';
 
 let s3ClientInstance: S3Client | null = null;
 
 export function useStorageClient(): S3Client | null {
 	if (s3ClientInstance) return s3ClientInstance;
 
-	const accountId = env.R2_ACCOUNT_ID;
-	const accessKeyId = env.R2_ACCESS_KEY_ID || env.AWS_ACCESS_KEY_ID;
-	const secretAccessKey = env.R2_SECRET_ACCESS_KEY || env.AWS_SECRET_ACCESS_KEY;
+	const accountId = R2_ACCOUNT_ID;
+	const accessKeyId = R2_ACCESS_KEY_ID || AWS_ACCESS_KEY_ID;
+	const secretAccessKey = R2_SECRET_ACCESS_KEY || AWS_SECRET_ACCESS_KEY;
 
 	if (!accountId || !accessKeyId || !secretAccessKey) {
 		return null;
@@ -33,9 +42,8 @@ export async function uploadEmailAsset(
 	mimeType: string,
 	originalFilename?: string
 ): Promise<{ url: string; key: string; sizeKb: number }> {
-	const bucketName = env.R2_BUCKET_NAME || 'frostmail-assets';
-	const publicDomain = (env.R2_PUBLIC_DOMAIN || '').replace(/\/+$/, '');
-
+	const bucketName = R2_BUCKET_NAME || 'frostmail-assets';
+	const publicDomain = (R2_PUBLIC_DOMAIN || '').replace(/\/+$/, '');
 	const ext = originalFilename?.split('.').pop() || mimeType.split('/')[1] || 'png';
 	const key = `assets/${Date.now()}_${randomUUID().slice(0, 8)}.${ext}`;
 
@@ -54,7 +62,7 @@ export async function uploadEmailAsset(
 
 		const url = publicDomain
 			? `${publicDomain}/${key}`
-			: `https://${bucketName}.${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/${key}`;
+			: `https://${bucketName}.${R2_ACCOUNT_ID}.r2.cloudflarestorage.com/${key}`;
 
 		return {
 			url,

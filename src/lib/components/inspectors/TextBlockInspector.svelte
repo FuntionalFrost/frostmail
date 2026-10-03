@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/TextBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { TextBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { TextBlock } from '#lib/types/email.js';
 	import { FormField, ToggleGroup, Button, Textarea } from 'yaxa-svelte';
 	import {
 		AlignLeft,

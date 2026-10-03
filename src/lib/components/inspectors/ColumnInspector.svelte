@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/ColumnInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { ColumnBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { ColumnBlock } from '#lib/types/email.js';
 	import { FormField, Input, ColorPicker, Button } from 'yaxa-svelte';
 	import { Trash2 } from '@lucide/svelte';
 

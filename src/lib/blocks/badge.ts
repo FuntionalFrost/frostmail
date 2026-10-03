@@ -1,8 +1,8 @@
 // src/lib/blocks/badge.ts
-import type { BadgeBlock } from '$lib/types/email';
+import type { BadgeBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { Tag } from '@lucide/svelte';
-import BadgeBlockInspector from '$lib/components/inspectors/BadgeBlockInspector.svelte';
+import BadgeBlockInspector from '#lib/components/inspectors/BadgeBlockInspector.svelte';
 
 export const badgeBlockPlugin: BlockPlugin<BadgeBlock> = {
 	type: 'badge',

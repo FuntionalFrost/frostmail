@@ -1,8 +1,8 @@
 // src/lib/blocks/divider.ts
-import type { DividerBlock } from '$lib/types/email';
+import type { DividerBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { Minus } from '@lucide/svelte';
-import DividerBlockInspector from '$lib/components/inspectors/DividerBlockInspector.svelte';
+import DividerBlockInspector from '#lib/components/inspectors/DividerBlockInspector.svelte';
 
 export const dividerBlockPlugin: BlockPlugin<DividerBlock> = {
 	type: 'divider',

@@ -1,8 +1,8 @@
 // src/routes/api/compiler/compile/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import type { EmailTemplate, CompilerResult } from '$lib/types/email';
-import { compileToHtml } from '$lib/server/mjmlCompiler';
+import type { EmailTemplate, CompilerResult } from '#lib/types/email.js';
+import { compileToHtml } from '#lib/server/mjmlCompiler.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const body = (await request.json().catch(() => null)) as {
@@ -25,5 +25,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		isClippedInGmail: sizeKb > 102
 	};
 
-	return json(result);
+	return Response.json(result);
 };

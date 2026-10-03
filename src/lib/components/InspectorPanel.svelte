@@ -1,8 +1,8 @@
 <!-- src/lib/components/InspectorPanel.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import { BLOCK_REGISTRY } from '$lib/blocks';
-	import type { SectionBlock, ColumnBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
+	import type { SectionBlock, ColumnBlock } from '#lib/types/email.js';
 	import { Button } from 'yaxa-svelte';
 	import { Trash2 } from '@lucide/svelte';
 	import GlobalSettingsInspector from './inspectors/GlobalSettingsInspector.svelte';

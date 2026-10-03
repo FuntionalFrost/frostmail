@@ -1,6 +1,6 @@
 // src/lib/blocks/types.ts
 import type { Component } from 'svelte';
-import type { BaseBlock, ContentBlock } from '$lib/types/email';
+import type { BaseBlock, ContentBlock } from '#lib/types/email.js';
 
 export interface BlockRenderContext {
 	forCanvas?: boolean;

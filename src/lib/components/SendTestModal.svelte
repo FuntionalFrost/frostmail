@@ -1,6 +1,6 @@
 <!-- src/lib/components/SendTestModal.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
+	import { studio } from '#lib/stores/studio.svelte.js';
 	import { Modal, FormField, Input, Button } from 'yaxa-svelte';
 	import { Send, CheckCircle2, AlertCircle } from '@lucide/svelte';
 

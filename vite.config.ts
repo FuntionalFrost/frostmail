@@ -6,8 +6,23 @@ import adapterNode from '@sveltejs/adapter-node';
 
 const isNode = process.env.DEPLOY_TARGET === 'node';
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const yaxaDist = path.dirname(fileURLToPath(import.meta.resolve('yaxa-svelte')));
+
 export default defineConfig({
 	plugins: [
+		{
+			name: 'yaxa-internal-resolver',
+			enforce: 'pre',
+			resolveId(source, importer) {
+				if (source.startsWith('#lib/') && importer && importer.includes('yaxa-svelte')) {
+					const subpath = source.replace('#lib/', '');
+					return path.resolve(yaxaDist, subpath);
+				}
+			}
+		},
 		tailwindcss(),
 		sveltekit({
 			compilerOptions: {
@@ -15,12 +30,7 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: isNode ? adapterNode() : adapterNetlify(),
-			typescript: {
-				config: (config) => {
-					config.include.push('../drizzle.config.ts');
-				}
-			}
+			adapter: isNode ? adapterNode() : adapterNetlify()
 		})
 	]
 });

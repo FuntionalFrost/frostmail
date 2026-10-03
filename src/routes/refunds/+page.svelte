@@ -1,7 +1,7 @@
 <!-- src/routes/refunds/+page.svelte -->
 <script lang="ts">
 	import { Seo, LegalDocument } from 'yaxa-svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import { ArrowLeft } from '@lucide/svelte';
 </script>
 

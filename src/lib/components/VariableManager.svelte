@@ -1,6 +1,6 @@
 <!-- src/lib/components/VariableManager.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
+	import { studio } from '#lib/stores/studio.svelte.js';
 	import { Textarea } from 'yaxa-svelte';
 	import { Check, Copy } from '@lucide/svelte';
 

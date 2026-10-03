@@ -1,8 +1,8 @@
 // src/lib/blocks/image.ts
-import type { ImageBlock } from '$lib/types/email';
+import type { ImageBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { Image as ImageIcon } from '@lucide/svelte';
-import ImageBlockInspector from '$lib/components/inspectors/ImageBlockInspector.svelte';
+import ImageBlockInspector from '#lib/components/inspectors/ImageBlockInspector.svelte';
 
 export const imageBlockPlugin: BlockPlugin<ImageBlock> = {
 	type: 'image',

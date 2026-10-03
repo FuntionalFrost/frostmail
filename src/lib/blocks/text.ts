@@ -1,8 +1,8 @@
 // src/lib/blocks/text.ts
-import type { TextBlock } from '$lib/types/email';
+import type { TextBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { FileText } from '@lucide/svelte';
-import TextBlockInspector from '$lib/components/inspectors/TextBlockInspector.svelte';
+import TextBlockInspector from '#lib/components/inspectors/TextBlockInspector.svelte';
 
 export const textBlockPlugin: BlockPlugin<TextBlock> = {
 	type: 'text',

@@ -2,7 +2,7 @@
 <script lang="ts">
 	import './layout.css';
 	import { YaxaApp, Favicons } from 'yaxa-svelte';
-	import { siteConfig } from '$lib/config/site';
+	import { siteConfig } from '#lib/config/site.js';
 
 	let { children } = $props();
 </script>

@@ -1,5 +1,5 @@
 // src/lib/blocks/registry.ts
-import type { ContentBlock } from '$lib/types/email';
+import type { ContentBlock } from '#lib/types/email.js';
 import type { BlockPlugin, LayoutPreset } from './types';
 import { textBlockPlugin } from './text';
 import { buttonBlockPlugin } from './button';

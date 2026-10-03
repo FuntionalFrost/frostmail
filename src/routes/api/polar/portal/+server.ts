@@ -1,7 +1,7 @@
 // src/routes/api/polar/portal/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { usePolar } from '$lib/server/polar';
+import { usePolar } from '#lib/server/polar.js';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const polar = usePolar();
@@ -23,7 +23,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			customerId: body.customerId
 		});
 
-		return json({
+		return Response.json({
 			url: session.customerPortalUrl,
 			token: session.token
 		});

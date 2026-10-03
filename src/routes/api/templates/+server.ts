@@ -1,19 +1,19 @@
 // src/routes/api/templates/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getDb, templates } from '$lib/server/db';
-import type { EmailTemplate } from '$lib/types/email';
+import { getDb, templates } from '#lib/server/db/index.js';
+import type { EmailTemplate } from '#lib/types/email.js';
 import { desc, eq } from 'drizzle-orm';
 
 export const GET: RequestHandler = async ({ locals }) => {
 	const user = locals.user;
 	if (!user?.id) {
-		return json([]);
+		return Response.json([]);
 	}
 
 	const db = getDb();
 	if (!db) {
-		return json([]);
+		return Response.json([]);
 	}
 
 	try {
@@ -23,7 +23,7 @@ export const GET: RequestHandler = async ({ locals }) => {
 			.where(eq(templates.userId, user.id))
 			.orderBy(desc(templates.updatedAt));
 
-		return json(
+		return Response.json(
 			list.map((item) => ({
 				id: item.id,
 				name: item.name,
@@ -34,7 +34,7 @@ export const GET: RequestHandler = async ({ locals }) => {
 	} catch (err: unknown) {
 		const e = err as Error;
 		console.error('Failed to query cloud templates:', e.message);
-		return json([]);
+		return Response.json([]);
 	}
 };
 
@@ -53,7 +53,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const user = locals.user;
 
 	if (!db || !user?.id) {
-		return json({
+		return Response.json({
 			success: true,
 			syncedToCloud: false,
 			message: 'Saved locally (Log in to sync to cloud database).'
@@ -92,7 +92,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			});
 		}
 
-		return json({
+		return Response.json({
 			success: true,
 			syncedToCloud: true,
 			id: templateId

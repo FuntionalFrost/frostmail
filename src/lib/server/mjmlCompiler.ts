@@ -1,8 +1,8 @@
 // src/lib/server/mjmlCompiler.ts
 import mjml2html from 'mjml';
-import type { EmailTemplate } from '$lib/types/email';
-import { templateToMjml } from '$lib/utils/mjmlGenerator';
-import { interpolateVariables } from '$lib/utils/interpolate';
+import type { EmailTemplate } from '#lib/types/email.js';
+import { templateToMjml } from '#lib/utils/mjmlGenerator.js';
+import { interpolateVariables } from '#lib/utils/interpolate.js';
 
 export async function compileToHtml(
 	template: EmailTemplate,

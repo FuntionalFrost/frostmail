@@ -1,7 +1,7 @@
 <!-- src/lib/components/BlockPalette.svelte -->
 <script lang="ts">
-	import { BLOCK_REGISTRY, LAYOUT_PRESETS } from '$lib/blocks';
-	import { studio } from '$lib/stores/studio.svelte';
+	import { BLOCK_REGISTRY, LAYOUT_PRESETS } from '#lib/blocks/index.js';
+	import { studio } from '#lib/stores/studio.svelte.js';
 
 	const contentBlocks = Object.values(BLOCK_REGISTRY);
 </script>

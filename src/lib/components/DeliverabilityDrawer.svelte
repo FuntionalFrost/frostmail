@@ -1,6 +1,6 @@
 <!-- src/lib/components/DeliverabilityDrawer.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
+	import { studio } from '#lib/stores/studio.svelte.js';
 	import { Popover, Badge } from 'yaxa-svelte';
 	import { ShieldAlert, AlertTriangle, XCircle, Info, CheckCircle2 } from '@lucide/svelte';
 

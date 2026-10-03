@@ -1,6 +1,6 @@
 <!-- src/lib/components/inspectors/DividerBlockInspector.svelte -->
 <script lang="ts">
-	import type { DividerBlock } from '$lib/types/email';
+	import type { DividerBlock } from '#lib/types/email.js';
 
 	let { block = $bindable() }: { block?: DividerBlock } = $props();
 	void block;

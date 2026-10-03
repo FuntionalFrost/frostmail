@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/RawBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { RawBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { RawBlock } from '#lib/types/email.js';
 	import { FormField, Textarea } from 'yaxa-svelte';
 
 	let { block = $bindable() }: { block: RawBlock } = $props();

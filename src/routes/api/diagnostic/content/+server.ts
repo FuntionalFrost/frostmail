@@ -1,5 +1,4 @@
 // src/routes/api/diagnostic/content/+server.ts
-import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export interface ContentLintResult {
@@ -74,5 +73,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		flags
 	};
 
-	return json(result);
+	return Response.json(result);
 };

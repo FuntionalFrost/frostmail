@@ -1,6 +1,6 @@
 <!-- src/routes/editor/+page.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
+	import { studio } from '#lib/stores/studio.svelte.js';
 	import {
 		useShortcuts,
 		toast,
@@ -12,17 +12,17 @@
 		ToggleGroup
 	} from 'yaxa-svelte';
 	import { page } from '$app/state';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import BlockPalette from '$lib/components/BlockPalette.svelte';
-	import LayersTree from '$lib/components/LayersTree.svelte';
-	import VariableManager from '$lib/components/VariableManager.svelte';
-	import InspectorPanel from '$lib/components/InspectorPanel.svelte';
-	import DeliverabilityDrawer from '$lib/components/DeliverabilityDrawer.svelte';
-	import SendTestModal from '$lib/components/SendTestModal.svelte';
-	import ExportModal from '$lib/components/ExportModal.svelte';
-	import TemplateLibraryModal from '$lib/components/TemplateLibraryModal.svelte';
-	import UpgradeModal from '$lib/components/UpgradeModal.svelte';
-	import AuthModal from '$lib/components/AuthModal.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import BlockPalette from '#lib/components/BlockPalette.svelte';
+	import LayersTree from '#lib/components/LayersTree.svelte';
+	import VariableManager from '#lib/components/VariableManager.svelte';
+	import InspectorPanel from '#lib/components/InspectorPanel.svelte';
+	import DeliverabilityDrawer from '#lib/components/DeliverabilityDrawer.svelte';
+	import SendTestModal from '#lib/components/SendTestModal.svelte';
+	import ExportModal from '#lib/components/ExportModal.svelte';
+	import TemplateLibraryModal from '#lib/components/TemplateLibraryModal.svelte';
+	import UpgradeModal from '#lib/components/UpgradeModal.svelte';
+	import AuthModal from '#lib/components/AuthModal.svelte';
 
 	import {
 		Folder,

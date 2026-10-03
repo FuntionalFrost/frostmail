@@ -1,13 +1,13 @@
 // src/routes/api/webhooks/polar/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks';
-import { getDb, user, subscriptions } from '$lib/server/db';
+import { getDb, user, subscriptions } from '#lib/server/db/index.js';
 import { eq } from 'drizzle-orm';
-import { env } from '$env/dynamic/private';
+import { POLAR_WEBHOOK_SECRET } from '$app/env/private';
 
 export const POST: RequestHandler = async ({ request }) => {
-	const secret = env.POLAR_WEBHOOK_SECRET;
+	const secret = POLAR_WEBHOOK_SECRET;
 	const rawBody = await request.text();
 
 	if (!rawBody) {
@@ -110,7 +110,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	}
 
-	return json({
+	return Response.json({
 		received: true,
 		event: type
 	});

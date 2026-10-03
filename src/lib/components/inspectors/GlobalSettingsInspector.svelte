@@ -1,8 +1,8 @@
 <!-- src/lib/components/inspectors/GlobalSettingsInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
+	import { studio } from '#lib/stores/studio.svelte.js';
 	import { FormField, Input, Select, ColorPicker } from 'yaxa-svelte';
-	import { EMAIL_SAFE_FONTS } from '$lib/constants/blocks';
+	import { EMAIL_SAFE_FONTS } from '#lib/constants/blocks.js';
 
 	const fontOptions = EMAIL_SAFE_FONTS.map((f) => ({ value: f.value, label: f.label }));
 </script>

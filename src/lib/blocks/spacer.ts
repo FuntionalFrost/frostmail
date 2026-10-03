@@ -1,8 +1,8 @@
 // src/lib/blocks/spacer.ts
-import type { SpacerBlock } from '$lib/types/email';
+import type { SpacerBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { MoveVertical } from '@lucide/svelte';
-import SpacerBlockInspector from '$lib/components/inspectors/SpacerBlockInspector.svelte';
+import SpacerBlockInspector from '#lib/components/inspectors/SpacerBlockInspector.svelte';
 
 export const spacerBlockPlugin: BlockPlugin<SpacerBlock> = {
 	type: 'spacer',

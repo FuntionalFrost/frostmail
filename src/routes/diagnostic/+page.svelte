@@ -1,7 +1,7 @@
 <!-- src/routes/diagnostic/+page.svelte -->
 <script lang="ts">
 	import { Button, Badge, Input, Seo, MetricCard, toast } from 'yaxa-svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import { Wrench, Globe, Search, Check, Copy } from '@lucide/svelte';
 
 	interface DnsCheckResult {

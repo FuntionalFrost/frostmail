@@ -1,9 +1,9 @@
 <!-- src/lib/components/inspectors/ImageBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { ImageBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { ImageBlock } from '#lib/types/email.js';
 	import { FormField, Input, ToggleGroup } from 'yaxa-svelte';
-	import ImageUploader from '$lib/components/ImageUploader.svelte';
+	import ImageUploader from '#lib/components/ImageUploader.svelte';
 	import { AlignLeft, AlignCenter, AlignRight } from '@lucide/svelte';
 
 	let { block = $bindable() }: { block: ImageBlock } = $props();

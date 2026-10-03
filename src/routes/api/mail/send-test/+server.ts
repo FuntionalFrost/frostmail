@@ -1,9 +1,9 @@
 // src/routes/api/mail/send-test/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import type { EmailTemplate } from '$lib/types/email';
-import { compileToHtml } from '$lib/server/mjmlCompiler';
-import { env } from '$env/dynamic/private';
+import type { EmailTemplate } from '#lib/types/email.js';
+import { compileToHtml } from '#lib/server/mjmlCompiler.js';
+import { RESEND_API_KEY } from '$app/env/private';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const body = (await request.json().catch(() => null)) as {
@@ -18,7 +18,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'Recipient email address and template are required.');
 	}
 
-	const apiKey = body.apiKey?.trim() || env.RESEND_API_KEY;
+	const apiKey = body.apiKey?.trim() || RESEND_API_KEY;
 
 	if (!apiKey) {
 		throw error(401, 'No Resend API Key provided. Enter a key or set RESEND_API_KEY in .env.');
@@ -51,7 +51,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		const data = (await res.json()) as { id: string };
 
-		return json({
+		return Response.json({
 			success: true,
 			messageId: data.id,
 			recipient: body.to

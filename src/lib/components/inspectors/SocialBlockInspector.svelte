@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/SocialBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { SocialBlock, SocialNetworkItem } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { SocialBlock, SocialNetworkItem } from '#lib/types/email.js';
 	import { FormField, Input, Select, ToggleGroup, Button } from 'yaxa-svelte';
 	import { AlignLeft, AlignCenter, AlignRight, Plus, Trash2 } from '@lucide/svelte';
 

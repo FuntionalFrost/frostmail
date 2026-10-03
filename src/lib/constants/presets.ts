@@ -1,5 +1,5 @@
 // src/lib/constants/presets.ts
-import type { EmailTemplate } from '$lib/types/email';
+import type { EmailTemplate } from '#lib/types/email.js';
 
 export const TEMPLATE_PRESETS: Record<
 	'welcome' | 'passwordReset' | 'receipt' | 'verification' | 'newsletter',

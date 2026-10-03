@@ -1,6 +1,6 @@
 // src/lib/utils/mjmlGenerator.ts
-import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '$lib/types/email';
-import { BLOCK_REGISTRY } from '$lib/blocks';
+import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '#lib/types/email.js';
+import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
 
 export interface MjmlGeneratorOptions {
 	/** When true, embeds editor selection classes and postMessage event handlers for the canvas preview */

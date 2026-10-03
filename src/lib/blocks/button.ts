@@ -1,8 +1,8 @@
 // src/lib/blocks/button.ts
-import type { ButtonBlock } from '$lib/types/email';
+import type { ButtonBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { MousePointerClick } from '@lucide/svelte';
-import ButtonBlockInspector from '$lib/components/inspectors/ButtonBlockInspector.svelte';
+import ButtonBlockInspector from '#lib/components/inspectors/ButtonBlockInspector.svelte';
 
 export const buttonBlockPlugin: BlockPlugin<ButtonBlock> = {
 	type: 'button',

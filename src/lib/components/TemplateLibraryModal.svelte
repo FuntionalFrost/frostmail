@@ -1,7 +1,7 @@
 <!-- src/lib/components/TemplateLibraryModal.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { SavedProject } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { SavedProject } from '#lib/types/email.js';
 	import { Modal, Button, Badge, Input } from 'yaxa-svelte';
 	import { Cloud, Smartphone, Bookmark, Plus, Trash2 } from '@lucide/svelte';
 
@@ -124,7 +124,7 @@
 								variant="ghost"
 								size="sm"
 								aria-label="Delete Template"
-								onclick={(e) => {
+								onclick={(e: MouseEvent) => {
 									e.stopPropagation();
 									studio.deleteProject(project.id);
 								}}

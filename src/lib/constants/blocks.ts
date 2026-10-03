@@ -1,5 +1,5 @@
 // src/lib/constants/blocks.ts
-import type { ContentBlock } from '$lib/types/email';
+import type { ContentBlock } from '#lib/types/email.js';
 
 export interface BlockDefinition {
 	type: ContentBlock['type'];
@@ -8,7 +8,7 @@ export interface BlockDefinition {
 	factory: () => ContentBlock;
 }
 
-import { BLOCK_REGISTRY } from '$lib/blocks';
+import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
 
 export const BLOCK_DEFINITIONS = BLOCK_REGISTRY;
 

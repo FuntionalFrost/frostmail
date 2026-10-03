@@ -1,5 +1,5 @@
 import { pgTable, text, timestamp, jsonb, serial, integer } from 'drizzle-orm/pg-core';
-import type { EmailTemplate } from '$lib/types/email';
+import type { EmailTemplate } from '#lib/types/email.js';
 import { user } from './auth.schema';
 
 export const task = pgTable('task', {

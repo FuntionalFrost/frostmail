@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/SpacerBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { SpacerBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { SpacerBlock } from '#lib/types/email.js';
 	import { FormField, Input, Button } from 'yaxa-svelte';
 
 	let { block = $bindable() }: { block: SpacerBlock } = $props();

@@ -1,8 +1,8 @@
 // src/lib/blocks/raw.ts
-import type { RawBlock } from '$lib/types/email';
+import type { RawBlock } from '#lib/types/email.js';
 import type { BlockPlugin } from './types';
 import { Code } from '@lucide/svelte';
-import RawBlockInspector from '$lib/components/inspectors/RawBlockInspector.svelte';
+import RawBlockInspector from '#lib/components/inspectors/RawBlockInspector.svelte';
 
 export const rawBlockPlugin: BlockPlugin<RawBlock> = {
 	type: 'raw',

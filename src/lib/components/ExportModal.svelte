@@ -1,8 +1,8 @@
 <!-- src/lib/components/ExportModal.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import { templateToReactEmail } from '$lib/utils/reactEmailConverter';
-	import { templateToMjml } from '$lib/utils/mjmlGenerator';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import { templateToReactEmail } from '#lib/utils/reactEmailConverter.js';
+	import { templateToMjml } from '#lib/utils/mjmlGenerator.js';
 	import { Modal, Tabs, Button } from 'yaxa-svelte';
 	import { Download, Copy, Check } from '@lucide/svelte';
 

@@ -1,8 +1,8 @@
 <!-- src/lib/components/LayersTree.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import { BLOCK_REGISTRY } from '$lib/blocks';
-	import type { ContentBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
+	import type { ContentBlock } from '#lib/types/email.js';
 	import { Button } from 'yaxa-svelte';
 	import {
 		Layers,
@@ -66,7 +66,7 @@
 							size="xs"
 							disabled={sIndex === 0}
 							aria-label="Move Section Up"
-							onclick={(e) => {
+							onclick={(e: MouseEvent) => {
 								e.stopPropagation();
 								studio.moveSection('up', section.id);
 							}}
@@ -79,7 +79,7 @@
 							size="xs"
 							disabled={sIndex === (studio.template.body?.length || 0) - 1}
 							aria-label="Move Section Down"
-							onclick={(e) => {
+							onclick={(e: MouseEvent) => {
 								e.stopPropagation();
 								studio.moveSection('down', section.id);
 							}}
@@ -91,7 +91,7 @@
 							color="neutral"
 							size="xs"
 							aria-label="Duplicate Section"
-							onclick={(e) => {
+							onclick={(e: MouseEvent) => {
 								e.stopPropagation();
 								studio.duplicateSection(section.id);
 							}}
@@ -103,7 +103,7 @@
 							color="error"
 							size="xs"
 							aria-label="Remove Section"
-							onclick={(e) => {
+							onclick={(e: MouseEvent) => {
 								e.stopPropagation();
 								studio.removeSection(section.id);
 							}}
@@ -140,7 +140,7 @@
 										color="error"
 										size="xs"
 										aria-label="Remove Column"
-										onclick={(e) => {
+										onclick={(e: MouseEvent) => {
 											e.stopPropagation();
 											studio.removeColumn(col.id);
 										}}
@@ -179,7 +179,7 @@
 												size="xs"
 												disabled={bIndex === 0}
 												aria-label="Move Block Up"
-												onclick={(e) => {
+												onclick={(e: MouseEvent) => {
 													e.stopPropagation();
 													studio.moveBlock('up', block.id);
 												}}
@@ -192,7 +192,7 @@
 												size="xs"
 												disabled={bIndex === (col.children?.length ?? 0) - 1}
 												aria-label="Move Block Down"
-												onclick={(e) => {
+												onclick={(e: MouseEvent) => {
 													e.stopPropagation();
 													studio.moveBlock('down', block.id);
 												}}
@@ -204,7 +204,7 @@
 												color="neutral"
 												size="xs"
 												aria-label="Duplicate Block"
-												onclick={(e) => {
+												onclick={(e: MouseEvent) => {
 													e.stopPropagation();
 													studio.duplicateBlock(block.id);
 												}}
@@ -216,7 +216,7 @@
 												color="error"
 												size="xs"
 												aria-label="Remove Block"
-												onclick={(e) => {
+												onclick={(e: MouseEvent) => {
 													e.stopPropagation();
 													studio.removeBlock(block.id);
 												}}

@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/SectionInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { SectionBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { SectionBlock } from '#lib/types/email.js';
 	import { FormField, Input, ColorPicker, Button } from 'yaxa-svelte';
 	import { Plus, Trash2, Copy } from '@lucide/svelte';
 

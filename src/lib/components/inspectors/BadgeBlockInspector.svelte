@@ -1,7 +1,7 @@
 <!-- src/lib/components/inspectors/BadgeBlockInspector.svelte -->
 <script lang="ts">
-	import { studio } from '$lib/stores/studio.svelte';
-	import type { BadgeBlock } from '$lib/types/email';
+	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { BadgeBlock } from '#lib/types/email.js';
 	import { FormField, Input, ColorPicker, ToggleGroup } from 'yaxa-svelte';
 	import { AlignLeft, AlignCenter, AlignRight } from '@lucide/svelte';
 

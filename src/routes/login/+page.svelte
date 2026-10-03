@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { Button, FormField, Input, Tabs, Seo, Alert } from 'yaxa-svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import { ArrowLeft, Mail, User, Sparkles, AlertCircle } from '@lucide/svelte';
 	import type { ActionData, PageData } from './$types';
 

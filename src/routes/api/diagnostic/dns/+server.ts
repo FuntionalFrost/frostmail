@@ -1,5 +1,5 @@
 // src/routes/api/diagnostic/dns/+server.ts
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export interface DnsCheckResult {
@@ -138,5 +138,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		result.score += 25;
 	}
 
-	return json(result);
+	return Response.json(result);
 };
