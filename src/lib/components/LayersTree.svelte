@@ -52,7 +52,7 @@
 					onclick={() => studio.selectBlock(section.id)}
 				>
 					<div class="flex items-center gap-2">
-						<Layers class="text-primary-500 h-4 w-4" />
+						<Layers class="h-4 w-4 text-primary-500" />
 						<span class="text-xs font-bold">Section {sIndex + 1}</span>
 						<span class="font-mono text-[11px] font-normal text-neutral-500 dark:text-neutral-400">
 							({section.children?.length || 0} cols)
@@ -159,7 +159,7 @@
 									<!-- svelte-ignore a11y_no_static_element_interactions -->
 									<div
 										class="group flex cursor-pointer items-center justify-between rounded px-2 py-1 text-xs transition {isBlockSelected
-											? 'bg-primary-50 text-primary-900 dark:bg-primary-950/60 dark:text-primary-300 font-semibold'
+											? 'bg-primary-50 font-semibold text-primary-900 dark:bg-primary-950/60 dark:text-primary-300'
 											: 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800'}"
 										onclick={() => studio.selectBlock(block.id)}
 									>

@@ -10,6 +10,7 @@ export default defineConfig(
 		ignores: [
 			'build/**',
 			'.svelte-kit/**',
+			'.vercel/**',
 			'.netlify/**',
 			'node_modules/**',
 			'test-results/**',

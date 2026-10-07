@@ -69,7 +69,7 @@
 			{#each availableKeys as key (key)}
 				<button
 					type="button"
-					class="border-primary-200 bg-primary-50 text-primary-700 hover:bg-primary-100 dark:border-primary-900 dark:bg-primary-950/60 dark:text-primary-300 dark:hover:bg-primary-900 flex cursor-pointer items-center gap-1.5 rounded-md border px-2.5 py-1.5 font-mono text-sm font-medium transition"
+					class="flex cursor-pointer items-center gap-1.5 rounded-md border border-primary-200 bg-primary-50 px-2.5 py-1.5 font-mono text-sm font-medium text-primary-700 transition hover:bg-primary-100 dark:border-primary-900 dark:bg-primary-950/60 dark:text-primary-300 dark:hover:bg-primary-900"
 					onclick={() => copyTag(key)}
 				>
 					<span>&#123;&#123; {key} &#125;&#125;</span>

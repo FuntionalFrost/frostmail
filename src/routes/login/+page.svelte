@@ -45,7 +45,7 @@
 			<div class="flex items-center gap-3">
 				<a
 					href="/editor"
-					class="text-primary-600 hover:text-primary-700 dark:text-primary-400 text-sm font-semibold"
+					class="text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400"
 				>
 					Open Studio
 				</a>
@@ -60,7 +60,7 @@
 			<!-- Header / Brand Icon -->
 			<div class="space-y-2 text-center">
 				<div
-					class="bg-primary-500 shadow-primary-500/25 mx-auto flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-lg"
+					class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500 text-white shadow-lg shadow-primary-500/25"
 				>
 					<Sparkles class="h-6 w-6" />
 				</div>

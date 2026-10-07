@@ -6,7 +6,7 @@ export const siteConfig = defineSiteConfig({
 	title: 'FrostMail — Open Source Visual Transactional Email Studio & Deliverability Auditor',
 	description:
 		'Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records (SPF, DKIM, DMARC, MX), and dispatch test emails.',
-	url: 'https://frostmail.netlify.app',
+	url: 'https://frostmail.vercel.app',
 	email: 'devfrost@protonmail.com',
 	version: '1.0.0',
 	defaultLocale: 'en',
@@ -20,22 +20,22 @@ export const siteConfig = defineSiteConfig({
 	project: {
 		license: 'MIT',
 		type: 'open-source',
-		pricingModel: 'freemium',
+		pricingModel: 'free',
 		repositoryUrl: 'https://github.com/FuntionalFrost/',
 		isAccessibleForFree: true,
-		badge: 'MIT Open Source'
+		badge: '100% Free & Open Source'
 	},
 	company: {
-		legalName: 'FrostMail',
+		legalName: 'FrostMail Open Source',
 		contactEmail: 'devfrost@protonmail.com',
 		representative: 'FunctionalFrost'
 	},
 	legal: {
 		jurisdiction: 'EU',
-		paymentProcessor: 'polar',
+		paymentProcessor: 'none',
 		adNetwork: 'ethicalads',
 		analytics: 'none',
-		refundDays: 14,
+		refundDays: 0,
 		dpoEmail: 'devfrost@protonmail.com',
 		links: {
 			privacy: '/privacy',

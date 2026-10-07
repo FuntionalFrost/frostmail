@@ -1,17 +1,7 @@
 <!-- src/routes/editor/+page.svelte -->
 <script lang="ts">
 	import { studio } from '#lib/stores/studio.svelte.js';
-	import {
-		useShortcuts,
-		toast,
-		Button,
-		ButtonGroup,
-		Kbd,
-		Tabs,
-		Seo,
-		ToggleGroup
-	} from 'yaxa-svelte';
-	import { page } from '$app/state';
+	import { useShortcuts, Button, ButtonGroup, Kbd, Tabs, Seo, ToggleGroup } from 'yaxa-svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import BlockPalette from '#lib/components/BlockPalette.svelte';
 	import LayersTree from '#lib/components/LayersTree.svelte';
@@ -21,7 +11,8 @@
 	import SendTestModal from '#lib/components/SendTestModal.svelte';
 	import ExportModal from '#lib/components/ExportModal.svelte';
 	import TemplateLibraryModal from '#lib/components/TemplateLibraryModal.svelte';
-	import UpgradeModal from '#lib/components/UpgradeModal.svelte';
+	import SponsorModal from '#lib/components/SponsorModal.svelte';
+	import ThemeModal from '#lib/components/ThemeModal.svelte';
 	import AuthModal from '#lib/components/AuthModal.svelte';
 
 	import {
@@ -36,7 +27,8 @@
 		Redo2,
 		ShieldCheck,
 		User,
-		Sparkles,
+		Heart,
+		Palette,
 		Code,
 		Send,
 		LayoutGrid,
@@ -59,15 +51,12 @@
 	let isTestSendOpen = $state(false);
 	let isExportOpen = $state(false);
 	let isLibraryOpen = $state(false);
-	let isUpgradeOpen = $state(false);
+	let isSponsorOpen = $state(false);
+	let isThemeOpen = $state(false);
 	let isAuthOpen = $state(false);
 
 	// In-Iframe postMessage Click-to-Select Listener & Shortcuts
 	$effect(() => {
-		if (page.url.searchParams.get('upgrade') === 'success') {
-			toast.success('Welcome to FrostMail Pro! Your subscription is active.');
-		}
-
 		const handleIframeMessage = (event: MessageEvent) => {
 			if (
 				(event.data?.type === 'FROSTMAIL_BLOCK_CLICK' ||
@@ -141,7 +130,7 @@
 					<CheckCircle2 class="h-4.5 w-4.5 text-emerald-500" />
 					Saved
 				{:else}
-					<RotateCw class="text-primary-500 h-4.5 w-4.5 animate-spin" />
+					<RotateCw class="h-4.5 w-4.5 animate-spin text-primary-500" />
 					Saving...
 				{/if}
 			</span>
@@ -217,10 +206,10 @@
 
 			<div class="mx-0.5 h-5 w-px bg-neutral-200 dark:bg-neutral-800"></div>
 
-			<!-- Pro Upgrade & Account Profile -->
-			<Button size="sm" color="primary" variant="subtle" onclick={() => (isUpgradeOpen = true)}>
-				<Sparkles class="mr-1 h-3.5 w-3.5" />
-				Pro
+			<!-- Sponsor / Community & Account Profile -->
+			<Button size="sm" color="neutral" variant="ghost" onclick={() => (isSponsorOpen = true)}>
+				<Heart class="mr-1.5 h-3.5 w-3.5 text-rose-500" />
+				Sponsor
 			</Button>
 
 			<Button size="sm" color="neutral" variant="outline" onclick={() => (isAuthOpen = true)}>
@@ -229,6 +218,16 @@
 			</Button>
 
 			<ThemeToggle />
+
+			<Button
+				size="sm"
+				color="neutral"
+				variant="ghost"
+				aria-label="Customize Theme"
+				onclick={() => (isThemeOpen = true)}
+			>
+				<Palette class="h-4 w-4" />
+			</Button>
 		</div>
 	</header>
 
@@ -285,7 +284,8 @@
 	<SendTestModal bind:open={isTestSendOpen} />
 	<ExportModal bind:open={isExportOpen} />
 	<TemplateLibraryModal bind:open={isLibraryOpen} />
-	<UpgradeModal bind:open={isUpgradeOpen} />
+	<SponsorModal bind:open={isSponsorOpen} />
+	<ThemeModal bind:open={isThemeOpen} />
 	<AuthModal bind:open={isAuthOpen} />
 
 	<!-- Floating Shortcut Hints Bar -->

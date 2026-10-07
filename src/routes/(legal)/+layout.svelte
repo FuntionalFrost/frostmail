@@ -1,19 +1,15 @@
-<!-- src/routes/refunds/+page.svelte -->
+<!-- src/routes/(legal)/+layout.svelte -->
 <script lang="ts">
-	import { Seo, LegalDocument } from 'yaxa-svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import { ArrowLeft } from '@lucide/svelte';
-</script>
 
-<Seo
-	title="Refund Policy"
-	description="Transparent 14-day refund policy, self-serve cancellation terms, and EU statutory withdrawal rights for FrostMail."
-/>
+	let { children } = $props();
+</script>
 
 <div
 	class="min-h-screen bg-white text-neutral-900 transition-colors dark:bg-neutral-950 dark:text-neutral-100"
 >
-	<!-- Navigation Bar -->
+	<!-- Shared Legal Navigation Bar -->
 	<header
 		class="border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/90"
 	>
@@ -28,7 +24,7 @@
 			<div class="flex items-center gap-3">
 				<a
 					href="/editor"
-					class="text-primary-600 hover:text-primary-700 dark:text-primary-400 text-sm font-semibold"
+					class="text-sm font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400"
 				>
 					Open Studio
 				</a>
@@ -38,6 +34,8 @@
 	</header>
 
 	<main class="mx-auto max-w-4xl px-6 py-12">
-		<LegalDocument type="refunds" />
+		{#if children}
+			{@render children()}
+		{/if}
 	</main>
 </div>

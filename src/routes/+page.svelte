@@ -2,7 +2,8 @@
 <script lang="ts">
 	import { Badge, Button, Seo } from 'yaxa-svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
-	import UpgradeModal from '#lib/components/UpgradeModal.svelte';
+	import SponsorModal from '#lib/components/SponsorModal.svelte';
+	import ThemeModal from '#lib/components/ThemeModal.svelte';
 	import {
 		Sparkles,
 		ArrowRight,
@@ -18,10 +19,16 @@
 		MousePointerClick,
 		Image as ImageIcon,
 		MoveVertical,
-		ExternalLink
+		ExternalLink,
+		Heart,
+		Palette,
+		HardDrive,
+		Server
 	} from '@lucide/svelte';
+	import GithubIcon from '#lib/components/icons/GithubIcon.svelte';
 
-	let isUpgradeOpen = $state(false);
+	let isSponsorOpen = $state(false);
+	let isThemeOpen = $state(false);
 
 	const features = [
 		{
@@ -50,26 +57,17 @@
 		}
 	];
 
-	const proFeatures = [
-		'Unlimited Cloud Sync & Database Storage',
-		'Automated 24/7 Domain DNS Monitoring',
-		'1,000 High-Reputation Dispatches / Month',
-		'Full React Email (.tsx) & AST Exports',
-		'White-Label (Remove FrostMail branding)',
-		'Commercial Merchant of Record via Polar.sh'
-	];
-
 	import { siteConfig } from '#lib/config/site.js';
 	import { generateOrganizationSchema, generateSoftwareApplicationSchema } from 'yaxa-svelte';
 </script>
 
 <Seo
-	title="Open Source Visual Transactional Email Studio & Deliverability Auditor"
+	title="100% Free & Open Source Visual Transactional Email Studio & Deliverability Auditor"
 	description="Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records, and dispatch test emails."
 	ogImage={{
 		title: 'FrostMail',
-		description: 'Design bulletproof emails. Ensure primary inbox delivery.',
-		badge: 'Open Source Email Studio'
+		description: 'Design bulletproof emails. 100% Free and Open Source.',
+		badge: 'MIT Open Source'
 	}}
 	schema={[generateOrganizationSchema(siteConfig), generateSoftwareApplicationSchema(siteConfig)]}
 />
@@ -84,21 +82,36 @@
 		<div class="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
 			<div class="flex items-center gap-3">
 				<span class="text-lg font-extrabold tracking-tight">FrostMail</span>
-				<Badge color="primary" variant="subtle" size="sm">v1.0</Badge>
+				<Badge color="primary" variant="subtle" size="sm">MIT FOSS</Badge>
 			</div>
 
 			<div class="flex items-center gap-3">
 				<ThemeToggle />
+				<Button
+					size="sm"
+					color="neutral"
+					variant="ghost"
+					aria-label="Customize Theme"
+					onclick={() => (isThemeOpen = true)}
+				>
+					<Palette class="h-4 w-4" />
+				</Button>
 				<a href="/diagnostic">
 					<Button variant="ghost" color="neutral" size="sm">DNS Auditor</Button>
 				</a>
-				<Button color="primary" variant="subtle" size="sm" onclick={() => (isUpgradeOpen = true)}>
-					<Sparkles class="mr-1.5 h-4 w-4" />
-					Pricing (€)
+				<Button color="neutral" variant="ghost" size="sm" onclick={() => (isSponsorOpen = true)}>
+					<Heart class="mr-1.5 h-4 w-4 text-rose-500" />
+					Sponsor
 				</Button>
+				<a href="https://github.com/FuntionalFrost/" target="_blank" rel="noopener noreferrer">
+					<Button variant="outline" color="neutral" size="sm">
+						<GithubIcon class="mr-1.5 h-4 w-4" />
+						GitHub
+					</Button>
+				</a>
 				<a href="/editor">
 					<Button color="primary" size="sm">
-						Launch Editor
+						Launch Studio
 						<ArrowRight class="ml-1.5 h-4 w-4" />
 					</Button>
 				</a>
@@ -112,12 +125,12 @@
 			<!-- Subtle Ambient Glow -->
 			<div class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
 				<div
-					class="bg-primary-500/15 dark:bg-primary-500/20 h-[280px] w-[540px] rounded-full blur-[100px]"
+					class="h-[280px] w-[540px] rounded-full bg-primary-500/15 blur-[100px] dark:bg-primary-500/20"
 				></div>
 			</div>
 
 			<div
-				class="border-primary-300 bg-primary-100/80 text-primary-800 dark:border-primary-800 dark:bg-primary-950/80 dark:text-primary-300 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-semibold shadow-xs"
+				class="inline-flex items-center gap-2 rounded-full border border-primary-300 bg-primary-100/80 px-4 py-1.5 text-sm font-semibold text-primary-800 shadow-xs dark:border-primary-800 dark:bg-primary-950/80 dark:text-primary-300"
 			>
 				<Sparkles class="h-4 w-4" />
 				<span>The Open Source Transactional Email Studio</span>
@@ -175,7 +188,7 @@
 
 					<div class="flex items-center gap-2 text-sm">
 						<span
-							class="bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300 rounded px-2.5 py-0.5 font-semibold"
+							class="rounded bg-primary-100 px-2.5 py-0.5 font-semibold text-primary-800 dark:bg-primary-950 dark:text-primary-300"
 							>640px Desktop</span
 						>
 						<span
@@ -202,7 +215,7 @@
 									<div
 										class="flex items-center gap-2.5 rounded-lg border border-neutral-200 bg-neutral-50 p-2.5 text-sm font-medium text-neutral-800 dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-200"
 									>
-										<b.icon class="text-primary-500 h-4.5 w-4.5" />
+										<b.icon class="h-4.5 w-4.5 text-primary-500" />
 										<span>{b.name}</span>
 									</div>
 								{/each}
@@ -210,7 +223,7 @@
 						</div>
 
 						<div
-							class="border-primary-200 bg-primary-50 text-primary-800 dark:border-primary-900/60 dark:bg-primary-950/50 dark:text-primary-300 rounded-lg border p-3 text-sm"
+							class="rounded-lg border border-primary-200 bg-primary-50 p-3 text-sm text-primary-800 dark:border-primary-900/60 dark:bg-primary-950/50 dark:text-primary-300"
 						>
 							<span class="font-bold">Drag & Drop Ready</span>
 							<p class="mt-0.5 text-sm text-neutral-600 dark:text-neutral-400">
@@ -225,7 +238,7 @@
 							class="w-full max-w-md space-y-4 rounded-xl border border-neutral-300 bg-white p-6 text-neutral-900 shadow-lg"
 						>
 							<div class="flex items-center justify-between border-b border-neutral-200 pb-3">
-								<span class="text-primary-600 text-base font-extrabold tracking-tight"
+								<span class="text-base font-extrabold tracking-tight text-primary-600"
 									>FrostMail Store</span
 								>
 								<span class="text-sm font-medium text-neutral-500">Order #48921</span>
@@ -255,7 +268,7 @@
 
 							<div class="pt-1 text-center">
 								<span
-									class="bg-primary-600 hover:bg-primary-700 inline-block rounded-md px-5 py-2.5 text-sm font-bold text-white shadow-xs"
+									class="inline-block rounded-md bg-primary-600 px-5 py-2.5 text-sm font-bold text-white shadow-xs hover:bg-primary-700"
 								>
 									Download Invoice (PDF)
 								</span>
@@ -285,7 +298,7 @@
 								<div>
 									<span class="font-medium text-neutral-600 dark:text-neutral-400">Color</span>
 									<div class="mt-1 flex items-center gap-2">
-										<span class="bg-primary-500 inline-block h-4.5 w-4.5 rounded"></span>
+										<span class="inline-block h-4.5 w-4.5 rounded bg-primary-500"></span>
 										<span class="font-mono text-sm font-medium">#ff3e00</span>
 									</div>
 								</div>
@@ -293,7 +306,7 @@
 									<span class="font-medium text-neutral-600 dark:text-neutral-400">Alignment</span>
 									<div class="mt-1 flex gap-1">
 										<span
-											class="bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300 rounded px-2.5 py-1 text-sm font-bold"
+											class="rounded bg-primary-100 px-2.5 py-1 text-sm font-bold text-primary-800 dark:bg-primary-950 dark:text-primary-300"
 											>Center</span
 										>
 									</div>
@@ -322,7 +335,7 @@
 						class="space-y-3 rounded-xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<div
-							class="bg-primary-100 text-primary-600 dark:bg-primary-950 dark:text-primary-400 flex h-10 w-10 items-center justify-center rounded-lg"
+							class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-950 dark:text-primary-400"
 						>
 							<feat.icon class="h-5 w-5" />
 						</div>
@@ -335,46 +348,59 @@
 			</div>
 		</section>
 
-		<!-- Pricing Section in Euro (€) -->
+		<!-- Open Source & Architecture Showcase Section -->
 		<section
 			class="mx-auto max-w-6xl border-t border-neutral-200 px-6 py-16 dark:border-neutral-800"
 		>
 			<div class="mx-auto mb-12 max-w-2xl space-y-3 text-center">
+				<div
+					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-600 dark:text-primary-400"
+				>
+					<Sparkles class="h-3.5 w-3.5" />
+					<span>100% Free & Open Source</span>
+				</div>
 				<h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
-					Transparent, Developer-Friendly Pricing
+					Freedom First. Zero Paywalls.
 				</h2>
 				<p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-					Start completely free in your browser. Upgrade whenever you need cloud synchronization and
-					automated deliverability monitoring.
+					Use the web studio directly in your browser with zero registration, or deploy your own
+					self-hosted instance in minutes.
 				</p>
 			</div>
 
 			<div class="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
-				<!-- Community Free Tier -->
+				<!-- Zero Setup Studio -->
 				<div
-					class="flex flex-col justify-between space-y-6 rounded-2xl border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-neutral-900"
+					class="flex flex-col justify-between space-y-6 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
 				>
 					<div class="space-y-4">
-						<div>
-							<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Community</h3>
-							<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-								For independent hackers and developers
-							</p>
+						<div class="flex items-center justify-between">
+							<div>
+								<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+									Local Studio
+								</h3>
+								<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+									Instant browser-only mode, 100% private
+								</p>
+							</div>
+							<div class="rounded-lg bg-neutral-100 p-2.5 dark:bg-neutral-800">
+								<HardDrive class="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
+							</div>
 						</div>
 
 						<div class="flex items-baseline gap-1.5">
-							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">€0</span>
+							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">Free</span>
 							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
-								>/ free forever</span
+								>/ MIT Licensed</span
 							>
 						</div>
 
 						<div class="space-y-3 pt-2">
-							{#each ['Visual AST & MJML Canvas Editor', 'LocalStorage Persistence & 25-step Undo/Redo', 'Live Deliverability & DNS-over-HTTPS Auditor', 'HTML, MJML & React Email (.tsx) Exports', 'Dynamic JSON Payload Simulation'] as feat (feat)}
+							{#each ['Zero registration or cloud account required', 'Local browser storage with 25-step Undo/Redo', 'Real-time MJML compilation & AST generation', 'Multi-format export (HTML, MJML, React Email .tsx)', 'Live DNS DoH deliverability auditing & scoring'] as feat (feat)}
 								<div
 									class="flex items-center gap-2.5 text-sm text-neutral-800 dark:text-neutral-200"
 								>
-									<Check class="text-primary-500 h-5 w-5 shrink-0" />
+									<Check class="h-5 w-5 shrink-0 text-primary-500" />
 									<span>{feat}</span>
 								</div>
 							{/each}
@@ -382,55 +408,77 @@
 					</div>
 
 					<a href="/editor" class="block w-full">
-						<Button block size="lg" color="neutral" variant="outline">Launch Free Studio</Button>
+						<Button block size="lg" color="primary" variant="solid">Launch Studio Now</Button>
 					</a>
 				</div>
 
-				<!-- Pro Tier -->
+				<!-- Self-Hosted / Full Cloud -->
 				<div
-					class="border-primary-500 shadow-primary-500/10 relative flex flex-col justify-between space-y-6 rounded-2xl border-2 bg-white p-8 shadow-xl dark:bg-neutral-900"
+					class="relative flex flex-col justify-between space-y-6 rounded-2xl border-2 border-primary-500/40 bg-white p-8 shadow-lg dark:bg-neutral-900"
 				>
 					<div
-						class="bg-primary-600 absolute -top-3.5 right-6 rounded-full px-3.5 py-1 text-sm font-bold text-white shadow-sm"
+						class="absolute -top-3.5 right-6 rounded-full bg-primary-600 px-3.5 py-1 text-xs font-bold text-white shadow-sm"
 					>
-						Merchant of Record: Polar.sh
+						Self-Hostable
 					</div>
 
 					<div class="space-y-4">
-						<div>
-							<h3
-								class="flex items-center gap-2 text-xl font-bold text-neutral-900 dark:text-neutral-100"
-							>
-								<span>FrostMail Pro</span>
-								<Sparkles class="text-primary-500 h-5 w-5" />
-							</h3>
-							<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-								For production teams and high-deliverability senders
-							</p>
+						<div class="flex items-center justify-between">
+							<div>
+								<h3
+									class="flex items-center gap-2 text-xl font-bold text-neutral-900 dark:text-neutral-100"
+								>
+									<span>Self-Hosted & BYOK</span>
+								</h3>
+								<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+									For teams and production workflows
+								</p>
+							</div>
+							<div class="rounded-lg bg-primary-100 p-2.5 dark:bg-primary-950">
+								<Server class="h-5 w-5 text-primary-600 dark:text-primary-400" />
+							</div>
 						</div>
 
 						<div class="flex items-baseline gap-2">
-							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">€19</span>
-							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400">/ month</span
+							<span class="text-4xl font-black text-neutral-900 dark:text-neutral-100">100%</span>
+							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
+								>Open Source</span
 							>
 						</div>
 
 						<div class="space-y-3 pt-2">
-							{#each proFeatures as feat (feat)}
+							{#each ['Deploy with Docker, Netlify, Vercel, or Node', 'Encrypted PostgreSQL database sync (Neon/Local)', 'BYOK Resend API for 1-click test inbox delivery', 'Cloudflare R2 / AWS S3 media asset storage', 'Complete source code access with zero lock-in'] as feat (feat)}
 								<div
 									class="flex items-center gap-2.5 text-sm text-neutral-800 dark:text-neutral-200"
 								>
-									<CheckCircle2 class="text-primary-500 h-5 w-5 shrink-0" />
+									<CheckCircle2 class="h-5 w-5 shrink-0 text-primary-500" />
 									<span>{feat}</span>
 								</div>
 							{/each}
 						</div>
 					</div>
 
-					<Button block size="lg" color="primary" onclick={() => (isUpgradeOpen = true)}>
-						<ShieldCheck class="mr-2 h-5 w-5" />
-						Subscribe to Pro (€19 / mo)
-					</Button>
+					<div class="flex gap-2.5">
+						<a
+							href="https://github.com/FuntionalFrost/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex-1"
+						>
+							<Button block size="lg" color="neutral" variant="outline">
+								<GithubIcon class="mr-2 h-4 w-4" />
+								GitHub
+							</Button>
+						</a>
+						<Button
+							size="lg"
+							color="neutral"
+							variant="subtle"
+							onclick={() => (isSponsorOpen = true)}
+						>
+							<Heart class="h-4 w-4 text-rose-500" />
+						</Button>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -446,7 +494,7 @@
 			<div class="flex items-center gap-2">
 				<span class="font-bold text-neutral-900 dark:text-neutral-100">FrostMail</span>
 				<span>&bull;</span>
-				<span>Built with SvelteKit & yaxa-svelte</span>
+				<span>MIT Licensed Open Source Software</span>
 			</div>
 			<div class="flex flex-wrap items-center justify-center gap-5 text-sm">
 				<a href="/editor" class="hover:text-neutral-900 hover:underline dark:hover:text-white"
@@ -477,6 +525,7 @@
 		</div>
 	</footer>
 
-	<!-- Upgrade Modal -->
-	<UpgradeModal bind:open={isUpgradeOpen} />
+	<!-- Modals -->
+	<SponsorModal bind:open={isSponsorOpen} />
+	<ThemeModal bind:open={isThemeOpen} />
 </div>

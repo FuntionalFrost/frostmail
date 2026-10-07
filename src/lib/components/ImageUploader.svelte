@@ -96,7 +96,7 @@
 		/>
 
 		{#if isUploading}
-			<Loader2 class="text-primary-500 h-6 w-6 animate-spin" />
+			<Loader2 class="h-6 w-6 animate-spin text-primary-500" />
 		{:else}
 			<Image class="h-6 w-6 text-neutral-400" />
 		{/if}

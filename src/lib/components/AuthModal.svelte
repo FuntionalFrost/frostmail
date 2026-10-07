@@ -34,7 +34,7 @@
 		{#if isLoggedIn}
 			<div class="space-y-4 text-center">
 				<div
-					class="bg-primary-100 text-primary-600 dark:bg-primary-950 dark:text-primary-400 mx-auto flex h-14 w-14 items-center justify-center rounded-full"
+					class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-950 dark:text-primary-400"
 				>
 					{#if user?.image}
 						<img

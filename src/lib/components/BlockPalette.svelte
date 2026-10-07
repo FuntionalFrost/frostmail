@@ -52,7 +52,7 @@
 					onclick={() => studio.addBlock(item.factory)}
 				>
 					<div
-						class="bg-primary-50 text-primary-600 dark:bg-primary-950 dark:text-primary-400 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+						class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950 dark:text-primary-400"
 					>
 						<IconComponent class="h-4 w-4" />
 					</div>

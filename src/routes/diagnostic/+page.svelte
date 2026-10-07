@@ -120,7 +120,7 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 		<div class="flex items-center gap-3">
 			<a href="/" class="text-lg font-bold tracking-tight hover:opacity-80"> FrostMail </a>
 			<span
-				class="bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300 rounded px-2.5 py-0.5 text-sm font-semibold"
+				class="rounded bg-primary-100 px-2.5 py-0.5 text-sm font-semibold text-primary-800 dark:bg-primary-950 dark:text-primary-300"
 			>
 				DNS Auditor
 			</span>

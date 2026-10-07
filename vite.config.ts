@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite';
-import adapterNetlify from '@sveltejs/adapter-netlify';
+import adapterVercel from '@sveltejs/adapter-vercel';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import adapterNode from '@sveltejs/adapter-node';
@@ -27,10 +27,9 @@ export default defineConfig({
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
-				runes: ({ filename }) =>
-					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
+				runes: true
 			},
-			adapter: isNode ? adapterNode() : adapterNetlify()
+			adapter: isNode ? adapterNode() : adapterVercel({ runtime: 'nodejs24.x' })
 		})
 	]
 });

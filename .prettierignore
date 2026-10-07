@@ -1,6 +1,7 @@
 .svelte-kit
 build
 dist
+.vercel
 .netlify
 node_modules
 .gemini
