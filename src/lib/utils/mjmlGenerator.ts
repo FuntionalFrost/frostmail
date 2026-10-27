@@ -1,6 +1,6 @@
 // src/lib/utils/mjmlGenerator.ts
 import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '#lib/types/email.js';
-import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
+import { BLOCK_SERIALIZERS } from '#lib/blocks/serializers.js';
 
 export interface MjmlGeneratorOptions {
 	/** When true, embeds editor selection classes and postMessage event handlers for the canvas preview */
@@ -28,9 +28,9 @@ export function templateToMjml(
 
 					const blocksHtml = (column.children || [])
 						.map((block: ContentBlock) => {
-							const plugin = BLOCK_REGISTRY[block.type];
-							if (plugin?.toMjml) {
-								return plugin.toMjml(block, { forCanvas });
+							const serializer = BLOCK_SERIALIZERS[block.type];
+							if (serializer?.toMjml) {
+								return serializer.toMjml(block, { forCanvas });
 							}
 							return '';
 						})

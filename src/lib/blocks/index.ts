@@ -1,5 +1,6 @@
 // src/lib/blocks/index.ts
 export * from './types';
+export * from './serializers';
 export * from './registry';
 export * from './text';
 export * from './button';

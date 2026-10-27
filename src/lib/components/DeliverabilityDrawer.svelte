@@ -1,7 +1,7 @@
 <!-- src/lib/components/DeliverabilityDrawer.svelte -->
 <script lang="ts">
 	import { studio } from '#lib/stores/studio.svelte.js';
-	import { Popover, Badge } from 'yaxa-svelte';
+	import { Popover, Badge, useDebounce } from 'yaxa-svelte';
 	import { ShieldAlert, AlertTriangle, XCircle, Info, CheckCircle2 } from '@lucide/svelte';
 
 	interface LintResult {
@@ -11,19 +11,23 @@
 
 	let lintResult = $state<LintResult>({ score: 100, flags: [] });
 	let isValidating = $state(false);
-	let lintTimer: ReturnType<typeof setTimeout> | null = null;
 
-	async function checkContent() {
-		if (!studio.compiledHtml) return;
+	const debouncedContent = useDebounce(
+		() => ({
+			subject: studio.template.subject,
+			html: studio.compiledHtml
+		}),
+		400
+	);
+
+	async function checkContent(subject: string, html: string) {
+		if (!html) return;
 		isValidating = true;
 		try {
 			const res = await fetch('/api/diagnostic/content', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					subject: studio.template.subject,
-					html: studio.compiledHtml
-				})
+				body: JSON.stringify({ subject, html })
 			});
 			if (res.ok) {
 				lintResult = (await res.json()) as LintResult;
@@ -36,13 +40,10 @@
 	}
 
 	$effect(() => {
-		// Track dependencies
-		const _sub = studio.template.subject;
-		const _html = studio.compiledHtml;
-		if (lintTimer) clearTimeout(lintTimer);
-		lintTimer = setTimeout(() => {
-			checkContent();
-		}, 400);
+		const payload = debouncedContent.value;
+		if (payload.html) {
+			checkContent(payload.subject, payload.html);
+		}
 	});
 </script>
 

@@ -3,7 +3,7 @@
 	import { studio } from '#lib/stores/studio.svelte.js';
 	import { templateToReactEmail } from '#lib/utils/reactEmailConverter.js';
 	import { templateToMjml } from '#lib/utils/mjmlGenerator.js';
-	import { Modal, Tabs, Button } from 'yaxa-svelte';
+	import { Modal, Tabs, Button, useClipboard } from 'yaxa-svelte';
 	import { Download, Copy, Check } from '@lucide/svelte';
 
 	interface Props {
@@ -14,7 +14,7 @@
 
 	type ExportTab = 'html' | 'react' | 'mjml' | 'json';
 	let activeTab = $state<ExportTab>('html');
-	let isCopied = $state(false);
+	const clipboard = useClipboard({ timeout: 2000 });
 
 	const tabs = [
 		{ value: 'html', label: 'HTML' },
@@ -42,14 +42,6 @@
 		const bytes = new TextEncoder().encode(currentContent).length;
 		return (bytes / 1024).toFixed(2);
 	});
-
-	async function copyContent() {
-		await navigator.clipboard.writeText(currentContent);
-		isCopied = true;
-		setTimeout(() => {
-			isCopied = false;
-		}, 2000);
-	}
 
 	function downloadFile() {
 		const extMap: Record<ExportTab, string> = {
@@ -110,8 +102,8 @@
 					<Download class="mr-1.5 h-3.5 w-3.5" />
 					Download .{activeTab === 'react' ? 'tsx' : activeTab}
 				</Button>
-				<Button color="primary" size="sm" onclick={copyContent}>
-					{#if isCopied}
+				<Button color="primary" size="sm" onclick={() => clipboard.copy(currentContent)}>
+					{#if clipboard.copied}
 						<Check class="mr-1.5 h-3.5 w-3.5" />
 						Copied!
 					{:else}

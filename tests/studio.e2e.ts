@@ -61,9 +61,9 @@ test.describe('FrostMail Application Navigation & SEO E2E Tests', () => {
 		await expect(auditDomainBtn).toBeVisible();
 		await expect(auditDomainBtn).toHaveAttribute('href', '/diagnostic');
 
-		// Check pricing cards
-		await expect(page.getByText('Community')).toBeVisible();
-		await expect(page.getByText('FrostMail Pro', { exact: true })).toBeVisible();
+		// Check FOSS showcase cards
+		await expect(page.getByText('Local Studio')).toBeVisible();
+		await expect(page.getByText('Self-Hosted & BYOK')).toBeVisible();
 	});
 
 	test('Editor page loads with sidebar, canvas iframe, and inspector', async ({ page }) => {

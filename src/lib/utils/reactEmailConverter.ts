@@ -1,6 +1,6 @@
 // src/lib/utils/reactEmailConverter.ts
 import type { EmailTemplate, SectionBlock, ColumnBlock, ContentBlock } from '#lib/types/email.js';
-import { BLOCK_REGISTRY } from '#lib/blocks/index.js';
+import { BLOCK_SERIALIZERS } from '#lib/blocks/serializers.js';
 
 function toValidComponentName(name: string): string {
 	const cleaned = name.replace(/[^a-zA-Z0-9]/g, '');
@@ -14,9 +14,9 @@ export function templateToReactEmail(template: EmailTemplate): string {
 	const componentName = toValidComponentName(template?.name || 'Template');
 
 	const renderBlock = (block: ContentBlock): string => {
-		const plugin = BLOCK_REGISTRY[block.type];
-		if (plugin?.toReactEmail) {
-			return plugin.toReactEmail(block);
+		const serializer = BLOCK_SERIALIZERS[block.type];
+		if (serializer?.toReactEmail) {
+			return serializer.toReactEmail(block);
 		}
 		return '';
 	};

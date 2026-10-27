@@ -1,6 +1,16 @@
 <!-- src/routes/diagnostic/+page.svelte -->
 <script lang="ts">
-	import { Button, Badge, Input, Seo, MetricCard, toast } from 'yaxa-svelte';
+	import {
+		Button,
+		Badge,
+		Input,
+		Seo,
+		MetricCard,
+		Skeleton,
+		DonutChart,
+		useClipboard,
+		toast
+	} from 'yaxa-svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import { Wrench, Globe, Search, Check, Copy } from '@lucide/svelte';
 
@@ -22,9 +32,27 @@
 	let isScanning = $state(false);
 	let scanError = $state<string | null>(null);
 	let scanResult = $state<DnsCheckResult | null>(null);
-	let isCopied = $state(false);
+	const clipboard = useClipboard({ timeout: 2000 });
 
 	const sampleDomains = ['resend.com', 'stripe.com', 'github.com', 'google.com', 'postmarkapp.com'];
+
+	const donutData = $derived.by(() => {
+		if (!scanResult) return [];
+		const statuses = [
+			scanResult.mx.status,
+			scanResult.spf.status,
+			scanResult.dkim.status,
+			scanResult.dmarc.status
+		];
+		const passCount = statuses.filter((s) => s === 'pass').length;
+		const warnCount = statuses.filter((s) => s === 'warn').length;
+		const failCount = statuses.filter((s) => s === 'fail').length;
+		return [
+			{ label: 'Pass', value: passCount, color: '#10b981' },
+			{ label: 'Warning', value: warnCount, color: '#f59e0b' },
+			{ label: 'Fail', value: failCount, color: '#ef4444' }
+		].filter((d) => d.value > 0);
+	});
 
 	async function runDiagnostic() {
 		const cleanDomain =
@@ -81,16 +109,11 @@
 
 Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 
-		try {
-			await navigator.clipboard.writeText(text);
-			isCopied = true;
+		const ok = await clipboard.copy(text);
+		if (ok) {
 			toast.success('Audit report copied to clipboard!');
-			setTimeout(() => {
-				isCopied = false;
-			}, 2000);
-		} catch (err) {
+		} else {
 			toast.error('Failed to copy report to clipboard.');
-			console.error('Failed to copy report:', err);
 		}
 	}
 
@@ -186,7 +209,21 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 			{/if}
 		</div>
 
-		{#if scanResult}
+		{#if isScanning}
+			<div class="space-y-6">
+				<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+					<Skeleton recipe="metric" />
+					<Skeleton recipe="metric" />
+					<Skeleton recipe="metric" />
+				</div>
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+					<Skeleton recipe="card" />
+					<Skeleton recipe="card" />
+					<Skeleton recipe="card" />
+					<Skeleton recipe="card" />
+				</div>
+			</div>
+		{:else if scanResult}
 			<div class="space-y-6">
 				<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 					<MetricCard
@@ -210,7 +247,7 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 						variant="outline"
 					>
 						<Button size="sm" block color="neutral" variant="outline" onclick={copyAuditReport}>
-							{#if isCopied}
+							{#if clipboard.copied}
 								<Check class="mr-1.5 h-4 w-4" />
 								Report Copied!
 							{:else}
@@ -223,20 +260,18 @@ Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
 						title="Protocol Health"
 						value={`${[scanResult.mx.status, scanResult.spf.status, scanResult.dkim.status, scanResult.dmarc.status].filter((s) => s === 'pass').length} / 4 Passed`}
 						changePeriod="SPF • DKIM • DMARC • MX"
-						sparkline={[
-							1,
-							2,
-							3,
-							[
-								scanResult.mx.status,
-								scanResult.spf.status,
-								scanResult.dkim.status,
-								scanResult.dmarc.status
-							].filter((s) => s === 'pass').length
-						]}
-						sparklineColor="primary"
 						variant="outline"
-					/>
+					>
+						<div class="flex items-center justify-center pt-2">
+							<DonutChart
+								data={donutData}
+								size={105}
+								strokeWidth={12}
+								centerValue={`${[scanResult.mx.status, scanResult.spf.status, scanResult.dkim.status, scanResult.dmarc.status].filter((s) => s === 'pass').length}/4`}
+								centerLabel="Passed"
+							/>
+						</div>
+					</MetricCard>
 				</div>
 
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
