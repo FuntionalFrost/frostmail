@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Svelte v5](https://img.shields.io/badge/Svelte-5.56-orange.svg)](https://svelte.dev)
-[![yaxa-svelte](https://img.shields.io/badge/yaxa--svelte-v2.0.0-red.svg)](https://yaxa.vercel.app)
+[![yaxa-svelte](https://img.shields.io/badge/yaxa--svelte-v2.0.4-red.svg)](https://yaxa.vercel.app)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4.3-38bdf8.svg)](https://tailwindcss.com)
 
 ---
@@ -44,7 +44,7 @@
 - **Email Engine**: [MJML](https://mjml.io) + Custom React Email AST Converter
 - **Auth & Database**: [Better-Auth](https://better-auth.com) + [Drizzle ORM](https://orm.drizzle.team) + [Neon PostgreSQL](https://neon.tech)
 - **Icons**: [Lucide Svelte](https://lucide.dev)
-- **Testing**: [Playwright](https://playwright.dev)
+- **Testing**: [Vitest](https://vitest.dev)
 
 ---
 
@@ -104,6 +104,9 @@ pnpm check
 pnpm format
 pnpm lint
 
+# Unit tests
+pnpm test
+
 # Production build
 pnpm build
 ```
@@ -112,7 +115,7 @@ pnpm build
 
 ## 🤝 Community & Contributing
 
-Contributions, feature requests, and block submissions are welcome! Please check [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Contributions and block submissions are welcome! Please check [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md) for details.
 
 ---
 

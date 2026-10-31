@@ -58,7 +58,10 @@ pnpm check
 pnpm format
 pnpm lint
 
-# 3. Production build
+# 3. Unit tests
+pnpm test
+
+# 4. Production build
 pnpm build
 ```
 

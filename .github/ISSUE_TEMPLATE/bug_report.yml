@@ -1,0 +1,62 @@
+name: 🐛 Bug Report
+description: Report a reproducible problem or rendering defect in FrostMail
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue! Please check existing issues first to avoid duplicates.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: What browser, OS, and deployment target are you using?
+      placeholder: e.g. Chrome 124, Windows 11, Node.js 24 / Vercel
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      options:
+        - Email Studio / Canvas Editor
+        - Block Inspectors / Properties
+        - Export (HTML, MJML, React Email, JSON)
+        - Deliverability / DNS Diagnostic Suite
+        - Authentication / Sessions
+        - Assets / S3 Uploads
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Current Behavior
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions or paste relevant template JSON / MJML snippet.
+      placeholder: |
+        1. Go to '/editor'
+        2. Drag a 'Hero' block onto the canvas
+        3. Change background color to...
+        4. See error...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: email_clients
+    attributes:
+      label: Affected Email Clients (if applicable)
+      description: e.g. Outlook Desktop, Gmail iOS, Apple Mail MacOS
+      placeholder: e.g. Outlook 2021 (Windows), Gmail Web
