@@ -4,6 +4,7 @@ import {
 	GITHUB_CLIENT_ID,
 	GITHUB_CLIENT_SECRET
 } from '$app/env/private';
+import { building } from '$app/env';
 
 import { betterAuth } from 'better-auth/minimal';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
@@ -12,8 +13,9 @@ import { getRequestEvent } from '$app/server';
 import { db } from '#lib/server/db/index.js';
 
 export const auth = betterAuth({
-	baseURL: ORIGIN,
-	secret: BETTER_AUTH_SECRET,
+	baseURL: ORIGIN || (building ? 'http://localhost:5173' : undefined),
+	secret:
+		BETTER_AUTH_SECRET || (building ? 'build-time-secret-placeholder-minimum-32-chars' : undefined),
 	database: drizzleAdapter(db, { provider: 'pg' }),
 	emailAndPassword: { enabled: true },
 	socialProviders: {
