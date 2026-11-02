@@ -107,7 +107,7 @@
 • DKIM Signatures: ${scanResult.dkim.status.toUpperCase()} - ${scanResult.dkim.message}
 • DMARC Policy: ${scanResult.dmarc.status.toUpperCase()} - ${scanResult.dmarc.message}
 
-Audited with FrostMail: https://frostmail.netlify.app/diagnostic`;
+Audited with FrostMail: https://frostmail-sepia.vercel.app/diagnostic`;
 
 		const ok = await clipboard.copy(text);
 		if (ok) {

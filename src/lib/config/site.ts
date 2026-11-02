@@ -6,7 +6,7 @@ export const siteConfig = defineSiteConfig({
 	title: 'FrostMail — Open Source Visual Transactional Email Studio & Deliverability Auditor',
 	description:
 		'Design responsive MJML emails, preview dynamic merge variables, audit DNS authentication records (SPF, DKIM, DMARC, MX), and dispatch test emails.',
-	url: 'https://frostmail.vercel.app',
+	url: 'https://frostmail-sepia.vercel.app',
 	email: 'devfrost@protonmail.com',
 	version: '1.0.0',
 	defaultLocale: 'en',
