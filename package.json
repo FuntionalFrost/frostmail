@@ -61,7 +61,7 @@
 		"@types/mjml": "^5.4.1",
 		"mjml": "^5.4.1",
 		"resend": "^6.34.1",
-		"yaxa-svelte": "^2.0.4"
+		"yaxa-svelte": "^2.6.0"
 	},
 	"imports": {
 		"#lib/*.js": "./src/lib/*.ts",

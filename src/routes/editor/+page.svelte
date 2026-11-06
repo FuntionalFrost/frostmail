@@ -1,7 +1,17 @@
 <!-- src/routes/editor/+page.svelte -->
 <script lang="ts">
 	import { studio } from '#lib/stores/studio.svelte.js';
-	import { useShortcuts, Button, ButtonGroup, Kbd, Tabs, Seo, ToggleGroup } from 'yaxa-svelte';
+	import {
+		useShortcuts,
+		Button,
+		Kbd,
+		Tabs,
+		Seo,
+		ToggleGroup,
+		DropdownMenu,
+		Tooltip,
+		type MenuItem
+	} from 'yaxa-svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import BlockPalette from '#lib/components/BlockPalette.svelte';
 	import LayersTree from '#lib/components/LayersTree.svelte';
@@ -23,17 +33,13 @@
 		Monitor,
 		Smartphone,
 		Moon,
-		Undo2,
-		Redo2,
-		ShieldCheck,
 		User,
-		Heart,
-		Palette,
 		Code,
 		Send,
 		LayoutGrid,
 		Layers,
-		Variable
+		Variable,
+		MoreHorizontal
 	} from '@lucide/svelte';
 
 	const sidebarTabs = [
@@ -54,6 +60,27 @@
 	let isSponsorOpen = $state(false);
 	let isThemeOpen = $state(false);
 	let isAuthOpen = $state(false);
+
+	const moreMenuItems: MenuItem[] = [
+		{
+			id: 'dns-auditor',
+			label: 'Domain DNS Auditor',
+			icon: 'shield-check',
+			onSelect: () => (window.location.href = '/diagnostic')
+		},
+		{
+			id: 'theme-studio',
+			label: 'Theme Customizer',
+			icon: 'palette',
+			onSelect: () => (isThemeOpen = true)
+		},
+		{
+			id: 'sponsor',
+			label: 'Support FrostMail',
+			icon: 'heart',
+			onSelect: () => (isSponsorOpen = true)
+		}
+	];
 
 	// In-Iframe postMessage Click-to-Select Listener & Shortcuts
 	$effect(() => {
@@ -136,8 +163,8 @@
 			</span>
 		</div>
 
-		<!-- 2. Center: Viewport & Dark Mode Simulation Controls -->
-		<div class="flex items-center gap-2.5">
+		<!-- 2. Center: Viewport & Canvas Dark Mode Simulation -->
+		<div class="flex items-center gap-1.5">
 			<ToggleGroup
 				items={viewportOptions}
 				bind:value={studio.previewMode}
@@ -145,54 +172,24 @@
 				variant="outline"
 			/>
 
-			<Button
-				variant={studio.simulateDarkMode ? 'solid' : 'outline'}
-				color={studio.simulateDarkMode ? 'primary' : 'neutral'}
-				size="sm"
-				aria-label="Simulate Email Client Dark Mode"
-				onclick={() => (studio.simulateDarkMode = !studio.simulateDarkMode)}
-			>
-				<Moon class="h-4 w-4" />
-			</Button>
-
-			<div class="mx-1 h-5 w-px bg-neutral-300 dark:bg-neutral-700"></div>
-
-			<ButtonGroup>
+			<Tooltip text="Preview Email in Dark Mode">
 				<Button
+					variant={studio.simulateDarkMode ? 'solid' : 'ghost'}
+					color={studio.simulateDarkMode ? 'primary' : 'neutral'}
 					size="sm"
-					color="neutral"
-					variant="outline"
-					disabled={!studio.canUndo}
-					aria-label="Undo"
-					onclick={studio.undo}
+					aria-label="Simulate Email Client Dark Mode"
+					onclick={() => (studio.simulateDarkMode = !studio.simulateDarkMode)}
 				>
-					<Undo2 class="h-4 w-4" />
+					<Moon class="h-4 w-4" />
 				</Button>
-				<Button
-					size="sm"
-					color="neutral"
-					variant="outline"
-					disabled={!studio.canRedo}
-					aria-label="Redo"
-					onclick={studio.redo}
-				>
-					<Redo2 class="h-4 w-4" />
-				</Button>
-			</ButtonGroup>
+			</Tooltip>
 		</div>
 
-		<!-- 3. Right: Deliverability, Actions, Utilities -->
+		<!-- 3. Right: Deliverability, Primary Actions & Overflow -->
 		<div class="flex items-center gap-2">
 			<DeliverabilityDrawer />
 
-			<a href="/diagnostic">
-				<Button size="sm" color="neutral" variant="ghost">
-					<ShieldCheck class="mr-1.5 h-4 w-4" />
-					DNS Auditor
-				</Button>
-			</a>
-
-			<div class="mx-0.5 h-5 w-px bg-neutral-200 dark:bg-neutral-800"></div>
+			<div class="mx-0.5 h-4 w-px bg-neutral-200 dark:bg-neutral-800"></div>
 
 			<Button size="sm" color="neutral" variant="outline" onclick={() => (isExportOpen = true)}>
 				<Code class="mr-1.5 h-4 w-4" />
@@ -204,30 +201,34 @@
 				Send Test
 			</Button>
 
-			<div class="mx-0.5 h-5 w-px bg-neutral-200 dark:bg-neutral-800"></div>
+			<div class="mx-0.5 h-4 w-px bg-neutral-200 dark:bg-neutral-800"></div>
 
-			<!-- Sponsor / Community & Account Profile -->
-			<Button size="sm" color="neutral" variant="ghost" onclick={() => (isSponsorOpen = true)}>
-				<Heart class="mr-1.5 h-3.5 w-3.5 text-rose-500" />
-				Sponsor
-			</Button>
+			<!-- UI Theme Toggle -->
+			<Tooltip text="Toggle Interface Theme">
+				<ThemeToggle />
+			</Tooltip>
 
-			<Button size="sm" color="neutral" variant="outline" onclick={() => (isAuthOpen = true)}>
-				<User class="mr-1.5 h-4 w-4" />
-				Account
-			</Button>
+			<!-- Account Trigger -->
+			<Tooltip text="Account Profile & Cloud Sync">
+				<Button
+					size="sm"
+					color="neutral"
+					variant="ghost"
+					aria-label="Account Profile"
+					onclick={() => (isAuthOpen = true)}
+				>
+					<User class="h-4 w-4" />
+				</Button>
+			</Tooltip>
 
-			<ThemeToggle />
-
-			<Button
-				size="sm"
-				color="neutral"
-				variant="ghost"
-				aria-label="Customize Theme"
-				onclick={() => (isThemeOpen = true)}
-			>
-				<Palette class="h-4 w-4" />
-			</Button>
+			<!-- More / Overflow Menu -->
+			<DropdownMenu items={moreMenuItems}>
+				{#snippet trigger()}
+					<Button size="sm" color="neutral" variant="ghost" aria-label="More options">
+						<MoreHorizontal class="h-4 w-4" />
+					</Button>
+				{/snippet}
+			</DropdownMenu>
 		</div>
 	</header>
 

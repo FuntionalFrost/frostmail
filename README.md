@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Svelte v5](https://img.shields.io/badge/Svelte-5.56-orange.svg)](https://svelte.dev)
-[![yaxa-svelte](https://img.shields.io/badge/yaxa--svelte-v2.0.4-red.svg)](https://yaxa.vercel.app)
+[![yaxa-svelte](https://img.shields.io/badge/yaxa--svelte-v2.6.0-red.svg)](https://yaxa.vercel.app)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4.3-38bdf8.svg)](https://tailwindcss.com)
 
 ---

@@ -1,8 +1,16 @@
 <!-- src/lib/components/DeliverabilityDrawer.svelte -->
 <script lang="ts">
 	import { studio } from '#lib/stores/studio.svelte.js';
-	import { Popover, Badge, useDebounce } from 'yaxa-svelte';
-	import { ShieldAlert, AlertTriangle, XCircle, Info, CheckCircle2 } from '@lucide/svelte';
+	import { Popover, Badge, Button, useDebounce } from 'yaxa-svelte';
+	import {
+		ShieldAlert,
+		AlertTriangle,
+		XCircle,
+		Info,
+		CheckCircle2,
+		ShieldCheck,
+		ExternalLink
+	} from '@lucide/svelte';
 
 	interface LintResult {
 		score: number;
@@ -134,5 +142,17 @@
 				{/each}
 			</div>
 		{/if}
+
+		<div class="border-t border-neutral-100 pt-2.5 dark:border-neutral-800">
+			<a href="/diagnostic" class="block">
+				<Button size="xs" color="neutral" variant="subtle" class="w-full justify-between">
+					<span class="inline-flex items-center gap-1.5">
+						<ShieldCheck class="h-3.5 w-3.5 text-primary-500" />
+						<span>Open Domain DNS Auditor (SPF, DKIM, DMARC)</span>
+					</span>
+					<ExternalLink class="h-3 w-3 opacity-60" />
+				</Button>
+			</a>
+		</div>
 	</div>
 </Popover>
