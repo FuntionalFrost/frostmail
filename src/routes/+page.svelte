@@ -191,22 +191,24 @@
 />
 
 <div
-	class="flex min-h-screen flex-col bg-neutral-950 font-sans text-neutral-100 antialiased selection:bg-primary-500/30 selection:text-primary-300"
+	class="flex min-h-screen flex-col bg-neutral-50 font-sans text-neutral-900 antialiased transition-colors duration-200 selection:bg-primary-500/30 selection:text-primary-600 dark:bg-neutral-950 dark:text-neutral-100 dark:selection:text-primary-300"
 >
 	<!-- Standardized Top Navigation Bar -->
 	<header
-		class="sticky top-0 z-50 h-16 border-b border-neutral-800/80 bg-neutral-950/85 backdrop-blur-md"
+		class="sticky top-0 z-50 h-16 border-b border-neutral-200 bg-white/85 backdrop-blur-md transition-colors dark:border-neutral-800/80 dark:bg-neutral-950/85"
 	>
 		<div class="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
 			<!-- Brand & Pill -->
 			<div class="flex items-center gap-3">
 				<a href="/" class="flex items-center gap-2.5 transition-opacity hover:opacity-90">
 					<div
-						class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 ring-1 ring-primary-500/30"
+						class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 ring-1 ring-primary-500/30 dark:text-primary-500"
 					>
 						<Inbox class="h-4.5 w-4.5" />
 					</div>
-					<span class="text-lg font-bold tracking-tight text-white">FrostMail</span>
+					<span class="text-lg font-bold tracking-tight text-neutral-900 dark:text-white"
+						>FrostMail</span
+					>
 				</a>
 				<Badge color="primary" variant="subtle" size="sm" class="hidden sm:inline-flex">
 					MIT FOSS
@@ -214,11 +216,22 @@
 			</div>
 
 			<!-- Center Links -->
-			<nav class="hidden items-center gap-6 text-sm font-medium text-neutral-400 md:flex">
-				<a href="/editor" class="transition-colors hover:text-white">Studio</a>
-				<a href="/diagnostic" class="transition-colors hover:text-white">DNS Auditor</a>
-				<a href="#features" class="transition-colors hover:text-white">Features</a>
-				<a href="#architecture" class="transition-colors hover:text-white">Self-Hosting</a>
+			<nav
+				class="hidden items-center gap-6 text-sm font-medium text-neutral-600 md:flex dark:text-neutral-400"
+			>
+				<a href="/editor" class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+					>Studio</a
+				>
+				<a href="/diagnostic" class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+					>DNS Auditor</a
+				>
+				<a href="#features" class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+					>Features</a
+				>
+				<a
+					href="#architecture"
+					class="transition-colors hover:text-neutral-900 dark:hover:text-white">Self-Hosting</a
+				>
 			</nav>
 
 			<!-- Right Actions -->
@@ -262,29 +275,35 @@
 		<section class="relative mx-auto max-w-5xl px-6 pt-20 pb-16 text-center">
 			<!-- Ambient Atmospheric Glow -->
 			<div class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-				<div class="h-90 w-160 rounded-full bg-primary-500/15 blur-[120px] transition-all"></div>
+				<div
+					class="h-90 w-160 rounded-full bg-primary-500/10 blur-[120px] transition-all dark:bg-primary-500/15"
+				></div>
 			</div>
 
 			<!-- Announcement Pill -->
 			<div
-				class="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-xs font-semibold text-primary-400 backdrop-blur-xs"
+				class="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-xs font-semibold text-primary-700 backdrop-blur-xs dark:text-primary-400"
 			>
-				<Sparkles class="h-3.5 w-3.5 text-primary-400" />
+				<Sparkles class="h-3.5 w-3.5 text-primary-600 dark:text-primary-400" />
 				<span>100% Free & Open-Source Email Engineering Suite</span>
 			</div>
 
 			<!-- Punchy Headline with Gradient Accent -->
-			<h1 class="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl sm:leading-[1.12]">
+			<h1
+				class="mt-6 text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-6xl sm:leading-[1.12] dark:text-white"
+			>
 				Design bulletproof emails.<br />
 				<span
-					class="bg-linear-to-r from-primary-400 via-primary-500 to-amber-400 bg-clip-text text-transparent"
+					class="bg-linear-to-r from-primary-600 via-primary-500 to-amber-500 bg-clip-text text-transparent dark:from-primary-400 dark:via-primary-500 dark:to-amber-400"
 				>
 					Deliver with 100% confidence.
 				</span>
 			</h1>
 
 			<!-- Subtitle -->
-			<p class="mx-auto mt-6 max-w-2xl text-base text-neutral-400 sm:text-lg sm:leading-relaxed">
+			<p
+				class="mx-auto mt-6 max-w-2xl text-base text-neutral-600 sm:text-lg sm:leading-relaxed dark:text-neutral-400"
+			>
 				FrostMail pairs a visual MJML canvas with real-time spam scoring, dynamic JSON merge tag
 				simulation, and live DNS-over-HTTPS deliverability audits.
 			</p>
@@ -307,18 +326,18 @@
 
 			<!-- Quick stats bar -->
 			<div
-				class="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs font-medium text-neutral-500"
+				class="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs font-medium text-neutral-600 dark:text-neutral-400"
 			>
 				<div class="flex items-center gap-1.5">
-					<CheckCircle2 class="h-4 w-4 text-emerald-400" />
+					<CheckCircle2 class="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
 					<span>Zero Telemetry & Private by Default</span>
 				</div>
 				<div class="flex items-center gap-1.5">
-					<CheckCircle2 class="h-4 w-4 text-emerald-400" />
+					<CheckCircle2 class="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
 					<span>Outlook & Gmail 102KB Safe</span>
 				</div>
 				<div class="flex items-center gap-1.5">
-					<CheckCircle2 class="h-4 w-4 text-emerald-400" />
+					<CheckCircle2 class="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
 					<span>No Vendor Lock-In (HTML/MJML/TSX)</span>
 				</div>
 			</div>
@@ -327,11 +346,11 @@
 		<!-- Interactive Product Showcase Window -->
 		<section class="mx-auto max-w-5xl px-6 pb-20">
 			<div
-				class="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/90 shadow-2xl backdrop-blur-md"
+				class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xl backdrop-blur-md transition-colors dark:border-neutral-800 dark:bg-neutral-900/90 dark:shadow-2xl"
 			>
 				<!-- Window Header Bar with macOS-style dots & tabs -->
 				<div
-					class="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 bg-neutral-950/70 px-4 py-2.5"
+					class="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-100/80 px-4 py-2.5 transition-colors dark:border-neutral-800 dark:bg-neutral-950/70"
 				>
 					<!-- Left: Window Dots & Active Preset -->
 					<div class="flex items-center gap-2">
@@ -340,21 +359,21 @@
 							<span class="h-3 w-3 rounded-full bg-amber-500/80"></span>
 							<span class="h-3 w-3 rounded-full bg-emerald-500/80"></span>
 						</div>
-						<span class="font-mono text-xs text-neutral-400">
+						<span class="font-mono text-xs text-neutral-600 dark:text-neutral-400">
 							frostmail-studio &bull; {presetsData[previewPreset].file}
 						</span>
 					</div>
 
 					<!-- Center Preset Switcher -->
 					<div
-						class="flex items-center gap-1 rounded-lg border border-neutral-800 bg-neutral-900 p-1"
+						class="flex items-center gap-1 rounded-lg border border-neutral-200 bg-neutral-200/60 p-1 dark:border-neutral-800 dark:bg-neutral-900"
 					>
 						<button
 							type="button"
 							class="rounded-md px-2.5 py-1 text-xs font-semibold transition-colors {previewPreset ===
 							'receipt'
-								? 'bg-primary-500 text-white'
-								: 'text-neutral-400 hover:text-white'}"
+								? 'bg-primary-600 text-white shadow-xs dark:bg-primary-500'
+								: 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'}"
 							onclick={() => (previewPreset = 'receipt')}
 						>
 							Order Receipt
@@ -363,8 +382,8 @@
 							type="button"
 							class="rounded-md px-2.5 py-1 text-xs font-semibold transition-colors {previewPreset ===
 							'welcome'
-								? 'bg-primary-500 text-white'
-								: 'text-neutral-400 hover:text-white'}"
+								? 'bg-primary-600 text-white shadow-xs dark:bg-primary-500'
+								: 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'}"
 							onclick={() => (previewPreset = 'welcome')}
 						>
 							Welcome
@@ -373,8 +392,8 @@
 							type="button"
 							class="rounded-md px-2.5 py-1 text-xs font-semibold transition-colors {previewPreset ===
 							'newsletter'
-								? 'bg-primary-500 text-white'
-								: 'text-neutral-400 hover:text-white'}"
+								? 'bg-primary-600 text-white shadow-xs dark:bg-primary-500'
+								: 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'}"
 							onclick={() => (previewPreset = 'newsletter')}
 						>
 							Changelog
@@ -384,11 +403,13 @@
 					<!-- Right Status Metrics -->
 					<div class="flex items-center gap-2 text-xs">
 						<span
-							class="rounded border border-emerald-800/60 bg-emerald-950/60 px-2 py-0.5 font-semibold text-emerald-300"
+							class="rounded border border-emerald-300 bg-emerald-50 px-2 py-0.5 font-semibold text-emerald-700 dark:border-emerald-800/60 dark:bg-emerald-950/60 dark:text-emerald-300"
 						>
 							Spam: 96/100 Safe
 						</span>
-						<span class="rounded bg-neutral-800 px-2 py-0.5 font-mono text-neutral-300">
+						<span
+							class="rounded bg-neutral-200 px-2 py-0.5 font-mono text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
+						>
 							640px Canvas
 						</span>
 					</div>
@@ -398,35 +419,41 @@
 				<div class="grid min-h-105 grid-cols-1 lg:grid-cols-12">
 					<!-- Left: Visual Rendered Card -->
 					<div
-						class="flex flex-col justify-between border-b border-neutral-800 bg-neutral-950/40 p-6 sm:p-8 lg:col-span-7 lg:border-r lg:border-b-0"
+						class="flex flex-col justify-between border-b border-neutral-200 bg-neutral-50/70 p-6 sm:p-8 lg:col-span-7 lg:border-r lg:border-b-0 dark:border-neutral-800 dark:bg-neutral-950/40"
 					>
 						<div class="space-y-4">
-							<div class="flex items-center justify-between text-xs text-neutral-400">
-								<span class="font-semibold tracking-wider text-primary-400 uppercase"
+							<div
+								class="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400"
+							>
+								<span
+									class="font-semibold tracking-wider text-primary-600 uppercase dark:text-primary-400"
 									>Live Visual Simulation</span
 								>
-								<span class="rounded bg-neutral-800 px-2 py-0.5 text-neutral-300"
+								<span
+									class="rounded bg-neutral-200 px-2 py-0.5 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
 									>Responsive MJML Viewport</span
 								>
 							</div>
 
 							<!-- Rendered Email Mock Card -->
-							<div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-xl">
+							<div
+								class="rounded-xl border border-neutral-200 bg-white p-6 shadow-md dark:border-neutral-700/60 dark:shadow-xl"
+							>
 								{@html presetsData[previewPreset].previewHtml}
 							</div>
 						</div>
 
 						<div
-							class="mt-6 flex items-center justify-between border-t border-neutral-800/80 pt-4 text-xs text-neutral-400"
+							class="mt-6 flex items-center justify-between border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-neutral-800/80 dark:text-neutral-400"
 						>
 							<span
-								>Subject: <strong class="text-neutral-200"
+								>Subject: <strong class="text-neutral-800 dark:text-neutral-200"
 									>{presetsData[previewPreset].subject}</strong
 								></span
 							>
 							<a
 								href="/editor"
-								class="inline-flex items-center gap-1 font-semibold text-primary-400 hover:underline"
+								class="inline-flex items-center gap-1 font-semibold text-primary-600 hover:underline dark:text-primary-400"
 							>
 								<span>Edit in Studio</span>
 								<ExternalLink class="h-3 w-3" />
@@ -435,17 +462,21 @@
 					</div>
 
 					<!-- Right: Synchronized AST / MJML Code -->
-					<div class="flex flex-col justify-between bg-neutral-950/80 p-6 lg:col-span-5">
+					<div
+						class="flex flex-col justify-between bg-neutral-900 p-6 lg:col-span-5 dark:bg-neutral-950/80"
+					>
 						<div class="space-y-3">
 							<div class="flex items-center justify-between text-xs">
-								<span class="flex items-center gap-1.5 font-mono text-neutral-400">
-									<Terminal class="h-3.5 w-3.5 text-primary-500" />
+								<span
+									class="flex items-center gap-1.5 font-mono text-neutral-300 dark:text-neutral-400"
+								>
+									<Terminal class="h-3.5 w-3.5 text-primary-400 dark:text-primary-500" />
 									<span>Generated MJML Markup</span>
 								</span>
 								<button
 									type="button"
 									onclick={copyActiveMjml}
-									class="inline-flex items-center gap-1 text-xs text-neutral-400 transition-colors hover:text-white"
+									class="inline-flex items-center gap-1 text-xs text-neutral-300 transition-colors hover:text-white dark:text-neutral-400"
 								>
 									{#if copiedSnippet}
 										<CheckIcon class="h-3.5 w-3.5 text-emerald-400" />
@@ -458,13 +489,13 @@
 							</div>
 
 							<pre
-								class="max-h-75 overflow-x-auto rounded-lg border border-neutral-800/80 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-neutral-300"><code
+								class="max-h-75 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-neutral-200"><code
 									>{presetsData[previewPreset].mjmlCode}</code
 								></pre>
 						</div>
 
 						<div
-							class="mt-4 rounded-lg border border-primary-500/20 bg-primary-500/5 p-3 text-xs text-neutral-300"
+							class="mt-4 rounded-lg border border-primary-500/30 bg-primary-500/10 p-3 text-xs text-neutral-200 dark:border-primary-500/20 dark:bg-primary-500/5 dark:text-neutral-300"
 						>
 							<span class="font-bold text-primary-400">Zero-Overhead Compilation:</span> Compiles into
 							pure, bulletproof HTML with Outlook VML tags in sub-10ms.
@@ -475,18 +506,23 @@
 		</section>
 
 		<!-- Features Bento Grid -->
-		<section id="features" class="mx-auto max-w-6xl border-t border-neutral-800/80 px-6 py-20">
+		<section
+			id="features"
+			class="mx-auto max-w-6xl border-t border-neutral-200 px-6 py-20 dark:border-neutral-800/80"
+		>
 			<div class="mx-auto mb-14 max-w-2xl space-y-3 text-center">
 				<div
-					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-400"
+					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-700 dark:text-primary-400"
 				>
 					<Sparkles class="h-3.5 w-3.5" />
 					<span>Engineered for Production</span>
 				</div>
-				<h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+				<h2
+					class="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl dark:text-white"
+				>
 					Everything you need for transactional email.
 				</h2>
-				<p class="text-base leading-relaxed text-neutral-400">
+				<p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
 					Built with Svelte 5 runes, Yaxa UI primitives, and Tailwind CSS v4 design tokens.
 				</p>
 			</div>
@@ -494,18 +530,20 @@
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{#each features as feat (feat.title)}
 					<div
-						class="group relative space-y-3 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-7 transition-all duration-200 hover:border-neutral-700 hover:bg-neutral-900"
+						class="group relative space-y-3 rounded-2xl border border-neutral-200 bg-white p-7 shadow-xs transition-all duration-200 hover:border-neutral-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
 					>
 						<div
-							class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-400 ring-1 ring-primary-500/30 transition-transform group-hover:scale-105"
+							class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 ring-1 ring-primary-500/30 transition-transform group-hover:scale-105 dark:text-primary-400"
 						>
 							<feat.icon class="h-5 w-5" />
 						</div>
-						<div class="text-xs font-semibold tracking-wider text-primary-400 uppercase">
+						<div
+							class="text-xs font-semibold tracking-wider text-primary-600 uppercase dark:text-primary-400"
+						>
 							{feat.category}
 						</div>
-						<h3 class="text-lg font-bold text-white">{feat.title}</h3>
-						<p class="text-sm leading-relaxed text-neutral-400">
+						<h3 class="text-lg font-bold text-neutral-900 dark:text-white">{feat.title}</h3>
+						<p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
 							{feat.description}
 						</p>
 					</div>
@@ -514,36 +552,45 @@
 		</section>
 
 		<!-- DX Comparison Section: Legacy vs FrostMail -->
-		<section class="mx-auto max-w-5xl border-t border-neutral-800/80 px-6 py-20">
+		<section
+			class="mx-auto max-w-5xl border-t border-neutral-200 px-6 py-20 dark:border-neutral-800/80"
+		>
 			<div class="mx-auto mb-14 max-w-2xl space-y-3 text-center">
 				<div
-					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-400"
+					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-700 dark:text-primary-400"
 				>
 					<Code class="h-3.5 w-3.5" />
 					<span>Developer Experience</span>
 				</div>
-				<h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+				<h2
+					class="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl dark:text-white"
+				>
 					See the DX Difference
 				</h2>
-				<p class="text-base leading-relaxed text-neutral-400">
+				<p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
 					Stop writing nested table hacks and broken inline CSS. Write declarative AST blocks.
 				</p>
 			</div>
 
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				<!-- Legacy HTML Table Nightmare -->
-				<div class="space-y-4 rounded-2xl border border-rose-900/50 bg-rose-950/20 p-6">
+				<div
+					class="space-y-4 rounded-2xl border border-rose-200 bg-rose-50/60 p-6 dark:border-rose-900/50 dark:bg-rose-950/20"
+				>
 					<div class="flex items-center justify-between">
-						<span class="flex items-center gap-2 text-sm font-bold text-rose-400">
+						<span
+							class="flex items-center gap-2 text-sm font-bold text-rose-600 dark:text-rose-400"
+						>
 							<span>✕</span>
 							<span>Legacy Table-Based Email HTML</span>
 						</span>
-						<span class="rounded bg-rose-950 px-2 py-0.5 font-mono text-xs text-rose-300"
+						<span
+							class="rounded bg-rose-100 px-2 py-0.5 font-mono text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-300"
 							>Painful</span
 						>
 					</div>
 					<pre
-						class="max-h-55 overflow-x-auto rounded-lg border border-rose-900/40 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-rose-200/80"><code
+						class="max-h-55 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-rose-300"><code
 							>&lt;!-- Nested 1999 Table Hack --&gt;
 &lt;table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"&gt;
   &lt;tr&gt;
@@ -557,36 +604,41 @@
   &lt;/tr&gt;
 &lt;/table&gt;</code
 						></pre>
-					<p class="text-xs text-rose-300/80">
+					<p class="text-xs text-rose-700 dark:text-rose-300/80">
 						Brittle, impossible to preview with mock data, breaks on mobile, and clips in Gmail.
 					</p>
 				</div>
 
 				<!-- FrostMail Clean AST & MJML -->
-				<div class="space-y-4 rounded-2xl border border-emerald-900/50 bg-emerald-950/20 p-6">
+				<div
+					class="space-y-4 rounded-2xl border border-emerald-200 bg-emerald-50/60 p-6 dark:border-emerald-900/50 dark:bg-emerald-950/20"
+				>
 					<div class="flex items-center justify-between">
-						<span class="flex items-center gap-2 text-sm font-bold text-emerald-400">
+						<span
+							class="flex items-center gap-2 text-sm font-bold text-emerald-600 dark:text-emerald-400"
+						>
 							<CheckIcon class="h-4 w-4" />
 							<span>FrostMail Clean MJML AST</span>
 						</span>
-						<span class="rounded bg-emerald-950 px-2 py-0.5 font-mono text-xs text-emerald-300"
+						<span
+							class="rounded bg-emerald-100 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
 							>Modern DX</span
 						>
 					</div>
 					<pre
-						class="max-h-55 overflow-x-auto rounded-lg border border-emerald-900/40 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-emerald-200/80"><code
+						class="max-h-55 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-emerald-300"><code
 							>&lt;!-- Declarative, Reactive & Typed --&gt;
 &lt;mj-section background-color="#ffffff" border-radius="12px"&gt;
   &lt;mj-column&gt;
-    &lt;mj-text font-size="20px" font-weight="bold"&gt;Order #{'{'}{'{'} order.id }}&lt;/mj-text&gt;
-    &lt;mj-text color="#64748b"&gt;Hi {'{'}{'{'} user.name }}, your invoice is ready.&lt;/mj-text&gt;
-    &lt;mj-button background-color="#ff3e00" href="{'{'}{'{'} invoice.url }}"&gt;
+    &lt;mj-text font-size="20px" font-weight="bold"&gt;Order #&#123;&#123; order.id &#125;&#125;&lt;/mj-text&gt;
+    &lt;mj-text color="#64748b"&gt;Hi &#123;&#123; user.name &#125;&#125;, your invoice is ready.&lt;/mj-text&gt;
+    &lt;mj-button background-color="#ff3e00" href="&#123;&#123; invoice.url &#125;&#125;"&gt;
       Download Receipt
     &lt;/mj-button&gt;
   &lt;/mj-column&gt;
 &lt;/mj-section&gt;</code
 						></pre>
-					<p class="text-xs text-emerald-300/80">
+					<p class="text-xs text-emerald-700 dark:text-emerald-300/80">
 						Responsive across 60+ email clients, live variable simulation, and instant React Email
 						export.
 					</p>
@@ -595,18 +647,23 @@
 		</section>
 
 		<!-- Open Source & Self-Hosting Architecture Section -->
-		<section id="architecture" class="mx-auto max-w-5xl border-t border-neutral-800/80 px-6 py-20">
+		<section
+			id="architecture"
+			class="mx-auto max-w-5xl border-t border-neutral-200 px-6 py-20 dark:border-neutral-800/80"
+		>
 			<div class="mx-auto mb-14 max-w-2xl space-y-3 text-center">
 				<div
-					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-400"
+					class="inline-flex items-center gap-1.5 rounded-full bg-primary-500/10 px-3.5 py-1 text-xs font-bold text-primary-700 dark:text-primary-400"
 				>
 					<Sparkles class="h-3.5 w-3.5" />
 					<span>100% Free & Open Source</span>
 				</div>
-				<h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+				<h2
+					class="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl dark:text-white"
+				>
 					Freedom First. Zero Paywalls.
 				</h2>
-				<p class="text-base leading-relaxed text-neutral-400">
+				<p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
 					Use the web studio directly in your browser with zero sign-up, or self-host your own
 					instance with custom cloud storage.
 				</p>
@@ -615,27 +672,33 @@
 			<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 				<!-- Zero Setup Studio -->
 				<div
-					class="flex flex-col justify-between space-y-6 rounded-2xl border border-neutral-800 bg-neutral-900/60 p-8 shadow-sm"
+					class="flex flex-col justify-between space-y-6 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition-colors dark:border-neutral-800 dark:bg-neutral-900/60"
 				>
 					<div class="space-y-4">
 						<div class="flex items-center justify-between">
 							<div>
-								<h3 class="text-xl font-bold text-white">Local Studio</h3>
-								<p class="mt-1 text-sm text-neutral-400">Instant browser-only mode, 100% private</p>
+								<h3 class="text-xl font-bold text-neutral-900 dark:text-white">Local Studio</h3>
+								<p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+									Instant browser-only mode, 100% private
+								</p>
 							</div>
-							<div class="rounded-lg bg-neutral-800 p-2.5">
-								<HardDrive class="h-5 w-5 text-neutral-300" />
+							<div class="rounded-lg bg-neutral-100 p-2.5 dark:bg-neutral-800">
+								<HardDrive class="h-5 w-5 text-neutral-600 dark:text-neutral-300" />
 							</div>
 						</div>
 
 						<div class="flex items-baseline gap-1.5">
-							<span class="text-4xl font-black text-white">Free</span>
-							<span class="text-sm font-medium text-neutral-400">/ MIT Licensed</span>
+							<span class="text-4xl font-black text-neutral-900 dark:text-white">Free</span>
+							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
+								>/ MIT Licensed</span
+							>
 						</div>
 
 						<div class="space-y-3 pt-2">
 							{#each ['Zero registration or cloud account required', 'Local browser storage with 25-step Undo/Redo', 'Real-time MJML compilation & AST generation', 'Multi-format export (HTML, MJML, React Email .tsx)', 'Live DNS DoH deliverability auditing & scoring'] as feat (feat)}
-								<div class="flex items-center gap-2.5 text-sm text-neutral-300">
+								<div
+									class="flex items-center gap-2.5 text-sm text-neutral-700 dark:text-neutral-300"
+								>
 									<Check class="h-4.5 w-4.5 shrink-0 text-primary-500" />
 									<span>{feat}</span>
 								</div>
@@ -650,7 +713,7 @@
 
 				<!-- Self-Hosted / Full Cloud -->
 				<div
-					class="relative flex flex-col justify-between space-y-6 rounded-2xl border-2 border-primary-500/40 bg-neutral-900/80 p-8 shadow-xl"
+					class="relative flex flex-col justify-between space-y-6 rounded-2xl border-2 border-primary-500/40 bg-white p-8 shadow-lg transition-colors dark:bg-neutral-900/80 dark:shadow-xl"
 				>
 					<div
 						class="absolute -top-3.5 right-6 rounded-full bg-primary-600 px-3.5 py-1 text-xs font-bold text-white shadow-sm"
@@ -661,24 +724,30 @@
 					<div class="space-y-4">
 						<div class="flex items-center justify-between">
 							<div>
-								<h3 class="text-xl font-bold text-white">Self-Hosted & BYOK</h3>
-								<p class="mt-1 text-sm text-neutral-400">
+								<h3 class="text-xl font-bold text-neutral-900 dark:text-white">
+									Self-Hosted & BYOK
+								</h3>
+								<p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
 									For teams and production backend workflows
 								</p>
 							</div>
-							<div class="rounded-lg bg-primary-500/20 p-2.5">
-								<Server class="h-5 w-5 text-primary-400" />
+							<div class="rounded-lg bg-primary-500/10 p-2.5 dark:bg-primary-500/20">
+								<Server class="h-5 w-5 text-primary-600 dark:text-primary-400" />
 							</div>
 						</div>
 
 						<div class="flex items-baseline gap-2">
-							<span class="text-4xl font-black text-white">100%</span>
-							<span class="text-sm font-medium text-neutral-400">Open Source</span>
+							<span class="text-4xl font-black text-neutral-900 dark:text-white">100%</span>
+							<span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
+								>Open Source</span
+							>
 						</div>
 
 						<div class="space-y-3 pt-2">
 							{#each ['Deploy with Docker, Vercel, Node, or Netlify', 'Encrypted PostgreSQL database sync (Neon/Local)', 'BYOK Resend API for 1-click test inbox delivery', 'Cloudflare R2 / AWS S3 media asset storage', 'Complete source code access with zero lock-in'] as feat (feat)}
-								<div class="flex items-center gap-2.5 text-sm text-neutral-300">
+								<div
+									class="flex items-center gap-2.5 text-sm text-neutral-700 dark:text-neutral-300"
+								>
 									<CheckCircle2 class="h-4.5 w-4.5 shrink-0 text-primary-500" />
 									<span>{feat}</span>
 								</div>
@@ -705,7 +774,7 @@
 							aria-label="Support FrostMail"
 							onclick={() => (isSponsorOpen = true)}
 						>
-							<span class="text-rose-400">♥</span>
+							<span class="text-rose-500 dark:text-rose-400">♥</span>
 						</Button>
 					</div>
 				</div>
@@ -714,21 +783,25 @@
 	</main>
 
 	<!-- Standardized 4-Column Global Footer -->
-	<footer class="border-t border-neutral-800/80 bg-neutral-950 py-16 text-sm text-neutral-400">
+	<footer
+		class="border-t border-neutral-200 bg-white py-16 text-sm text-neutral-600 transition-colors dark:border-neutral-800/80 dark:bg-neutral-950 dark:text-neutral-400"
+	>
 		<div class="mx-auto max-w-6xl px-6">
 			<div class="grid grid-cols-1 gap-10 md:grid-cols-12">
 				<!-- Brand Col -->
 				<div class="space-y-4 md:col-span-5">
 					<div class="flex items-center gap-2.5">
 						<div
-							class="flex h-7 w-7 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 ring-1 ring-primary-500/30"
+							class="flex h-7 w-7 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 ring-1 ring-primary-500/30 dark:text-primary-500"
 						>
 							<Inbox class="h-4 w-4" />
 						</div>
-						<span class="text-base font-bold tracking-tight text-white">FrostMail</span>
+						<span class="text-base font-bold tracking-tight text-neutral-900 dark:text-white"
+							>FrostMail</span
+						>
 						<Badge color="primary" variant="subtle" size="sm">MIT</Badge>
 					</div>
-					<p class="max-w-sm text-xs leading-relaxed text-neutral-400">
+					<p class="max-w-sm text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
 						100% Free & Open-Source Visual Transactional Email Studio & Domain Deliverability
 						Auditor. Built with SvelteKit 2, Svelte 5 Runes, MJML, and Tailwind CSS v4.
 					</p>
@@ -737,46 +810,93 @@
 
 				<!-- Navigation Col -->
 				<div class="space-y-3 md:col-span-2">
-					<div class="text-xs font-bold tracking-wider text-neutral-300 uppercase">Navigation</div>
+					<div
+						class="text-xs font-bold tracking-wider text-neutral-900 uppercase dark:text-neutral-300"
+					>
+						Navigation
+					</div>
 					<ul class="space-y-2 text-xs">
-						<li><a href="/editor" class="transition-colors hover:text-white">Studio</a></li>
 						<li>
-							<a href="/diagnostic" class="transition-colors hover:text-white">DNS Auditor</a>
+							<a
+								href="/editor"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white">Studio</a
+							>
 						</li>
-						<li><a href="#features" class="transition-colors hover:text-white">Features</a></li>
 						<li>
-							<a href="#architecture" class="transition-colors hover:text-white">Self-Hosting</a>
+							<a
+								href="/diagnostic"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+								>DNS Auditor</a
+							>
+						</li>
+						<li>
+							<a
+								href="#features"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white">Features</a
+							>
+						</li>
+						<li>
+							<a
+								href="#architecture"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+								>Self-Hosting</a
+							>
 						</li>
 					</ul>
 				</div>
 
 				<!-- Legal & Compliance Col -->
 				<div class="space-y-3 md:col-span-3">
-					<div class="text-xs font-bold tracking-wider text-neutral-300 uppercase">
+					<div
+						class="text-xs font-bold tracking-wider text-neutral-900 uppercase dark:text-neutral-300"
+					>
 						Legal & Compliance
 					</div>
 					<ul class="space-y-2 text-xs">
 						<li>
-							<a href="/privacy" class="transition-colors hover:text-white">Privacy Policy</a>
+							<a
+								href="/privacy"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+								>Privacy Policy</a
+							>
 						</li>
 						<li>
-							<a href="/terms" class="transition-colors hover:text-white">Terms of Service</a>
+							<a
+								href="/terms"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+								>Terms of Service</a
+							>
 						</li>
-						<li><a href="/refunds" class="transition-colors hover:text-white">Refund Policy</a></li>
-						<li><a href="/impressum" class="transition-colors hover:text-white">Impressum</a></li>
+						<li>
+							<a
+								href="/refunds"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white"
+								>Refund Policy</a
+							>
+						</li>
+						<li>
+							<a
+								href="/impressum"
+								class="transition-colors hover:text-neutral-900 dark:hover:text-white">Impressum</a
+							>
+						</li>
 					</ul>
 				</div>
 
 				<!-- Community Col -->
 				<div class="space-y-3 md:col-span-2">
-					<div class="text-xs font-bold tracking-wider text-neutral-300 uppercase">Community</div>
+					<div
+						class="text-xs font-bold tracking-wider text-neutral-900 uppercase dark:text-neutral-300"
+					>
+						Community
+					</div>
 					<ul class="space-y-2 text-xs">
 						<li>
 							<a
 								href="https://github.com/FuntionalFrost/"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="inline-flex items-center gap-1 transition-colors hover:text-white"
+								class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white"
 							>
 								<span>GitHub</span>
 								<ExternalLink class="h-3 w-3 opacity-60" />
@@ -787,7 +907,7 @@
 								href="https://yaxa.vercel.app"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="inline-flex items-center gap-1 transition-colors hover:text-white"
+								class="inline-flex items-center gap-1 transition-colors hover:text-neutral-900 dark:hover:text-white"
 							>
 								<span>Built with Yaxa</span>
 								<ExternalLink class="h-3 w-3 opacity-60" />
@@ -796,7 +916,7 @@
 						<li>
 							<button
 								type="button"
-								class="text-left transition-colors hover:text-white"
+								class="text-left transition-colors hover:text-neutral-900 dark:hover:text-white"
 								onclick={() => (isSponsorOpen = true)}
 							>
 								Support FOSS ♥

@@ -2,8 +2,25 @@
 <script lang="ts">
 	import { BLOCK_REGISTRY, LAYOUT_PRESETS } from '#lib/blocks/index.js';
 	import { studio } from '#lib/stores/studio.svelte.js';
+	import type { ContentBlock } from '#lib/types/email.js';
+
+	interface Props {
+		onBlockAdded?: () => void;
+	}
+
+	let { onBlockAdded }: Props = $props();
 
 	const contentBlocks = Object.values(BLOCK_REGISTRY);
+
+	function handleAddLayout(cols: string[]) {
+		studio.addLayoutSection(cols);
+		onBlockAdded?.();
+	}
+
+	function handleAddBlock(factory: () => ContentBlock) {
+		studio.addBlock(factory);
+		onBlockAdded?.();
+	}
 </script>
 
 <div class="space-y-6 text-sm">
@@ -18,7 +35,7 @@
 				<button
 					type="button"
 					class="flex w-full cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 bg-white p-2.5 text-left transition hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
-					onclick={() => studio.addLayoutSection(layout.columns)}
+					onclick={() => handleAddLayout(layout.columns)}
 				>
 					<div
 						class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
@@ -49,7 +66,7 @@
 				<button
 					type="button"
 					class="flex w-full cursor-pointer items-center gap-3 rounded-lg border border-neutral-200 bg-white p-2.5 text-left transition hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
-					onclick={() => studio.addBlock(item.factory)}
+					onclick={() => handleAddBlock(item.factory)}
 				>
 					<div
 						class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950 dark:text-primary-400"

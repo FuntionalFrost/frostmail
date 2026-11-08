@@ -47,7 +47,7 @@ export const siteConfig = defineSiteConfig({
 	theme: {
 		primaryColor: '#ff3e00',
 		neutralColor: '#18181b',
-		defaultMode: 'system'
+		defaultMode: 'dark'
 	},
 	seo: {
 		titleTemplate: '%s | FrostMail',
