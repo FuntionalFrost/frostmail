@@ -3,10 +3,15 @@
 > **100% Free & Open Source Visual Transactional Email Studio & Domain Deliverability Auditor**  
 > Built with **SvelteKit 2**, **Svelte 5 Runes**, **`yaxa-svelte`**, **Tailwind CSS v4**, **MJML**, **Drizzle ORM**, and **Resend**.
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-frostmail--sepia.vercel.app-emerald.svg)](https://frostmail-sepia.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Svelte v5](https://img.shields.io/badge/Svelte-5.56-orange.svg)](https://svelte.dev)
 [![yaxa-svelte](https://img.shields.io/badge/yaxa--svelte-v2.6.0-red.svg)](https://yaxa.vercel.app)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4.3-38bdf8.svg)](https://tailwindcss.com)
+
+**[🌐 Live Demo](https://frostmail-sepia.vercel.app)** &bull;
+**[🎨 Email Studio](https://frostmail-sepia.vercel.app/editor)** &bull;
+**[🛡️ DNS Auditor](https://frostmail-sepia.vercel.app/diagnostic)**
 
 ---
 
