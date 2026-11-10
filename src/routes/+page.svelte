@@ -4,6 +4,7 @@
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import SponsorModal from '#lib/components/SponsorModal.svelte';
 	import ThemeModal from '#lib/components/ThemeModal.svelte';
+	import MjmlCodeBlock from '#lib/components/MjmlCodeBlock.svelte';
 	import {
 		Sparkles,
 		ArrowRight,
@@ -23,7 +24,6 @@
 		Inbox,
 		Terminal,
 		Cpu,
-		Copy,
 		Check as CheckIcon
 	} from '@lucide/svelte';
 	import GithubIcon from '#lib/components/icons/GithubIcon.svelte';
@@ -32,7 +32,6 @@
 
 	let isSponsorOpen = $state(false);
 	let isThemeOpen = $state(false);
-	let copiedSnippet = $state(false);
 
 	let previewPreset = $state<'receipt' | 'welcome' | 'newsletter'>('receipt');
 
@@ -127,6 +126,30 @@
 		}
 	};
 
+	const legacyHtmlSnippet = `<!-- Nested 1999 Table Hack -->
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="center" style="padding: 20px 0;">
+      <!--[if mso]>
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" arcsize="10%" fillcolor="#ff3e00">
+      <![endif]-->
+      <a href="..." style="background:#ff3e00;padding:12px 24px;color:#fff;">Button</a>
+      <!--[if mso]></v:roundrect><![endif]-->
+    </td>
+  </tr>
+</table>`;
+
+	const modernMjmlSnippet = `<!-- Declarative, Reactive & Typed -->
+<mj-section background-color="#ffffff" border-radius="12px">
+  <mj-column>
+    <mj-text font-size="20px" font-weight="bold">Order #{{ order.id }}</mj-text>
+    <mj-text color="#64748b">Hi {{ user.name }}, your invoice is ready.</mj-text>
+    <mj-button background-color="#ff3e00" href="{{ invoice.url }}">
+      Download Receipt
+    </mj-button>
+  </mj-column>
+</mj-section>`;
+
 	const features = [
 		{
 			icon: Cpu,
@@ -171,12 +194,6 @@
 				'Run completely offline in browser localStorage with a 25-step Undo/Redo stack, or connect Neon PostgreSQL for encrypted cloud sync.'
 		}
 	];
-
-	function copyActiveMjml() {
-		navigator.clipboard.writeText(presetsData[previewPreset].mjmlCode);
-		copiedSnippet = true;
-		setTimeout(() => (copiedSnippet = false), 2000);
-	}
 </script>
 
 <Seo
@@ -471,27 +488,19 @@
 									class="flex items-center gap-1.5 font-mono text-neutral-300 dark:text-neutral-400"
 								>
 									<Terminal class="h-3.5 w-3.5 text-primary-400 dark:text-primary-500" />
-									<span>Generated MJML Markup</span>
+									<span>Live MJML AST Syntax</span>
 								</span>
-								<button
-									type="button"
-									onclick={copyActiveMjml}
-									class="inline-flex items-center gap-1 text-xs text-neutral-300 transition-colors hover:text-white dark:text-neutral-400"
-								>
-									{#if copiedSnippet}
-										<CheckIcon class="h-3.5 w-3.5 text-emerald-400" />
-										<span class="font-semibold text-emerald-400">Copied!</span>
-									{:else}
-										<Copy class="h-3.5 w-3.5" />
-										<span>Copy</span>
-									{/if}
-								</button>
+								<span class="font-mono text-[10px] text-emerald-400">● Validated</span>
 							</div>
 
-							<pre
-								class="max-h-75 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-neutral-200"><code
-									>{presetsData[previewPreset].mjmlCode}</code
-								></pre>
+							<MjmlCodeBlock
+								code={presetsData[previewPreset].mjmlCode}
+								language="mjml"
+								filename={presetsData[previewPreset].file}
+								maxHeight="290px"
+								showLineNumbers={true}
+								showCopy={true}
+							/>
 						</div>
 
 						<div
@@ -589,21 +598,13 @@
 							>Painful</span
 						>
 					</div>
-					<pre
-						class="max-h-55 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-rose-300"><code
-							>&lt;!-- Nested 1999 Table Hack --&gt;
-&lt;table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"&gt;
-  &lt;tr&gt;
-    &lt;td align="center" style="padding: 20px 0;"&gt;
-      &lt;!--[if mso]&gt;
-      &lt;v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" arcsize="10%" fillcolor="#ff3e00"&gt;
-      &lt;![endif]--&gt;
-      &lt;a href="..." style="background:#ff3e00;padding:12px 24px;color:#fff;"&gt;Button&lt;/a&gt;
-      &lt;!--[if mso]&gt;&lt;/v:roundrect&gt;&lt;![endif]--&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;</code
-						></pre>
+					<MjmlCodeBlock
+						code={legacyHtmlSnippet}
+						language="html"
+						maxHeight="220px"
+						showLineNumbers={false}
+						showCopy={false}
+					/>
 					<p class="text-xs text-rose-700 dark:text-rose-300/80">
 						Brittle, impossible to preview with mock data, breaks on mobile, and clips in Gmail.
 					</p>
@@ -625,19 +626,13 @@
 							>Modern DX</span
 						>
 					</div>
-					<pre
-						class="max-h-55 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-950 p-4 font-mono text-xs leading-relaxed text-emerald-300"><code
-							>&lt;!-- Declarative, Reactive & Typed --&gt;
-&lt;mj-section background-color="#ffffff" border-radius="12px"&gt;
-  &lt;mj-column&gt;
-    &lt;mj-text font-size="20px" font-weight="bold"&gt;Order #&#123;&#123; order.id &#125;&#125;&lt;/mj-text&gt;
-    &lt;mj-text color="#64748b"&gt;Hi &#123;&#123; user.name &#125;&#125;, your invoice is ready.&lt;/mj-text&gt;
-    &lt;mj-button background-color="#ff3e00" href="&#123;&#123; invoice.url &#125;&#125;"&gt;
-      Download Receipt
-    &lt;/mj-button&gt;
-  &lt;/mj-column&gt;
-&lt;/mj-section&gt;</code
-						></pre>
+					<MjmlCodeBlock
+						code={modernMjmlSnippet}
+						language="mjml"
+						maxHeight="220px"
+						showLineNumbers={false}
+						showCopy={false}
+					/>
 					<p class="text-xs text-emerald-700 dark:text-emerald-300/80">
 						Responsive across 60+ email clients, live variable simulation, and instant React Email
 						export.

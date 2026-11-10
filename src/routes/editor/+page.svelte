@@ -3,6 +3,8 @@
 	import { page } from '$app/state';
 	import { studio } from '#lib/stores/studio.svelte.js';
 	import { TEMPLATE_PRESETS } from '#lib/constants/presets.js';
+	import { templateToMjml } from '#lib/utils/mjmlGenerator.js';
+	import MjmlCodeBlock from '#lib/components/MjmlCodeBlock.svelte';
 	import {
 		useShortcuts,
 		Button,
@@ -52,11 +54,17 @@
 		{ label: 'Vars', icon: Variable, value: 'variables' }
 	];
 
+	const viewModeOptions = [
+		{ value: 'canvas', label: 'Canvas', icon: Eye },
+		{ value: 'code', label: 'MJML Markup', icon: Code }
+	];
+
 	const viewportOptions = [
 		{ value: 'desktop', label: 'Desktop', icon: Monitor },
 		{ value: 'mobile', label: 'Mobile', icon: Smartphone }
 	];
 
+	let currentView = $state<'canvas' | 'code'>('canvas');
 	let activeLeftTab = $state('blocks');
 	let mobilePane = $state<'canvas' | 'palette' | 'inspector'>('canvas');
 	let isTestSendOpen = $state(false);
@@ -188,26 +196,32 @@
 			</span>
 		</div>
 
-		<!-- 2. Center: Viewport & Canvas Dark Mode Simulation (hidden on mobile, visible on tablet+) -->
-		<div class="hidden items-center gap-1.5 md:flex">
-			<ToggleGroup
-				items={viewportOptions}
-				bind:value={studio.previewMode}
-				size="sm"
-				variant="outline"
-			/>
+		<!-- 2. Center: View Mode (Canvas vs MJML) & Viewport / Dark Mode -->
+		<div class="hidden items-center gap-2 md:flex">
+			<ToggleGroup items={viewModeOptions} bind:value={currentView} size="sm" variant="outline" />
 
-			<Tooltip text="Preview Email in Dark Mode">
-				<Button
-					variant={studio.simulateDarkMode ? 'solid' : 'ghost'}
-					color={studio.simulateDarkMode ? 'primary' : 'neutral'}
+			{#if currentView === 'canvas'}
+				<div class="h-4 w-px bg-neutral-200 dark:bg-neutral-800"></div>
+
+				<ToggleGroup
+					items={viewportOptions}
+					bind:value={studio.previewMode}
 					size="sm"
-					aria-label="Simulate Email Client Dark Mode"
-					onclick={() => (studio.simulateDarkMode = !studio.simulateDarkMode)}
-				>
-					<Moon class="h-4 w-4" />
-				</Button>
-			</Tooltip>
+					variant="outline"
+				/>
+
+				<Tooltip text="Preview Email in Dark Mode">
+					<Button
+						variant={studio.simulateDarkMode ? 'solid' : 'ghost'}
+						color={studio.simulateDarkMode ? 'primary' : 'neutral'}
+						size="sm"
+						aria-label="Simulate Email Client Dark Mode"
+						onclick={() => (studio.simulateDarkMode = !studio.simulateDarkMode)}
+					>
+						<Moon class="h-4 w-4" />
+					</Button>
+				</Tooltip>
+			{/if}
 		</div>
 
 		<!-- 3. Right: Deliverability, Primary Actions & Overflow -->
@@ -299,24 +313,43 @@
 			</div>
 		</aside>
 
-		<!-- Center Preview Canvas -->
+		<!-- Center Preview Canvas / MJML Markup View -->
 		<main
-			class="flex flex-1 items-center justify-center overflow-auto bg-neutral-100 p-2 sm:p-6 dark:bg-neutral-950 {mobilePane ===
+			class="flex flex-1 flex-col items-center justify-center overflow-auto bg-neutral-100 p-2 sm:p-6 dark:bg-neutral-950 {mobilePane ===
 			'canvas'
 				? 'flex'
 				: 'hidden lg:flex'}"
 		>
-			<div
-				class="h-full max-w-full overflow-hidden rounded-xl border border-neutral-300 shadow-2xl transition-all duration-300 sm:h-[90vh] dark:border-neutral-800 {studio.simulateDarkMode
-					? 'bg-[#1a1a1a]'
-					: 'bg-white'}"
-				style:width={studio.previewMode === 'desktop' ? '640px' : '375px'}
-				style:max-width="100%"
-				style:filter={studio.simulateDarkMode ? 'invert(0.9) hue-rotate(180deg)' : 'none'}
-			>
-				<iframe srcdoc={studio.compiledHtml} class="h-full w-full border-0" title="Email Preview"
-				></iframe>
+			<!-- Mobile View Switcher (visible only on mobile when on canvas pane) -->
+			<div class="mb-2 flex w-full justify-center md:hidden">
+				<ToggleGroup items={viewModeOptions} bind:value={currentView} size="sm" variant="outline" />
 			</div>
+
+			{#if currentView === 'code'}
+				<div class="flex h-full w-full max-w-4xl flex-col p-1 sm:p-2">
+					<MjmlCodeBlock
+						code={templateToMjml(studio.template, { forCanvas: false })}
+						language="mjml"
+						filename={`${studio.activeProjectName.toLowerCase().replace(/\s+/g, '-') || 'template'}.mjml`}
+						showLineNumbers={true}
+						showCopy={true}
+						maxHeight="80vh"
+						class="h-full shadow-2xl"
+					/>
+				</div>
+			{:else}
+				<div
+					class="h-full max-w-full overflow-hidden rounded-xl border border-neutral-300 shadow-2xl transition-all duration-300 sm:h-[90vh] dark:border-neutral-800 {studio.simulateDarkMode
+						? 'bg-[#1a1a1a]'
+						: 'bg-white'}"
+					style:width={studio.previewMode === 'desktop' ? '640px' : '375px'}
+					style:max-width="100%"
+					style:filter={studio.simulateDarkMode ? 'invert(0.9) hue-rotate(180deg)' : 'none'}
+				>
+					<iframe srcdoc={studio.compiledHtml} class="h-full w-full border-0" title="Email Preview"
+					></iframe>
+				</div>
+			{/if}
 		</main>
 
 		<!-- Right Sidebar: Inspector Panel -->

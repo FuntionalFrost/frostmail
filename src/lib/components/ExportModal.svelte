@@ -3,6 +3,7 @@
 	import { studio } from '#lib/stores/studio.svelte.js';
 	import { templateToReactEmail } from '#lib/utils/reactEmailConverter.js';
 	import { templateToMjml } from '#lib/utils/mjmlGenerator.js';
+	import MjmlCodeBlock from '#lib/components/MjmlCodeBlock.svelte';
 	import { Modal, Tabs, Button, useClipboard } from 'yaxa-svelte';
 	import { Download, Copy, Check } from '@lucide/svelte';
 
@@ -85,12 +86,14 @@
 		</div>
 
 		<div class="relative">
-			<textarea
-				value={currentContent}
-				readonly
-				rows={14}
-				class="w-full rounded-lg border border-neutral-200 bg-neutral-50 p-3.5 font-mono text-sm text-neutral-800 focus:outline-none dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200"
-			></textarea>
+			<MjmlCodeBlock
+				code={currentContent}
+				language={activeTab === 'react' ? 'tsx' : activeTab}
+				filename={`${studio.template.name.toLowerCase().replace(/\s+/g, '-') || 'email'}.${activeTab === 'react' ? 'tsx' : activeTab}`}
+				maxHeight="380px"
+				showLineNumbers={true}
+				showCopy={false}
+			/>
 		</div>
 
 		<div class="flex items-center justify-between pt-2">
