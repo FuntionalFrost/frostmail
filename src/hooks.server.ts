@@ -2,7 +2,7 @@ import { sequence, type Handle } from '@sveltejs/kit/hooks';
 import { building } from '$app/env';
 import { auth } from '#lib/server/auth.js';
 import { svelteKitHandler } from 'better-auth/svelte-kit';
-import { createYaxaHook } from 'yaxa-svelte';
+import { createYaxaHook } from 'yaxa-svelte/seo';
 import { siteConfig } from '#lib/config/site.js';
 
 const handleBetterAuth: Handle = async ({ event, resolve }) => {

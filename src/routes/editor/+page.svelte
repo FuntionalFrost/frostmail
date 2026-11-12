@@ -10,12 +10,12 @@
 		Button,
 		Kbd,
 		Tabs,
-		Seo,
 		ToggleGroup,
 		DropdownMenu,
 		Tooltip,
 		type MenuItem
 	} from 'yaxa-svelte';
+	import { useSeo } from 'yaxa-svelte/seo';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
 	import BlockPalette from '#lib/components/BlockPalette.svelte';
 	import LayersTree from '#lib/components/LayersTree.svelte';
@@ -148,17 +148,19 @@
 			if (studio.selectedBlockId) studio.removeBlock(studio.selectedBlockId);
 		}
 	});
-</script>
 
-<Seo
-	title="Email Template Studio"
-	description="Visual MJML email editor with real-time AST compilation, merge variables, dark mode simulation, and multi-format exports."
-	ogImage={{
-		title: 'Email Template Studio',
-		description: 'Visual MJML email canvas with real-time compilation.',
-		badge: 'FrostMail Studio'
-	}}
-/>
+	useSeo(() => ({
+		title: `${studio.template.name || 'Email Template'} | Studio`,
+		description: studio.template.subject
+			? `Subject: ${studio.template.subject} — Visual MJML email canvas with real-time compilation.`
+			: 'Visual MJML email editor with real-time AST compilation, merge variables, dark mode simulation, and multi-format exports.',
+		ogImage: {
+			title: studio.template.name || 'Email Template Studio',
+			description: 'Visual MJML email canvas with real-time compilation.',
+			badge: 'FrostMail Studio'
+		}
+	}));
+</script>
 
 <div
 	class="flex h-screen flex-col overflow-hidden bg-neutral-100 text-neutral-900 transition-colors duration-200 dark:bg-neutral-950 dark:text-neutral-100"
