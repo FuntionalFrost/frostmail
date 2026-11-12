@@ -20,11 +20,11 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	try {
 		const session = await polar.customerSessions.create({
-			customerId: body.customerId
+			customer_id: body.customerId
 		});
 
 		return Response.json({
-			url: session.customerPortalUrl,
+			url: session.customer_portal_url || session.token,
 			token: session.token
 		});
 	} catch (err: unknown) {

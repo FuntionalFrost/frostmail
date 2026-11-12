@@ -1,7 +1,7 @@
 // src/routes/api/webhooks/polar/+server.ts
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { validateEvent, WebhookVerificationError } from '@polar-sh/sdk/webhooks';
+import { webhooks } from '@polar-sh/sdk/2026-10';
 import { getDb, user, subscriptions } from '#lib/server/db/index.js';
 import { eq } from 'drizzle-orm';
 import { POLAR_WEBHOOK_SECRET } from '$app/env/private';
@@ -23,12 +23,13 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	if (secret) {
 		try {
-			webhookPayload = validateEvent(rawBody, headersRecord, secret) as {
+			const validated = await webhooks.validateEvent(rawBody, headersRecord, secret);
+			webhookPayload = validated as unknown as {
 				type: string;
 				data: Record<string, unknown>;
 			};
 		} catch (err: unknown) {
-			if (err instanceof WebhookVerificationError) {
+			if (err instanceof webhooks.PolarWebhookVerificationError) {
 				throw error(403, 'Invalid Polar webhook signature.');
 			}
 			throw error(400, 'Malformed webhook payload.');
@@ -50,68 +51,67 @@ export const POST: RequestHandler = async ({ request }) => {
 		const customerEmail = (customer.email || data.customer_email || data.email) as
 			string | undefined;
 
-		let userId = metadata.userId;
+		let targetUserId = metadata.userId;
 
-		if (userId || customerEmail) {
-			let existingUsers: (typeof user.$inferSelect)[] = [];
-
-			if (userId) {
-				existingUsers = await db.select().from(user).where(eq(user.id, userId)).limit(1);
+		if (!targetUserId && customerEmail) {
+			const existingUser = await db.query.user.findFirst({
+				where: eq(user.email, customerEmail)
+			});
+			if (existingUser) {
+				targetUserId = existingUser.id;
 			}
+		}
 
-			if (existingUsers.length === 0 && customerEmail) {
-				existingUsers = await db.select().from(user).where(eq(user.email, customerEmail)).limit(1);
-			}
-
-			if (existingUsers.length > 0 && existingUsers[0]) {
-				userId = existingUsers[0].id;
-			}
-
-			// Handle subscription events
-			if (userId && type.startsWith('subscription.')) {
-				const targetUserId = userId;
+		if (targetUserId) {
+			if (type === 'subscription.created' || type === 'subscription.updated') {
 				const subData = data as {
 					id: string;
+					status?: string;
+					current_period_end?: string | number;
 					product_id?: string;
-					status: string;
-					current_period_end?: string;
 				};
 
-				const existingSub = await db
+				const periodEnd = subData.current_period_end
+					? new Date(subData.current_period_end)
+					: undefined;
+
+				const existing = await db
 					.select()
 					.from(subscriptions)
 					.where(eq(subscriptions.polarSubscriptionId, subData.id))
 					.limit(1);
 
-				if (existingSub.length > 0) {
+				if (existing.length > 0) {
 					await db
 						.update(subscriptions)
 						.set({
-							status: subData.status,
-							currentPeriodEnd: subData.current_period_end
-								? new Date(subData.current_period_end)
-								: null,
+							status: subData.status || 'active',
+							currentPeriodEnd: periodEnd,
 							updatedAt: new Date()
 						})
 						.where(eq(subscriptions.polarSubscriptionId, subData.id));
 				} else {
 					await db.insert(subscriptions).values({
-						id: `sub_${Date.now()}`,
+						id: crypto.randomUUID(),
 						userId: targetUserId,
 						polarSubscriptionId: subData.id,
 						polarProductId: subData.product_id || null,
-						status: subData.status,
-						currentPeriodEnd: subData.current_period_end
-							? new Date(subData.current_period_end)
-							: null
+						status: subData.status || 'active',
+						currentPeriodEnd: periodEnd
 					});
 				}
+			} else if (type === 'subscription.revoked') {
+				const subData = data as { id: string };
+				await db
+					.update(subscriptions)
+					.set({
+						status: 'canceled',
+						updatedAt: new Date()
+					})
+					.where(eq(subscriptions.polarSubscriptionId, subData.id));
 			}
 		}
 	}
 
-	return Response.json({
-		received: true,
-		event: type
-	});
+	return Response.json({ received: true });
 };

@@ -32,9 +32,9 @@ export const POST: RequestHandler = async ({ request, url, locals }) => {
 	try {
 		const checkout = await polar.checkouts.create({
 			products: [productId],
-			customerEmail,
+			customer_email: customerEmail,
 			metadata: sessionUser?.id ? { userId: sessionUser.id } : undefined,
-			successUrl: body?.successUrl || `${url.origin}/editor?upgrade=success`
+			success_url: body?.successUrl || `${url.origin}/editor?upgrade=success`
 		});
 
 		return Response.json({

@@ -1,15 +1,17 @@
 // src/lib/server/polar.ts
-import { Polar } from '@polar-sh/sdk';
+import { createPolar } from '@polar-sh/sdk/2026-10';
 import { POLAR_ACCESS_TOKEN, POLAR_API_KEY } from '$app/env/private';
 
-export function usePolar(): Polar | null {
+export type PolarClient = ReturnType<typeof createPolar>;
+
+export function usePolar(): PolarClient | null {
 	const accessToken = POLAR_ACCESS_TOKEN || POLAR_API_KEY;
 
 	if (!accessToken) {
 		return null;
 	}
 
-	return new Polar({
+	return createPolar({
 		accessToken
 	});
 }
